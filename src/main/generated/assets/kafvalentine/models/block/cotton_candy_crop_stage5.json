@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/crop",
+  "textures": {
+    "crop": "kafvalentine:block/cotton_candy_crop_stage5"
+  }
+}

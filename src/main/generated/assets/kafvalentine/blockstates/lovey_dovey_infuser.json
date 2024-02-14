@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "kafvalentine:block/lovey_dovey_infuser",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "kafvalentine:block/lovey_dovey_infuser"
+    },
+    "facing=south": {
+      "model": "kafvalentine:block/lovey_dovey_infuser",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "kafvalentine:block/lovey_dovey_infuser",
+      "y": 270
+    }
+  }
+}

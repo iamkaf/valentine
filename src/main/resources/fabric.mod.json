@@ -1,0 +1,40 @@
+{
+	"schemaVersion": 1,
+	"id": "kafvalentine",
+	"version": "${version}",
+	"name": "Kaf's Valentine Special",
+	"description": "It's a special date, let's celebrate it with the people that matter the most to us!",
+	"authors": [
+		"iamkaf"
+	],
+	"contact": {
+		"homepage": "https://github.com/iamkaf",
+		"sources": "https://github.com/iamkaf/valentine"
+	},
+	"license": "CC0-1.0",
+	"icon": "assets/kafvalentine/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"com.codekaffe.valentine.KafValentine"
+		],
+		"client": [
+			"com.codekaffe.valentine.KafValentineClient"
+		],
+		"fabric-datagen": [
+			"com.codekaffe.valentine.KafValentineDataGenerator"
+		]
+	},
+	"mixins": [
+		"kafcopper.mixins.json"
+	],
+	"depends": {
+		"fabricloader": ">=0.15.6",
+		"minecraft": "~1.20.1",
+		"java": ">=17",
+		"fabric-api": "*"
+	},
+	"suggests": {
+		"another-mod": "*"
+	}
+}
