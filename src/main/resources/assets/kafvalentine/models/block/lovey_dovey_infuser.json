@@ -2,7 +2,8 @@
 	"credit": "Made with Blockbench",
 	"texture_size": [64, 64],
 	"textures": {
-		"1": "kafvalentine:block/lovey_dovey_infuser_texture"
+		"1": "kafvalentine:block/lovey_dovey_infuser_texture",
+		"particle": "kafvalentine:block/lovey_dovey_infuser_texture"
 	},
 	"elements": [
 		{
