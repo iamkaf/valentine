@@ -9,6 +9,7 @@ import com.codekaffe.valentine.screen.ModScreenHandlers;
 import com.codekaffe.valentine.sound.ModSounds;
 import com.codekaffe.valentine.util.ModCustomTrades;
 import com.codekaffe.valentine.util.ModLootTableModifiers;
+import com.codekaffe.valentine.world.gen.ModWorldGeneration;
 import net.fabricmc.api.ModInitializer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,5 +29,6 @@ public class KafValentine implements ModInitializer {
         ModBlockEntities.registerBlockEntities();
         ModScreenHandlers.registerScreenHandlers();
         ModRecipes.registerRecipes();
+        ModWorldGeneration.generateModWorldGen();
     }
 }
