@@ -34,9 +34,9 @@
   },
   "requirements": [
     [
-      "has_the_recipe",
       "has_cookie",
-      "has_cotton_candy"
+      "has_cotton_candy",
+      "has_the_recipe"
     ]
   ],
   "rewards": {

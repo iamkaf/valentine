@@ -1,17 +1,20 @@
 package com.codekaffe.valentine.recipe;
 
 import com.codekaffe.valentine.KafValentine;
-import com.mojang.serialization.Codec;
-import com.mojang.serialization.DataResult;
-import com.mojang.serialization.codecs.RecordCodecBuilder;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParseException;
 import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketByteBuf;
-import net.minecraft.recipe.*;
+import net.minecraft.recipe.Ingredient;
+import net.minecraft.recipe.Recipe;
+import net.minecraft.recipe.RecipeSerializer;
+import net.minecraft.recipe.RecipeType;
 import net.minecraft.registry.DynamicRegistryManager;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.JsonHelper;
 import net.minecraft.util.collection.DefaultedList;
-import net.minecraft.util.dynamic.Codecs;
 import net.minecraft.world.World;
 
 import java.util.List;
@@ -80,10 +83,45 @@ public class LoveyDoveyInfusingRecipe implements Recipe<SimpleInventory> {
         public static final Serializer INSTANCE = new Serializer();
         public static final String ID = "lovey_dovey_infusing";
 
+        private static DefaultedList<Ingredient> deserializeIngredients(JsonArray json) {
+            DefaultedList<Ingredient> ingredients = DefaultedList.ofSize(json.size(),
+                    Ingredient.EMPTY
+            );
+            for (int i = 0; i < json.size(); i++) {
+                Ingredient ingredient = Ingredient.fromJson(json.get(i));
+                if (!ingredient.isEmpty()) {
+                    ingredients.set(i, ingredient);
+                }
+            }
+            return ingredients;
+        }
+
         @Override
-        public LoveyDoveyInfusingRecipe read(PacketByteBuf buf) {
-            DefaultedList<Ingredient> inputs = DefaultedList.ofSize(
-                    buf.readInt(),
+        public LoveyDoveyInfusingRecipe read(Identifier id, JsonObject json) {
+//            final DefaultedList<Ingredient> ingredients =
+//                    CandlelightGeneralUtil.deserializeIngredients(JsonHelper.getArray(json,
+//                    "ingredients"
+//            ));
+            DefaultedList<Ingredient> ingredients = deserializeIngredients(JsonHelper.getArray(json,
+                    "ingredients"
+            ));
+            if (ingredients.isEmpty()) {
+                throw new JsonParseException("No ingredients for LoveyDoveyInfuser Recipe");
+            } else if (ingredients.size() > 1) {
+                throw new JsonParseException("Too many ingredients for LoveyDoveyInfuser Recipe");
+            } else {
+                KafValentine.LOGGER.info(String.valueOf(json));
+                return new LoveyDoveyInfusingRecipe(ingredients,
+                        Ingredient
+                                .fromJson(JsonHelper.getObject(json, "output"))
+                                .getMatchingStacks()[0]
+                );
+            }
+        }
+
+        @Override
+        public LoveyDoveyInfusingRecipe read(Identifier id, PacketByteBuf buf) {
+            DefaultedList<Ingredient> inputs = DefaultedList.ofSize(buf.readInt(),
                     Ingredient.EMPTY
             );
 

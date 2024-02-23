@@ -170,16 +170,9 @@ public class LoveyDoveyInfuserBlockEntity extends BlockEntity implements Extende
 
         this.removeStack(INPUT_SLOT, 1);
 
-//        this.setStack(OUTPUT_SLOT, new ItemStack(recipe.get().value().getResult(null).getItem(),
-//                getStack(OUTPUT_SLOT).getCount() + recipe.get().value().getResult(null).getCount()
-//        ));
-        this.setStack(
-                OUTPUT_SLOT,
-                new ItemStack(
-                        recipe.get().getOutput(null).getItem(),
-                        recipe.get().getOutput(null).getCount()
-                )
-        );
+        this.setStack(OUTPUT_SLOT, new ItemStack(recipe.get().getOutput(null).getItem(),
+                getStack(OUTPUT_SLOT).getCount() + recipe.get().getOutput(null).getCount()
+        ));
     }
 
     private boolean hasCraftingFinished() {
@@ -192,14 +185,6 @@ public class LoveyDoveyInfuserBlockEntity extends BlockEntity implements Extende
 
     private boolean hasRecipe() {
         Optional<LoveyDoveyInfusingRecipe> recipe = getCurrentRecipe();
-
-//        return recipe.isPresent() && canInsertAmountIntoOutputSlot(recipe
-//                .get()
-//                .getResult(null)) && canInsertItemIntoOutputSlot(recipe
-//                .get()
-//                .value()
-//                .getResult(null)
-//                .getItem());
         return recipe.isPresent() && canInsertAmountIntoOutputSlot(recipe
                 .get()
                 .getOutput(null)) && canInsertItemIntoOutputSlot(recipe
