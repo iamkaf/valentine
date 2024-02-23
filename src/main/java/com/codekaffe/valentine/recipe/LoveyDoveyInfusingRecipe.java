@@ -1,5 +1,6 @@
 package com.codekaffe.valentine.recipe;
 
+import com.codekaffe.valentine.KafValentine;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.DataResult;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
@@ -8,6 +9,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.recipe.*;
 import net.minecraft.registry.DynamicRegistryManager;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.dynamic.Codecs;
 import net.minecraft.world.World;
@@ -43,7 +45,7 @@ public class LoveyDoveyInfusingRecipe implements Recipe<SimpleInventory> {
     }
 
     @Override
-    public ItemStack getResult(DynamicRegistryManager registryManager) {
+    public ItemStack getOutput(DynamicRegistryManager registryManager) {
         return output;
     }
 
@@ -64,6 +66,11 @@ public class LoveyDoveyInfusingRecipe implements Recipe<SimpleInventory> {
         return Type.INSTANCE;
     }
 
+    @Override
+    public Identifier getId() {
+        return new Identifier(KafValentine.MOD_ID, "lovey_dovey_infusing");
+    }
+
     public static class Type implements RecipeType<LoveyDoveyInfusingRecipe> {
         public static final Type INSTANCE = new Type();
         public static final String ID = "lovey_dovey_infusing";
@@ -72,31 +79,6 @@ public class LoveyDoveyInfusingRecipe implements Recipe<SimpleInventory> {
     public static class Serializer implements RecipeSerializer<LoveyDoveyInfusingRecipe> {
         public static final Serializer INSTANCE = new Serializer();
         public static final String ID = "lovey_dovey_infusing";
-
-        public static final Codec<LoveyDoveyInfusingRecipe> CODEC = RecordCodecBuilder.create(in -> in
-                .group(validateAmount(Ingredient.DISALLOW_EMPTY_CODEC, 9)
-                                .fieldOf("ingredients")
-                                .forGetter(LoveyDoveyInfusingRecipe::getIngredients),
-                        RecipeCodecs.CRAFTING_RESULT.fieldOf("output").forGetter(r -> r.output)
-                )
-                .apply(in, LoveyDoveyInfusingRecipe::new));
-
-        private static Codec<List<Ingredient>> validateAmount(Codec<Ingredient> delegate, int max) {
-            return Codecs.validate(
-                    Codecs.validate(
-                            delegate.listOf(),
-                            list -> list.size() > max ? DataResult.error(() -> "Recipe has too many ingredients!") : DataResult.success(
-                                    list)
-                    ),
-                    list -> list.isEmpty() ? DataResult.error(() -> "Recipe has no ingredients!") : DataResult.success(
-                            list)
-            );
-        }
-
-        @Override
-        public Codec<LoveyDoveyInfusingRecipe> codec() {
-            return CODEC;
-        }
 
         @Override
         public LoveyDoveyInfusingRecipe read(PacketByteBuf buf) {
@@ -121,7 +103,7 @@ public class LoveyDoveyInfusingRecipe implements Recipe<SimpleInventory> {
                 ingredient.write(buf);
             }
 
-            buf.writeItemStack(recipe.getResult(null));
+            buf.writeItemStack(recipe.getOutput(null));
         }
     }
 }
