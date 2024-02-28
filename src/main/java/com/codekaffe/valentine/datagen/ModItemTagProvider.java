@@ -1,5 +1,6 @@
 package com.codekaffe.valentine.datagen;
 
+import com.codekaffe.valentine.block.ModBlocks;
 import com.codekaffe.valentine.item.ModItems;
 import com.codekaffe.valentine.util.ModTags;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
@@ -18,5 +19,8 @@ public class ModItemTagProvider extends FabricTagProvider.ItemTagProvider {
         getOrCreateTagBuilder(ModTags.Items.SPECIAL_COOKIE)
                 .add(ModItems.SPECIAL_CHOCOLATE_COOKIE)
                 .add(ModItems.EXTRA_SPECIAL_CHOCOLATE_COOKIE);
+
+        getOrCreateTagBuilder(ModTags.Items.ARISTEA).add(ModBlocks.ARISTEA.asItem());
+        getOrCreateTagBuilder(ModTags.Items.FLOWERS).add(ModBlocks.ARISTEA.asItem());
     }
 }
