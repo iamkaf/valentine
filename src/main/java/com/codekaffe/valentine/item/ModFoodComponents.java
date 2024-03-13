@@ -23,4 +23,6 @@ public class ModFoodComponents {
             .alwaysEdible()
             .statusEffect(new StatusEffectInstance(StatusEffects.SPEED, 100, 2), 1f)
             .build();
+
+
 }

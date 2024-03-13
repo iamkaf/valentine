@@ -1,5 +1,6 @@
 package com.codekaffe.valentine.world;
 
+import com.codekaffe.valentine.KafValentine;
 import com.codekaffe.valentine.block.ModBlocks;
 import net.minecraft.registry.Registerable;
 import net.minecraft.registry.RegistryKey;
@@ -25,7 +26,7 @@ public class ModConfiguredFeatures {
     public static RegistryKey<ConfiguredFeature<?, ?>> registerKey(String name) {
         return RegistryKey.of(
                 RegistryKeys.CONFIGURED_FEATURE,
-                new Identifier("kafvalentine", name)
+                new Identifier(KafValentine.MOD_ID, name)
         );
     }
 

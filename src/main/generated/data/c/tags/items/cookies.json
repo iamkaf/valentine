@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "kafvalentine:special_chocolate_cookie",
+    "kafvalentine:extra_special_chocolate_cookie",
+    "kafvalentine:medic_cookie",
+    "kafvalentine:special_medic_cookie",
+    "kafvalentine:good_vision_cookie",
+    "kafvalentine:special_good_vision_cookie"
+  ]
+}

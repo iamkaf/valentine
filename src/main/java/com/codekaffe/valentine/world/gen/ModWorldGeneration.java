@@ -6,52 +6,33 @@ import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
 import net.minecraft.world.biome.BiomeKeys;
 import net.minecraft.world.gen.GenerationStep;
 
+import java.util.List;
+
 public class ModWorldGeneration {
     public static void generateModWorldGen() {
-        BiomeModifications.addFeature(
-                BiomeSelectors.includeByKey(BiomeKeys.PLAINS),
-                GenerationStep.Feature.VEGETAL_DECORATION,
-                ModPlacedFeatures.ARISTEA_PLACED_KEY
+        var aristeaBiomes = List.of(
+                BiomeKeys.PLAINS,
+                BiomeKeys.SNOWY_PLAINS,
+                BiomeKeys.FLOWER_FOREST,
+                BiomeKeys.FOREST,
+                BiomeKeys.BIRCH_FOREST,
+                BiomeKeys.DARK_FOREST,
+                BiomeKeys.OLD_GROWTH_BIRCH_FOREST,
+                BiomeKeys.WINDSWEPT_FOREST,
+                BiomeKeys.MEADOW,
+                BiomeKeys.OLD_GROWTH_PINE_TAIGA,
+                BiomeKeys.OLD_GROWTH_SPRUCE_TAIGA,
+                BiomeKeys.TAIGA,
+                BiomeKeys.SNOWY_TAIGA
         );
-        BiomeModifications.addFeature(
-                BiomeSelectors.includeByKey(BiomeKeys.SNOWY_PLAINS),
-                GenerationStep.Feature.VEGETAL_DECORATION,
-                ModPlacedFeatures.ARISTEA_PLACED_KEY
-        );
-        BiomeModifications.addFeature(
-                BiomeSelectors.includeByKey(BiomeKeys.FLOWER_FOREST),
-                GenerationStep.Feature.VEGETAL_DECORATION,
-                ModPlacedFeatures.ARISTEA_PLACED_KEY
-        );
-        BiomeModifications.addFeature(
-                BiomeSelectors.includeByKey(BiomeKeys.FOREST),
-                GenerationStep.Feature.VEGETAL_DECORATION,
-                ModPlacedFeatures.ARISTEA_PLACED_KEY
-        );
-        BiomeModifications.addFeature(
-                BiomeSelectors.includeByKey(BiomeKeys.BIRCH_FOREST),
-                GenerationStep.Feature.VEGETAL_DECORATION,
-                ModPlacedFeatures.ARISTEA_PLACED_KEY
-        );
-        BiomeModifications.addFeature(
-                BiomeSelectors.includeByKey(BiomeKeys.DARK_FOREST),
-                GenerationStep.Feature.VEGETAL_DECORATION,
-                ModPlacedFeatures.ARISTEA_PLACED_KEY
-        );
-        BiomeModifications.addFeature(
-                BiomeSelectors.includeByKey(BiomeKeys.OLD_GROWTH_BIRCH_FOREST),
-                GenerationStep.Feature.VEGETAL_DECORATION,
-                ModPlacedFeatures.ARISTEA_PLACED_KEY
-        );
-        BiomeModifications.addFeature(
-                BiomeSelectors.includeByKey(BiomeKeys.WINDSWEPT_FOREST),
-                GenerationStep.Feature.VEGETAL_DECORATION,
-                ModPlacedFeatures.ARISTEA_PLACED_KEY
-        );
-        BiomeModifications.addFeature(
-                BiomeSelectors.includeByKey(BiomeKeys.MEADOW),
-                GenerationStep.Feature.VEGETAL_DECORATION,
-                ModPlacedFeatures.ARISTEA_PLACED_KEY
-        );
+
+        for (var biomeKey : aristeaBiomes) {
+            BiomeModifications.addFeature(
+                    BiomeSelectors.includeByKey(biomeKey),
+                    GenerationStep.Feature.VEGETAL_DECORATION,
+                    ModPlacedFeatures.ARISTEA_PLACED_KEY
+            );
+        }
+
     }
 }

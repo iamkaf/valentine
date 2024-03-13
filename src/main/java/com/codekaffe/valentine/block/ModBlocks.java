@@ -1,6 +1,7 @@
 package com.codekaffe.valentine.block;
 
 import com.codekaffe.valentine.KafValentine;
+import com.codekaffe.valentine.block.custom.AristeaBlock;
 import com.codekaffe.valentine.block.custom.CottonCandyCropBlock;
 import com.codekaffe.valentine.block.custom.LoveyDoveyInfuserBlock;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
@@ -28,7 +29,7 @@ public class ModBlocks {
     );
 
     public static final Block ARISTEA = registerBlock("aristea",
-            new FlowerBlock(StatusEffects.SPEED,
+            new AristeaBlock(StatusEffects.SPEED,
                     10,
                     FabricBlockSettings.copyOf(Blocks.ALLIUM).nonOpaque().noCollision()
             )

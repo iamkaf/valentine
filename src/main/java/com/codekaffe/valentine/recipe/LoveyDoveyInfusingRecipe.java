@@ -12,6 +12,7 @@ import net.minecraft.recipe.Recipe;
 import net.minecraft.recipe.RecipeSerializer;
 import net.minecraft.recipe.RecipeType;
 import net.minecraft.registry.DynamicRegistryManager;
+import net.minecraft.registry.Registries;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.JsonHelper;
 import net.minecraft.util.collection.DefaultedList;
@@ -71,7 +72,7 @@ public class LoveyDoveyInfusingRecipe implements Recipe<SimpleInventory> {
 
     @Override
     public Identifier getId() {
-        return new Identifier(KafValentine.MOD_ID, "lovey_dovey_infusing");
+        return new Identifier(Registries.ITEM.getId(output.getItem()).getPath());
     }
 
     public static class Type implements RecipeType<LoveyDoveyInfusingRecipe> {
@@ -98,10 +99,6 @@ public class LoveyDoveyInfusingRecipe implements Recipe<SimpleInventory> {
 
         @Override
         public LoveyDoveyInfusingRecipe read(Identifier id, JsonObject json) {
-//            final DefaultedList<Ingredient> ingredients =
-//                    CandlelightGeneralUtil.deserializeIngredients(JsonHelper.getArray(json,
-//                    "ingredients"
-//            ));
             DefaultedList<Ingredient> ingredients = deserializeIngredients(JsonHelper.getArray(json,
                     "ingredients"
             ));
@@ -110,7 +107,6 @@ public class LoveyDoveyInfusingRecipe implements Recipe<SimpleInventory> {
             } else if (ingredients.size() > 1) {
                 throw new JsonParseException("Too many ingredients for LoveyDoveyInfuser Recipe");
             } else {
-                KafValentine.LOGGER.info(String.valueOf(json));
                 return new LoveyDoveyInfusingRecipe(ingredients,
                         Ingredient
                                 .fromJson(JsonHelper.getObject(json, "output"))

@@ -36,7 +36,7 @@ public class LoveyDoveyInfuserBlockEntity extends BlockEntity implements Extende
     protected final PropertyDelegate propertyDelegate;
     private final DefaultedList<ItemStack> inventory = DefaultedList.ofSize(2, ItemStack.EMPTY);
     private int progress = 0;
-    private int maxProgress = 72;
+    private int maxProgress = 360;
 
     public LoveyDoveyInfuserBlockEntity(BlockPos pos, BlockState state) {
         super(ModBlockEntities.LOVEY_DOVEY_INFUSER_BLOCK_ENTITY, pos, state);
