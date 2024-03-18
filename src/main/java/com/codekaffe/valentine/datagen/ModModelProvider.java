@@ -63,6 +63,8 @@ public class ModModelProvider extends FabricModelProvider {
         itemModelGenerator.register(ModItems.SPECIAL_EVIL_COOKIE, Models.GENERATED);
         itemModelGenerator.register(ModItems.ARISTEA_COOKIE, Models.GENERATED);
         itemModelGenerator.register(ModItems.SPECIAL_ARISTEA_COOKIE, Models.GENERATED);
+        itemModelGenerator.register(ModItems.ROCKET_COOKIE, Models.GENERATED);
+        itemModelGenerator.register(ModItems.SPECIAL_ROCKET_COOKIE, Models.GENERATED);
 
         itemModelGenerator.register(ModItems.COTTON_CANDY, Models.GENERATED);
     }

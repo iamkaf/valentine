@@ -119,6 +119,15 @@ public class ModItems {
             new SpecialAristeaCookie(new FabricItemSettings().food(SpecialAristeaCookie.FOOD_COMPONENT))
     );
 
+    public static final Item ROCKET_COOKIE = registerItem(
+            "rocket_cookie",
+            new RocketCookie(new FabricItemSettings().food(RocketCookie.FOOD_COMPONENT))
+    );
+    public static final Item SPECIAL_ROCKET_COOKIE = registerItem(
+            "special_rocket_cookie",
+            new SpecialRocketCookie(new FabricItemSettings().food(SpecialRocketCookie.FOOD_COMPONENT))
+    );
+
     public static final Item COTTON_CANDY = registerItem(
             "cotton_candy",
             new Item(new FabricItemSettings().food(ModFoodComponents.COTTON_CANDY))

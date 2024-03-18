@@ -28,7 +28,29 @@ public class ModItemTagProvider extends FabricTagProvider.ItemTagProvider {
                 ModItems.MEDIC_COOKIE,
                 ModItems.SPECIAL_MEDIC_COOKIE,
                 ModItems.GOOD_VISION_COOKIE,
-                ModItems.SPECIAL_GOOD_VISION_COOKIE
+                ModItems.SPECIAL_GOOD_VISION_COOKIE,
+                ModItems.FIRE_COOKIE,
+                ModItems.SPECIAL_FIRE_COOKIE,
+                ModItems.MELON_COOKIE,
+                ModItems.SPECIAL_MELON_COOKIE,
+                ModItems.APPLE_COOKIE,
+                ModItems.SPECIAL_APPLE_COOKIE,
+                ModItems.NETHER_WART_COOKIE,
+                ModItems.SPECIAL_NETHER_WART_COOKIE,
+                ModItems.GLOW_COOKIE,
+                ModItems.SPECIAL_GLOW_COOKIE,
+                ModItems.CARAMEL_COOKIE,
+                ModItems.SPECIAL_CARAMEL_COOKIE,
+                ModItems.EXPLOSIVE_COOKIE,
+                ModItems.SPECIAL_EXPLOSIVE_COOKIE,
+                ModItems.GOLDEN_COOKIE,
+                ModItems.SPECIAL_GOLDEN_COOKIE,
+                ModItems.EVIL_COOKIE,
+                ModItems.SPECIAL_EVIL_COOKIE,
+                ModItems.ARISTEA_COOKIE,
+                ModItems.SPECIAL_ARISTEA_COOKIE,
+                ModItems.ROCKET_COOKIE,
+                ModItems.SPECIAL_ROCKET_COOKIE
         );
 
         var cookieBuilder = getOrCreateTagBuilder(ModTags.Items.COOKIES);

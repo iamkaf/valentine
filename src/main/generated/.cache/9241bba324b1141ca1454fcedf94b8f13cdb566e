@@ -1,4 +1,4 @@
-// 1.20.1	2024-03-13T15:13:43.4377125	Kaf's Valentine Special/Recipes
+// 1.20.1	2024-03-18T09:42:50.8397074	Kaf's Valentine Special/Recipes
 bc076317a1c015c0f8a04b0251c4489ea3e7438f data\kafvalentine\advancements\recipes\food\fire_cookie.json
 8839a7102aead55bc35c0586436302bdc0ab6a5c data\kafvalentine\recipes\special_fire_cookie_from_infusing_fire_cookie.json
 4da9f258446eb8f43829e51a9f7ecefba393c497 data\kafvalentine\recipes\golden_cookie.json
@@ -12,6 +12,7 @@ ffd570d9444fd6f2cf5a005c5de9f3b83c9523f4 data\kafvalentine\recipes\special_glow_
 1bd58ae0d233e1074a4055fdfbee8a364ef7d4f8 data\kafvalentine\advancements\recipes\food\apple_cookie.json
 301d0358add36606ba01ef3816e42b938b53eeed data\kafvalentine\recipes\aristea_cookie.json
 d30bdfd34cf23202685d323e5a28555ff4914f1e data\kafvalentine\advancements\recipes\food\good_vision_cookie.json
+5700c98c76a13858e27a299d1bd9000366312375 data\kafvalentine\recipes\special_rocket_cookie_from_infusing_rocket_cookie.json
 c1cc9217ccf7676e4cbc9a449dbb8672ce34c799 data\kafvalentine\recipes\special_explosive_cookie_from_infusing_explosive_cookie.json
 872378dd4d174d626a8c05b55b63aa08f92cea6f data\kafvalentine\recipes\purple_dye.json
 dc56546942d667e5b8b197f13136e85f87d0c28f data\kafvalentine\advancements\recipes\misc\lovey_dovey_infuser.json
@@ -22,6 +23,8 @@ dc56546942d667e5b8b197f13136e85f87d0c28f data\kafvalentine\advancements\recipes\
 2fbd192031dede9a8795213990b871149907828e data\kafvalentine\recipes\caramel_cookie.json
 4dde57908590814abd8415477119dd1c0bbdbf00 data\kafvalentine\recipes\fire_cookie.json
 14dc3c0d162bb7ec88fc947b3c78761459d91f8e data\kafvalentine\recipes\explosive_cookie.json
+8aa3f863598d57c1d3ded5059a42c23b9ec66aea data\kafvalentine\recipes\rocket_cookie.json
+4c40aa7f106a2d1171378bb7f87626452779d8ce data\kafvalentine\advancements\recipes\food\rocket_cookie.json
 223bda39c3de43e8ed2c65305e70fb0724c7262c data\kafvalentine\recipes\special_evil_cookie_from_infusing_evil_cookie.json
 1a76c63c74131ef0489b53a328827746de1efa0b data\kafvalentine\recipes\apple_cookie.json
 3309422cb37087bd272230ea7232f553505b81c7 data\kafvalentine\advancements\recipes\food\nether_wart_cookie.json
