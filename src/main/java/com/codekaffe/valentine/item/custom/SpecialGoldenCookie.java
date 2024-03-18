@@ -27,6 +27,11 @@ public class SpecialGoldenCookie extends Item {
     }
 
     @Override
+    public boolean hasGlint(ItemStack stack) {
+        return true;
+    }
+
+    @Override
     public void appendTooltip(
             ItemStack stack,
             @Nullable World world,
