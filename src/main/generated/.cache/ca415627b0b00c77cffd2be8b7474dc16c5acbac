@@ -1,4 +1,4 @@
-// 1.20.1	2024-03-18T09:42:50.8372068	Kaf's Valentine Special/Model Definitions
+// 1.20.1	2024-03-18T20:13:57.4865693	Kaf's Valentine Special/Model Definitions
 ecfc6a0d8264149c4ed5d1dc2e09ded6805ef94a assets\kafvalentine\models\item\special_aristea_cookie.json
 ce36fcf7318243a60feebd83eeeb0cac6eb4427e assets\kafvalentine\models\item\aristea_cookie.json
 94fb8c93e565e2b657e2642783928b7d4368bac8 assets\kafvalentine\models\item\special_evil_cookie.json
@@ -17,6 +17,7 @@ c65d06030a8d294e42ce8e12c9fc194e3ad5ee43 assets\kafvalentine\models\item\special
 f1b9765d7a5df224428d8a4908696343dc153a2a assets\kafvalentine\models\block\potted_aristea.json
 5fa629abd31587b3a3ad436c953401ea28218210 assets\kafvalentine\models\item\special_good_vision_cookie.json
 9e8d717f49da5b3802411bad8724b3b24ec97ea3 assets\kafvalentine\models\item\aristea.json
+0a8ef57f08958859c349d47e93cf3357a10bb00b assets\kafvalentine\models\item\cookie_book.json
 a334fbe52f56e2f07530686a01db6d7152e5aaa3 assets\kafvalentine\models\item\cotton_candy_seeds.json
 58a84e36ae1b004f3914d9424dbf19ae693a9e25 assets\kafvalentine\blockstates\cotton_candy_crop.json
 92ff33847e2aa996ea83d7f2b3a92675203b84db assets\kafvalentine\models\block\cotton_candy_crop_stage2.json

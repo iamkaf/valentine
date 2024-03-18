@@ -3,6 +3,7 @@ package com.codekaffe.valentine.item;
 import com.codekaffe.valentine.KafValentine;
 import com.codekaffe.valentine.block.ModBlocks;
 import com.codekaffe.valentine.item.custom.*;
+import io.wispforest.lavender.book.LavenderBookItem;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.item.AliasedBlockItem;
 import net.minecraft.item.Item;
@@ -135,6 +136,12 @@ public class ModItems {
     public static final Item COTTON_CANDY_SEEDS = registerItem(
             "cotton_candy_seeds",
             new AliasedBlockItem(ModBlocks.COTTON_CANDY_CROP, new FabricItemSettings())
+    );
+
+    public static final Item COOKIE_BOOK = LavenderBookItem.registerForBook(
+            KafValentine.id("cookies"),
+            KafValentine.id("cookie_book"),
+            new FabricItemSettings().maxCount(1)
     );
 
     private static Item registerItem(String name, Item item) {

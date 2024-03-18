@@ -19,6 +19,7 @@ public class ModItemGroups {
                     .displayName(Text.translatable("itemgroup.valentine"))
                     .icon(() -> new ItemStack(ModItems.APPLE_COOKIE))
                     .entries(((displayContext, entries) -> {
+                        entries.add(ModItems.COOKIE_BOOK);
                         entries.add(ModItems.SPECIAL_CHOCOLATE_COOKIE);
                         entries.add(ModItems.EXTRA_SPECIAL_CHOCOLATE_COOKIE);
                         entries.add(ModItems.MEDIC_COOKIE);
