@@ -128,6 +128,14 @@ public class ModItems {
             "special_rocket_cookie",
             new SpecialRocketCookie(new FabricItemSettings().food(SpecialRocketCookie.FOOD_COMPONENT))
     );
+    public static final Item SPOOKY_COOKIE = registerItem(
+            "spooky_cookie",
+            new SpookyCookie(new FabricItemSettings().food(SpookyCookie.FOOD_COMPONENT))
+    );
+    public static final Item SPECIAL_SPOOKY_COOKIE = registerItem(
+            "special_spooky_cookie",
+            new SpecialSpookyCookie(new FabricItemSettings().food(SpecialSpookyCookie.FOOD_COMPONENT))
+    );
 
     public static final Item COTTON_CANDY = registerItem(
             "cotton_candy",

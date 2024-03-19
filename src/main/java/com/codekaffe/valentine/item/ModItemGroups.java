@@ -48,6 +48,8 @@ public class ModItemGroups {
                         entries.add(ModItems.SPECIAL_ARISTEA_COOKIE);
                         entries.add(ModItems.ROCKET_COOKIE);
                         entries.add(ModItems.SPECIAL_ROCKET_COOKIE);
+                        entries.add(ModItems.SPOOKY_COOKIE);
+                        entries.add(ModItems.SPECIAL_SPOOKY_COOKIE);
                         entries.add(ModItems.COTTON_CANDY);
                         entries.add(ModItems.COTTON_CANDY_SEEDS);
                         entries.add(ModBlocks.ARISTEA);
