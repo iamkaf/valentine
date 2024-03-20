@@ -10,6 +10,7 @@ import net.minecraft.item.Item;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.Rarity;
 
 public class ModItems {
     public static final Item SPECIAL_CHOCOLATE_COOKIE = registerItem(
@@ -96,11 +97,15 @@ public class ModItems {
     );
     public static final Item GOLDEN_COOKIE = registerItem(
             "golden_cookie",
-            new GoldenCookie(new FabricItemSettings().food(GoldenCookie.FOOD_COMPONENT))
+            new GoldenCookie(new FabricItemSettings()
+                    .food(GoldenCookie.FOOD_COMPONENT)
+                    .rarity(Rarity.RARE))
     );
     public static final Item SPECIAL_GOLDEN_COOKIE = registerItem(
             "special_golden_cookie",
-            new SpecialGoldenCookie(new FabricItemSettings().food(SpecialGoldenCookie.FOOD_COMPONENT))
+            new SpecialGoldenCookie(new FabricItemSettings()
+                    .food(SpecialGoldenCookie.FOOD_COMPONENT)
+                    .rarity(Rarity.EPIC))
     );
     public static final Item EVIL_COOKIE = registerItem(
             "evil_cookie",
@@ -151,6 +156,14 @@ public class ModItems {
     public static final Item SPECIAL_PRISMATIC_COOKIE = registerItem(
             "special_prismatic_cookie",
             new SpecialPrismaticCookie(new FabricItemSettings().food(SpecialPrismaticCookie.FOOD_COMPONENT))
+    );
+    public static final Item CHORUS_COOKIE = registerItem(
+            "chorus_cookie",
+            new ChorusCookie(new FabricItemSettings().food(ChorusCookie.FOOD_COMPONENT))
+    );
+    public static final Item SPECIAL_CHORUS_COOKIE = registerItem(
+            "special_chorus_cookie",
+            new SpecialChorusCookie(new FabricItemSettings().food(SpecialChorusCookie.FOOD_COMPONENT))
     );
 
     public static final Item COTTON_CANDY = registerItem(

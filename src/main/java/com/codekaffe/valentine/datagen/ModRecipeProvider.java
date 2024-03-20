@@ -294,6 +294,22 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                         conditionsFromItem(ModItems.COTTON_CANDY)
                 )
                 .offerTo(exporter, new Identifier(getRecipeName(ModItems.PRISMATIC_COOKIE)));
+        ShapedRecipeJsonBuilder
+                .create(RecipeCategory.FOOD, ModItems.CHORUS_COOKIE, 2)
+                .pattern("ABA")
+                .pattern("BCB")
+                .pattern("ABA")
+                .input('A', Items.CHORUS_FRUIT)
+                .input('B', ModItems.COTTON_CANDY)
+                .input('C', Items.COOKIE)
+                .criterion(hasItem(Items.CHORUS_FRUIT),
+                        conditionsFromItem(Items.CHORUS_FRUIT)
+                )
+                .criterion(hasItem(Items.COOKIE), conditionsFromItem(Items.COOKIE))
+                .criterion(hasItem(ModItems.COTTON_CANDY),
+                        conditionsFromItem(ModItems.COTTON_CANDY)
+                )
+                .offerTo(exporter, new Identifier(getRecipeName(ModItems.CHORUS_COOKIE)));
 
         LoveyDoveyInfusingRecipeJsonBuilder
                 .create()
@@ -379,6 +395,11 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 .create()
                 .input(ModItems.PRISMATIC_COOKIE)
                 .output(ModItems.SPECIAL_PRISMATIC_COOKIE)
+                .offerTo(exporter);
+        LoveyDoveyInfusingRecipeJsonBuilder
+                .create()
+                .input(ModItems.CHORUS_COOKIE)
+                .output(ModItems.SPECIAL_CHORUS_COOKIE)
                 .offerTo(exporter);
     }
 }

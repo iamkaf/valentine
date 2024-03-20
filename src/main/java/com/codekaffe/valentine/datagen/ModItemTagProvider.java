@@ -56,7 +56,9 @@ public class ModItemTagProvider extends FabricTagProvider.ItemTagProvider {
                 ModItems.PECULIAR_COOKIE,
                 ModItems.SPECIAL_PECULIAR_COOKIE,
                 ModItems.PRISMATIC_COOKIE,
-                ModItems.SPECIAL_PRISMATIC_COOKIE
+                ModItems.SPECIAL_PRISMATIC_COOKIE,
+                ModItems.CHORUS_COOKIE,
+                ModItems.SPECIAL_CHORUS_COOKIE
         );
 
         var cookieBuilder = getOrCreateTagBuilder(ModTags.Items.COOKIES);
