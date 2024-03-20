@@ -165,6 +165,14 @@ public class ModItems {
             "special_chorus_cookie",
             new SpecialChorusCookie(new FabricItemSettings().food(SpecialChorusCookie.FOOD_COMPONENT))
     );
+    public static final Item BERRY_COOKIE = registerItem(
+            "berry_cookie",
+            new BerryCookie(new FabricItemSettings().food(BerryCookie.FOOD_COMPONENT))
+    );
+    public static final Item SPECIAL_BERRY_COOKIE = registerItem(
+            "special_berry_cookie",
+            new SpecialBerryCookie(new FabricItemSettings().food(SpecialBerryCookie.FOOD_COMPONENT))
+    );
 
     public static final Item COTTON_CANDY = registerItem(
             "cotton_candy",

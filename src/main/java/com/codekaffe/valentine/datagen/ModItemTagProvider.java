@@ -58,6 +58,10 @@ public class ModItemTagProvider extends FabricTagProvider.ItemTagProvider {
                 ModItems.PRISMATIC_COOKIE,
                 ModItems.SPECIAL_PRISMATIC_COOKIE,
                 ModItems.CHORUS_COOKIE,
+                ModItems.SPECIAL_CHORUS_COOKIE,
+                ModItems.BERRY_COOKIE,
+                ModItems.SPECIAL_BERRY_COOKIE,
+                ModItems.CHORUS_COOKIE,
                 ModItems.SPECIAL_CHORUS_COOKIE
         );
 

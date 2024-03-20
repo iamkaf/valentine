@@ -1,5 +1,6 @@
-// 1.20.1	2024-03-20T14:30:52.2567618	Kaf's Valentine Special/Model Definitions
+// 1.20.1	2024-03-20T20:24:26.3759945	Kaf's Valentine Special/Model Definitions
 ce36fcf7318243a60feebd83eeeb0cac6eb4427e assets\kafvalentine\models\item\aristea_cookie.json
+72438df75da150a8d34680bfde58ba0246502a06 assets\kafvalentine\models\item\special_berry_cookie.json
 94fb8c93e565e2b657e2642783928b7d4368bac8 assets\kafvalentine\models\item\special_evil_cookie.json
 f230362b425023b92f497863011b67a43a19d936 assets\kafvalentine\blockstates\lovey_dovey_infuser.json
 988a193d6a639cfc12e2b08d43d03fea2227cb32 assets\kafvalentine\models\item\rocket_cookie.json
@@ -20,10 +21,11 @@ d18fb7f86d8921a99665ad9decdca2df5f14f936 assets\kafvalentine\models\item\special
 fe09da65d1595bf961d0bf1d99732aaca1321245 assets\kafvalentine\models\item\caramel_cookie.json
 4df5d4fa3d3580200ba06079526eb376878df068 assets\kafvalentine\models\item\cotton_candy.json
 d0576d55112119fefa385cab24b0814bc068189f assets\kafvalentine\models\item\special_explosive_cookie.json
-f7eb0125a870954a0c6c0d8bb081dba8eedfb5cb assets\kafvalentine\models\block\cotton_candy_crop_stage0.json
 0de04ff727d417a5bf18a1d9d85ee7e98ceed3d3 assets\kafvalentine\models\block\cotton_candy_crop_stage3.json
+f7eb0125a870954a0c6c0d8bb081dba8eedfb5cb assets\kafvalentine\models\block\cotton_candy_crop_stage0.json
 69c9c9e7104863d68460a35f308eca404e059733 assets\kafvalentine\models\item\special_apple_cookie.json
 1c2305fb2d6e26b2bf9da1430da0fb889bd94ae1 assets\kafvalentine\models\item\special_glow_cookie.json
+8c3bbe4a79108036a235d09e9ab53a05a055d2c4 assets\kafvalentine\models\item\berry_cookie.json
 39314bf15cfb35e399b54a32c3ea31206ee25d2b assets\kafvalentine\models\item\medic_cookie.json
 f5d20385fdc3fc956ca0b6ade4e4eda997fb34ba assets\kafvalentine\models\item\good_vision_cookie.json
 86a39e2ca577fc58a94d762e4e15c3c42ad970e2 assets\kafvalentine\models\block\aristea.json
