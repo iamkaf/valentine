@@ -50,6 +50,9 @@ public class ModItemGroups {
                         entries.add(ModItems.SPECIAL_ROCKET_COOKIE);
                         entries.add(ModItems.SPOOKY_COOKIE);
                         entries.add(ModItems.SPECIAL_SPOOKY_COOKIE);
+                        entries.add(ModItems.PECULIAR_COOKIE);
+                        entries.add(ModItems.SPECIAL_PECULIAR_COOKIE);
+
                         entries.add(ModItems.COTTON_CANDY);
                         entries.add(ModItems.COTTON_CANDY_SEEDS);
                         entries.add(ModBlocks.ARISTEA);

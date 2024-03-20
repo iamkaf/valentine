@@ -208,8 +208,7 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 .input('D', Blocks.SOUL_SAND)
                 .input('B', ModItems.COTTON_CANDY)
                 .input('C', Items.COOKIE)
-                .criterion(
-                        hasItem(Blocks.WITHER_SKELETON_SKULL),
+                .criterion(hasItem(Blocks.WITHER_SKELETON_SKULL),
                         conditionsFromItem(Blocks.WITHER_SKELETON_SKULL)
                 )
                 .criterion(hasItem(Items.MILK_BUCKET), conditionsFromItem(Items.MILK_BUCKET))
@@ -240,12 +239,45 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 .input('A', Items.FIREWORK_ROCKET)
                 .input('B', ModItems.COTTON_CANDY)
                 .input('C', Items.COOKIE)
-                .criterion(hasItem(Items.FIREWORK_ROCKET), conditionsFromItem(Items.FIREWORK_ROCKET))
+                .criterion(
+                        hasItem(Items.FIREWORK_ROCKET),
+                        conditionsFromItem(Items.FIREWORK_ROCKET)
+                )
                 .criterion(hasItem(Items.COOKIE), conditionsFromItem(Items.COOKIE))
                 .criterion(hasItem(ModItems.COTTON_CANDY),
                         conditionsFromItem(ModItems.COTTON_CANDY)
                 )
                 .offerTo(exporter, new Identifier(getRecipeName(ModItems.ROCKET_COOKIE)));
+        ShapedRecipeJsonBuilder
+                .create(RecipeCategory.FOOD, ModItems.SPOOKY_COOKIE, 2)
+                .pattern("ABA")
+                .pattern("BCB")
+                .pattern("ABA")
+                .input('A', Items.PUMPKIN)
+                .input('B', ModItems.COTTON_CANDY)
+                .input('C', Items.COOKIE)
+                .criterion(hasItem(Items.PUMPKIN), conditionsFromItem(Items.PUMPKIN))
+                .criterion(hasItem(Items.COOKIE), conditionsFromItem(Items.COOKIE))
+                .criterion(hasItem(ModItems.COTTON_CANDY),
+                        conditionsFromItem(ModItems.COTTON_CANDY)
+                )
+                .offerTo(exporter, new Identifier(getRecipeName(ModItems.SPOOKY_COOKIE)));
+        ShapedRecipeJsonBuilder
+                .create(RecipeCategory.FOOD, ModItems.PECULIAR_COOKIE, 2)
+                .pattern("ABA")
+                .pattern("BCB")
+                .pattern("ABA")
+                .input('A', Items.PHANTOM_MEMBRANE)
+                .input('B', ModItems.COTTON_CANDY)
+                .input('C', Items.COOKIE)
+                .criterion(hasItem(Items.PHANTOM_MEMBRANE),
+                        conditionsFromItem(Items.PHANTOM_MEMBRANE)
+                )
+                .criterion(hasItem(Items.COOKIE), conditionsFromItem(Items.COOKIE))
+                .criterion(hasItem(ModItems.COTTON_CANDY),
+                        conditionsFromItem(ModItems.COTTON_CANDY)
+                )
+                .offerTo(exporter, new Identifier(getRecipeName(ModItems.PECULIAR_COOKIE)));
 
         LoveyDoveyInfusingRecipeJsonBuilder
                 .create()
@@ -316,6 +348,16 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 .create()
                 .input(ModItems.ROCKET_COOKIE)
                 .output(ModItems.SPECIAL_ROCKET_COOKIE)
+                .offerTo(exporter);
+        LoveyDoveyInfusingRecipeJsonBuilder
+                .create()
+                .input(ModItems.SPOOKY_COOKIE)
+                .output(ModItems.SPECIAL_SPOOKY_COOKIE)
+                .offerTo(exporter);
+        LoveyDoveyInfusingRecipeJsonBuilder
+                .create()
+                .input(ModItems.PECULIAR_COOKIE)
+                .output(ModItems.SPECIAL_PECULIAR_COOKIE)
                 .offerTo(exporter);
     }
 }

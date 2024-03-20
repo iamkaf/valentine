@@ -50,7 +50,11 @@ public class ModItemTagProvider extends FabricTagProvider.ItemTagProvider {
                 ModItems.ARISTEA_COOKIE,
                 ModItems.SPECIAL_ARISTEA_COOKIE,
                 ModItems.ROCKET_COOKIE,
-                ModItems.SPECIAL_ROCKET_COOKIE
+                ModItems.SPECIAL_ROCKET_COOKIE,
+                ModItems.SPOOKY_COOKIE,
+                ModItems.SPECIAL_SPOOKY_COOKIE,
+                ModItems.PECULIAR_COOKIE,
+                ModItems.SPECIAL_PECULIAR_COOKIE
         );
 
         var cookieBuilder = getOrCreateTagBuilder(ModTags.Items.COOKIES);
