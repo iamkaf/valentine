@@ -1,9 +1,9 @@
-// 1.20.1	2024-03-20T13:28:56.4974537	Kaf's Valentine Special/Tags for minecraft:block
+// 1.20.1	2024-03-20T14:06:19.0572094	Kaf's Valentine Special/Tags for minecraft:block
 9c8348c58e3e27b69a4b16f8e20d8eaa980834bc data\minecraft\tags\blocks\flowers.json
 8f07b04159f7352d1b38cb3fe7f1a64493c8ce5d data\minecraft\tags\blocks\bee_growables.json
 9c8348c58e3e27b69a4b16f8e20d8eaa980834bc data\c\tags\blocks\flowers.json
-a1798706c3e5fd45736c9c5576100f04b2d857ff data\minecraft\tags\blocks\needs_stone_tool.json
 a1798706c3e5fd45736c9c5576100f04b2d857ff data\minecraft\tags\blocks\mineable\pickaxe.json
+a1798706c3e5fd45736c9c5576100f04b2d857ff data\minecraft\tags\blocks\needs_stone_tool.json
 9c8348c58e3e27b69a4b16f8e20d8eaa980834bc data\minecraft\tags\blocks\small_flowers.json
 25cc646d5e2a2f791d1e2f4e5535188a658cf758 data\c\tags\blocks\plant.json
 25cc646d5e2a2f791d1e2f4e5535188a658cf758 data\minecraft\tags\blocks\crops.json

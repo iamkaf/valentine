@@ -40,7 +40,8 @@ public class ModLootTableModifiers {
             ModItems.NETHER_WART_COOKIE,
             ModItems.ROCKET_COOKIE,
             ModItems.SPOOKY_COOKIE,
-            ModItems.PECULIAR_COOKIE
+            ModItems.PECULIAR_COOKIE,
+            ModItems.PRISMATIC_COOKIE
     );
 
     private static Identifier villageIdHelper(String villageType) {

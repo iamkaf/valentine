@@ -1,0 +1,11 @@
+{
+  "type": "kafvalentine:lovey_dovey_infusing",
+  "ingredients": [
+    {
+      "item": "kafvalentine:prismatic_cookie"
+    }
+  ],
+  "output": {
+    "item": "kafvalentine:special_prismatic_cookie"
+  }
+}

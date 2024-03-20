@@ -52,6 +52,8 @@ public class ModItemGroups {
                         entries.add(ModItems.SPECIAL_SPOOKY_COOKIE);
                         entries.add(ModItems.PECULIAR_COOKIE);
                         entries.add(ModItems.SPECIAL_PECULIAR_COOKIE);
+                        entries.add(ModItems.PRISMATIC_COOKIE);
+                        entries.add(ModItems.SPECIAL_PRISMATIC_COOKIE);
 
                         entries.add(ModItems.COTTON_CANDY);
                         entries.add(ModItems.COTTON_CANDY_SEEDS);

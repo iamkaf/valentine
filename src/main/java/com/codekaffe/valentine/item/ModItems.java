@@ -144,6 +144,14 @@ public class ModItems {
             "special_peculiar_cookie",
             new SpecialPeculiarCookie(new FabricItemSettings().food(SpecialPeculiarCookie.FOOD_COMPONENT))
     );
+    public static final Item PRISMATIC_COOKIE = registerItem(
+            "prismatic_cookie",
+            new PrismaticCookie(new FabricItemSettings().food(PrismaticCookie.FOOD_COMPONENT))
+    );
+    public static final Item SPECIAL_PRISMATIC_COOKIE = registerItem(
+            "special_prismatic_cookie",
+            new SpecialPrismaticCookie(new FabricItemSettings().food(SpecialPrismaticCookie.FOOD_COMPONENT))
+    );
 
     public static final Item COTTON_CANDY = registerItem(
             "cotton_candy",

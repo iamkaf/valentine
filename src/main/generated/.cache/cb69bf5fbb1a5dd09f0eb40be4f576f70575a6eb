@@ -1,11 +1,11 @@
-// 1.20.1	2024-03-20T13:28:56.4979519	Kaf's Valentine Special/Tags for minecraft:item
+// 1.20.1	2024-03-20T14:06:19.0577075	Kaf's Valentine Special/Tags for minecraft:item
 9c8348c58e3e27b69a4b16f8e20d8eaa980834bc data\c\tags\items\flowers.json
-65ecaa0e94ee0ff52c0b29e2b318e5487e39e0b6 data\c\tags\items\cookies.json
+ef6187954567fc555a20210f84a1507a04c71939 data\c\tags\items\cookies.json
 9821ba29b28cd7ed1bbbb41aaf307e3c57b56e99 data\c\tags\items\golden_apples.json
 2388a7d48daef4a569c89aab474c716a355c724d data\c\tags\items\seeds.json
 2388a7d48daef4a569c89aab474c716a355c724d data\minecraft\tags\items\villager_plantable_seeds.json
 9c8348c58e3e27b69a4b16f8e20d8eaa980834bc data\c\tags\items\aristeas.json
 2388a7d48daef4a569c89aab474c716a355c724d data\botania\tags\items\seed_apothecary_reagent.json
-65ecaa0e94ee0ff52c0b29e2b318e5487e39e0b6 data\origins\tags\items\ignore_diet.json
+ef6187954567fc555a20210f84a1507a04c71939 data\origins\tags\items\ignore_diet.json
 2388a7d48daef4a569c89aab474c716a355c724d data\naturalist\tags\items\bird_food_items.json
-65ecaa0e94ee0ff52c0b29e2b318e5487e39e0b6 data\kafvalentine\tags\items\kaf_cookie.json
+ef6187954567fc555a20210f84a1507a04c71939 data\kafvalentine\tags\items\kaf_cookie.json
