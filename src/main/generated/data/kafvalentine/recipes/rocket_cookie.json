@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "minecraft:firework_rocket"
+    },
+    "B": {
+      "item": "kafvalentine:cotton_candy"
+    },
+    "C": {
+      "item": "minecraft:cookie"
+    }
+  },
+  "pattern": [
+    "ABA",
+    "BCB",
+    "ABA"
+  ],
+  "result": {
+    "count": 2,
+    "item": "kafvalentine:rocket_cookie"
+  },
+  "show_notification": true
+}

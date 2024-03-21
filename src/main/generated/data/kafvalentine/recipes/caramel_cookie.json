@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "minecraft:sugar"
+    },
+    "B": {
+      "item": "kafvalentine:cotton_candy"
+    },
+    "C": {
+      "item": "minecraft:cookie"
+    },
+    "D": {
+      "item": "minecraft:milk_bucket"
+    }
+  },
+  "pattern": [
+    "ABD",
+    "BCB",
+    "DBA"
+  ],
+  "result": {
+    "count": 2,
+    "item": "kafvalentine:caramel_cookie"
+  },
+  "show_notification": true
+}

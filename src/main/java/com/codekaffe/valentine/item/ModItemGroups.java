@@ -17,10 +17,50 @@ public class ModItemGroups {
             FabricItemGroup
                     .builder()
                     .displayName(Text.translatable("itemgroup.valentine"))
-                    .icon(() -> new ItemStack(ModItems.SPECIAL_CHOCOLATE_COOKIE))
+                    .icon(() -> new ItemStack(ModItems.APPLE_COOKIE))
                     .entries(((displayContext, entries) -> {
+                        entries.add(ModItems.COOKIE_BOOK);
                         entries.add(ModItems.SPECIAL_CHOCOLATE_COOKIE);
                         entries.add(ModItems.EXTRA_SPECIAL_CHOCOLATE_COOKIE);
+                        entries.add(ModItems.MEDIC_COOKIE);
+                        entries.add(ModItems.SPECIAL_MEDIC_COOKIE);
+                        entries.add(ModItems.GOOD_VISION_COOKIE);
+                        entries.add(ModItems.SPECIAL_GOOD_VISION_COOKIE);
+                        entries.add(ModItems.FIRE_COOKIE);
+                        entries.add(ModItems.SPECIAL_FIRE_COOKIE);
+                        entries.add(ModItems.MELON_COOKIE);
+                        entries.add(ModItems.SPECIAL_MELON_COOKIE);
+                        entries.add(ModItems.APPLE_COOKIE);
+                        entries.add(ModItems.SPECIAL_APPLE_COOKIE);
+                        entries.add(ModItems.NETHER_WART_COOKIE);
+                        entries.add(ModItems.SPECIAL_NETHER_WART_COOKIE);
+                        entries.add(ModItems.GLOW_COOKIE);
+                        entries.add(ModItems.SPECIAL_GLOW_COOKIE);
+                        entries.add(ModItems.CARAMEL_COOKIE);
+                        entries.add(ModItems.SPECIAL_CARAMEL_COOKIE);
+                        entries.add(ModItems.EXPLOSIVE_COOKIE);
+                        entries.add(ModItems.SPECIAL_EXPLOSIVE_COOKIE);
+                        entries.add(ModItems.GOLDEN_COOKIE);
+                        entries.add(ModItems.SPECIAL_GOLDEN_COOKIE);
+                        entries.add(ModItems.EVIL_COOKIE);
+                        entries.add(ModItems.SPECIAL_EVIL_COOKIE);
+                        entries.add(ModItems.ARISTEA_COOKIE);
+                        entries.add(ModItems.SPECIAL_ARISTEA_COOKIE);
+                        entries.add(ModItems.ROCKET_COOKIE);
+                        entries.add(ModItems.SPECIAL_ROCKET_COOKIE);
+                        entries.add(ModItems.SPOOKY_COOKIE);
+                        entries.add(ModItems.SPECIAL_SPOOKY_COOKIE);
+                        entries.add(ModItems.PECULIAR_COOKIE);
+                        entries.add(ModItems.SPECIAL_PECULIAR_COOKIE);
+                        entries.add(ModItems.PRISMATIC_COOKIE);
+                        entries.add(ModItems.SPECIAL_PRISMATIC_COOKIE);
+                        entries.add(ModItems.CHORUS_COOKIE);
+                        entries.add(ModItems.SPECIAL_CHORUS_COOKIE);
+                        entries.add(ModItems.BERRY_COOKIE);
+                        entries.add(ModItems.SPECIAL_BERRY_COOKIE);
+                        entries.add(ModItems.OMEGA_COOKIE);
+                        entries.add(ModItems.SPECIAL_OMEGA_COOKIE);
+
                         entries.add(ModItems.COTTON_CANDY);
                         entries.add(ModItems.COTTON_CANDY_SEEDS);
                         entries.add(ModBlocks.ARISTEA);

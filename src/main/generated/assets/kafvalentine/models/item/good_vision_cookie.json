@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "kafvalentine:item/good_vision_cookie"
+  }
+}

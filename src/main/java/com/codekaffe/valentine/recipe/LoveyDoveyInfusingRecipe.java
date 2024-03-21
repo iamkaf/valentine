@@ -1,15 +1,21 @@
 package com.codekaffe.valentine.recipe;
 
-import com.mojang.serialization.Codec;
-import com.mojang.serialization.DataResult;
-import com.mojang.serialization.codecs.RecordCodecBuilder;
+import com.codekaffe.valentine.KafValentine;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParseException;
 import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketByteBuf;
-import net.minecraft.recipe.*;
+import net.minecraft.recipe.Ingredient;
+import net.minecraft.recipe.Recipe;
+import net.minecraft.recipe.RecipeSerializer;
+import net.minecraft.recipe.RecipeType;
 import net.minecraft.registry.DynamicRegistryManager;
+import net.minecraft.registry.Registries;
+import net.minecraft.util.Identifier;
+import net.minecraft.util.JsonHelper;
 import net.minecraft.util.collection.DefaultedList;
-import net.minecraft.util.dynamic.Codecs;
 import net.minecraft.world.World;
 
 import java.util.List;
@@ -43,7 +49,7 @@ public class LoveyDoveyInfusingRecipe implements Recipe<SimpleInventory> {
     }
 
     @Override
-    public ItemStack getResult(DynamicRegistryManager registryManager) {
+    public ItemStack getOutput(DynamicRegistryManager registryManager) {
         return output;
     }
 
@@ -64,6 +70,11 @@ public class LoveyDoveyInfusingRecipe implements Recipe<SimpleInventory> {
         return Type.INSTANCE;
     }
 
+    @Override
+    public Identifier getId() {
+        return new Identifier(Registries.ITEM.getId(output.getItem()).getPath());
+    }
+
     public static class Type implements RecipeType<LoveyDoveyInfusingRecipe> {
         public static final Type INSTANCE = new Type();
         public static final String ID = "lovey_dovey_infusing";
@@ -73,35 +84,40 @@ public class LoveyDoveyInfusingRecipe implements Recipe<SimpleInventory> {
         public static final Serializer INSTANCE = new Serializer();
         public static final String ID = "lovey_dovey_infusing";
 
-        public static final Codec<LoveyDoveyInfusingRecipe> CODEC = RecordCodecBuilder.create(in -> in
-                .group(validateAmount(Ingredient.DISALLOW_EMPTY_CODEC, 9)
-                                .fieldOf("ingredients")
-                                .forGetter(LoveyDoveyInfusingRecipe::getIngredients),
-                        RecipeCodecs.CRAFTING_RESULT.fieldOf("output").forGetter(r -> r.output)
-                )
-                .apply(in, LoveyDoveyInfusingRecipe::new));
-
-        private static Codec<List<Ingredient>> validateAmount(Codec<Ingredient> delegate, int max) {
-            return Codecs.validate(
-                    Codecs.validate(
-                            delegate.listOf(),
-                            list -> list.size() > max ? DataResult.error(() -> "Recipe has too many ingredients!") : DataResult.success(
-                                    list)
-                    ),
-                    list -> list.isEmpty() ? DataResult.error(() -> "Recipe has no ingredients!") : DataResult.success(
-                            list)
+        private static DefaultedList<Ingredient> deserializeIngredients(JsonArray json) {
+            DefaultedList<Ingredient> ingredients = DefaultedList.ofSize(json.size(),
+                    Ingredient.EMPTY
             );
+            for (int i = 0; i < json.size(); i++) {
+                Ingredient ingredient = Ingredient.fromJson(json.get(i));
+                if (!ingredient.isEmpty()) {
+                    ingredients.set(i, ingredient);
+                }
+            }
+            return ingredients;
         }
 
         @Override
-        public Codec<LoveyDoveyInfusingRecipe> codec() {
-            return CODEC;
+        public LoveyDoveyInfusingRecipe read(Identifier id, JsonObject json) {
+            DefaultedList<Ingredient> ingredients = deserializeIngredients(JsonHelper.getArray(json,
+                    "ingredients"
+            ));
+            if (ingredients.isEmpty()) {
+                throw new JsonParseException("No ingredients for LoveyDoveyInfuser Recipe");
+            } else if (ingredients.size() > 1) {
+                throw new JsonParseException("Too many ingredients for LoveyDoveyInfuser Recipe");
+            } else {
+                return new LoveyDoveyInfusingRecipe(ingredients,
+                        Ingredient
+                                .fromJson(JsonHelper.getObject(json, "output"))
+                                .getMatchingStacks()[0]
+                );
+            }
         }
 
         @Override
-        public LoveyDoveyInfusingRecipe read(PacketByteBuf buf) {
-            DefaultedList<Ingredient> inputs = DefaultedList.ofSize(
-                    buf.readInt(),
+        public LoveyDoveyInfusingRecipe read(Identifier id, PacketByteBuf buf) {
+            DefaultedList<Ingredient> inputs = DefaultedList.ofSize(buf.readInt(),
                     Ingredient.EMPTY
             );
 
@@ -121,7 +137,7 @@ public class LoveyDoveyInfusingRecipe implements Recipe<SimpleInventory> {
                 ingredient.write(buf);
             }
 
-            buf.writeItemStack(recipe.getResult(null));
+            buf.writeItemStack(recipe.getOutput(null));
         }
     }
 }

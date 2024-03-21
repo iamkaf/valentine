@@ -17,7 +17,6 @@ import net.minecraft.network.listener.ClientPlayPacketListener;
 import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket;
 import net.minecraft.particle.ParticleTypes;
-import net.minecraft.recipe.RecipeEntry;
 import net.minecraft.screen.PropertyDelegate;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.server.network.ServerPlayerEntity;
@@ -37,7 +36,7 @@ public class LoveyDoveyInfuserBlockEntity extends BlockEntity implements Extende
     protected final PropertyDelegate propertyDelegate;
     private final DefaultedList<ItemStack> inventory = DefaultedList.ofSize(2, ItemStack.EMPTY);
     private int progress = 0;
-    private int maxProgress = 72;
+    private int maxProgress = 360;
 
     public LoveyDoveyInfuserBlockEntity(BlockPos pos, BlockState state) {
         super(ModBlockEntities.LOVEY_DOVEY_INFUSER_BLOCK_ENTITY, pos, state);
@@ -111,7 +110,9 @@ public class LoveyDoveyInfuserBlockEntity extends BlockEntity implements Extende
 
     @Nullable
     @Override
-    public ScreenHandler createMenu(int syncId, PlayerInventory playerInventory, PlayerEntity player) {
+    public ScreenHandler createMenu(
+            int syncId, PlayerInventory playerInventory, PlayerEntity player
+    ) {
         return new LoveyDoveyInfusingScreenHandler(syncId,
                 playerInventory,
                 this,
@@ -165,12 +166,12 @@ public class LoveyDoveyInfuserBlockEntity extends BlockEntity implements Extende
     }
 
     private void craftItem() {
-        Optional<RecipeEntry<LoveyDoveyInfusingRecipe>> recipe = getCurrentRecipe();
+        Optional<LoveyDoveyInfusingRecipe> recipe = getCurrentRecipe();
 
         this.removeStack(INPUT_SLOT, 1);
 
-        this.setStack(OUTPUT_SLOT, new ItemStack(recipe.get().value().getResult(null).getItem(),
-                getStack(OUTPUT_SLOT).getCount() + recipe.get().value().getResult(null).getCount()
+        this.setStack(OUTPUT_SLOT, new ItemStack(recipe.get().getOutput(null).getItem(),
+                getStack(OUTPUT_SLOT).getCount() + recipe.get().getOutput(null).getCount()
         ));
     }
 
@@ -183,19 +184,16 @@ public class LoveyDoveyInfuserBlockEntity extends BlockEntity implements Extende
     }
 
     private boolean hasRecipe() {
-        Optional<RecipeEntry<LoveyDoveyInfusingRecipe>> recipe = getCurrentRecipe();
-
+        Optional<LoveyDoveyInfusingRecipe> recipe = getCurrentRecipe();
         return recipe.isPresent() && canInsertAmountIntoOutputSlot(recipe
                 .get()
-                .value()
-                .getResult(null)) && canInsertItemIntoOutputSlot(recipe
+                .getOutput(null)) && canInsertItemIntoOutputSlot(recipe
                 .get()
-                .value()
-                .getResult(null)
+                .getOutput(null)
                 .getItem());
     }
 
-    private Optional<RecipeEntry<LoveyDoveyInfusingRecipe>> getCurrentRecipe() {
+    private Optional<LoveyDoveyInfusingRecipe> getCurrentRecipe() {
         SimpleInventory inv = new SimpleInventory(this.size());
         for (int i = 0; i < this.size(); i++) {
             inv.setStack(i, this.getStack(i));

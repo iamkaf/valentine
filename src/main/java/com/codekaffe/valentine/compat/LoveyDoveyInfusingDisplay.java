@@ -6,7 +6,6 @@ import me.shedaniel.rei.api.common.display.basic.BasicDisplay;
 import me.shedaniel.rei.api.common.entry.EntryIngredient;
 import me.shedaniel.rei.api.common.util.EntryIngredients;
 import me.shedaniel.rei.api.common.util.EntryStacks;
-import net.minecraft.recipe.RecipeEntry;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -17,10 +16,10 @@ public class LoveyDoveyInfusingDisplay extends BasicDisplay {
         super(inputs, outputs);
     }
 
-    public LoveyDoveyInfusingDisplay(RecipeEntry<LoveyDoveyInfusingRecipe> recipe) {
+    public LoveyDoveyInfusingDisplay(LoveyDoveyInfusingRecipe recipe) {
         super(
-                getInputList(recipe.value()),
-                List.of(EntryIngredient.of(EntryStacks.of(recipe.value().getResult(null))))
+                getInputList(recipe),
+                List.of(EntryIngredient.of(EntryStacks.of(recipe.getOutput(null))))
         );
     }
 
