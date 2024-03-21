@@ -173,6 +173,18 @@ public class ModItems {
             "special_berry_cookie",
             new SpecialBerryCookie(new FabricItemSettings().food(SpecialBerryCookie.FOOD_COMPONENT))
     );
+    public static final Item OMEGA_COOKIE = registerItem(
+            "omega_cookie",
+            new OmegaCookie(new FabricItemSettings()
+                    .food(OmegaCookie.FOOD_COMPONENT)
+                    .rarity(Rarity.EPIC))
+    );
+    public static final Item SPECIAL_OMEGA_COOKIE = registerItem(
+            "special_omega_cookie",
+            new SpecialOmegaCookie(new FabricItemSettings()
+                    .food(SpecialOmegaCookie.FOOD_COMPONENT)
+                    .rarity(Rarity.EPIC))
+    );
 
     public static final Item COTTON_CANDY = registerItem(
             "cotton_candy",

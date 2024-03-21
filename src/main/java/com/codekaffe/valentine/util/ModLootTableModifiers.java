@@ -42,7 +42,9 @@ public class ModLootTableModifiers {
             ModItems.SPOOKY_COOKIE,
             ModItems.PECULIAR_COOKIE,
             ModItems.PRISMATIC_COOKIE,
-            ModItems.CHORUS_COOKIE
+            ModItems.CHORUS_COOKIE,
+            ModItems.BERRY_COOKIE
+            // omega cookies do not go here
     );
 
     private static Identifier villageIdHelper(String villageType) {

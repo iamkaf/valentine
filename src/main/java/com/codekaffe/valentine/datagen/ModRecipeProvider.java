@@ -211,7 +211,7 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 .criterion(hasItem(Blocks.WITHER_SKELETON_SKULL),
                         conditionsFromItem(Blocks.WITHER_SKELETON_SKULL)
                 )
-                .criterion(hasItem(Items.MILK_BUCKET), conditionsFromItem(Items.MILK_BUCKET))
+                .criterion(hasItem(Items.SOUL_SAND), conditionsFromItem(Items.SOUL_SAND))
                 .criterion(hasItem(Items.COOKIE), conditionsFromItem(Items.COOKIE))
                 .criterion(hasItem(ModItems.COTTON_CANDY),
                         conditionsFromItem(ModItems.COTTON_CANDY)
@@ -319,6 +319,25 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                         conditionsFromItem(ModItems.COTTON_CANDY)
                 )
                 .offerTo(exporter, new Identifier(getRecipeName(ModItems.BERRY_COOKIE)));
+        ShapedRecipeJsonBuilder
+                .create(RecipeCategory.FOOD, ModItems.OMEGA_COOKIE, 2)
+                .pattern("ABD")
+                .pattern("BCB")
+                .pattern("DBA")
+                .input('A', Items.NETHER_STAR)
+                .input('D', Items.ENCHANTED_GOLDEN_APPLE)
+                .input('B', ModItems.COTTON_CANDY)
+                .input('C', Items.COOKIE)
+                .criterion(hasItem(Items.NETHER_STAR), conditionsFromItem(Items.NETHER_STAR))
+                .criterion(
+                        hasItem(Items.ENCHANTED_GOLDEN_APPLE),
+                        conditionsFromItem(Items.ENCHANTED_GOLDEN_APPLE)
+                )
+                .criterion(hasItem(Items.COOKIE), conditionsFromItem(Items.COOKIE))
+                .criterion(hasItem(ModItems.COTTON_CANDY),
+                        conditionsFromItem(ModItems.COTTON_CANDY)
+                )
+                .offerTo(exporter, new Identifier(getRecipeName(ModItems.OMEGA_COOKIE)));
 
         LoveyDoveyInfusingRecipeJsonBuilder
                 .create()
@@ -414,6 +433,11 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 .create()
                 .input(ModItems.BERRY_COOKIE)
                 .output(ModItems.SPECIAL_BERRY_COOKIE)
+                .offerTo(exporter);
+        LoveyDoveyInfusingRecipeJsonBuilder
+                .create()
+                .input(ModItems.OMEGA_COOKIE)
+                .output(ModItems.SPECIAL_OMEGA_COOKIE)
                 .offerTo(exporter);
     }
 }
