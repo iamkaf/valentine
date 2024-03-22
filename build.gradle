@@ -37,7 +37,6 @@ dependencies {
 	modRuntimeOnly "me.shedaniel:RoughlyEnoughItems-fabric:12.0.684"
 
 	modImplementation "io.wispforest:owo-lib:${project.owo_version}"
-	include "io.wispforest:owo-sentinel:${project.owo_version}"
 
 	include modImplementation("io.wispforest:lavender:${project.lavender_version}")
 	
