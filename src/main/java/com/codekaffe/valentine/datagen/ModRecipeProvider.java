@@ -23,6 +23,16 @@ public class ModRecipeProvider extends FabricRecipeProvider {
     @Override
     public void generate(Consumer<RecipeJsonProvider> exporter) {
         ShapelessRecipeJsonBuilder
+                .create(RecipeCategory.MISC, ModItems.COOKIE_BOOK)
+                .input(Items.BOOK)
+                .input(ModItems.COTTON_CANDY)
+                .criterion(hasItem(Items.BOOK), conditionsFromItem(Items.BOOK))
+                .criterion(
+                        hasItem(ModItems.COTTON_CANDY),
+                        conditionsFromItem(ModItems.COTTON_CANDY)
+                )
+                .offerTo(exporter, new Identifier(getRecipeName(ModItems.COOKIE_BOOK)));
+        ShapelessRecipeJsonBuilder
                 .create(RecipeCategory.DECORATIONS, Items.PURPLE_DYE)
                 .input(ModBlocks.ARISTEA)
                 .criterion(hasItem(ModBlocks.ARISTEA), conditionsFromItem(ModBlocks.ARISTEA))
@@ -329,8 +339,7 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 .input('B', ModItems.COTTON_CANDY)
                 .input('C', Items.COOKIE)
                 .criterion(hasItem(Items.NETHER_STAR), conditionsFromItem(Items.NETHER_STAR))
-                .criterion(
-                        hasItem(Items.ENCHANTED_GOLDEN_APPLE),
+                .criterion(hasItem(Items.ENCHANTED_GOLDEN_APPLE),
                         conditionsFromItem(Items.ENCHANTED_GOLDEN_APPLE)
                 )
                 .criterion(hasItem(Items.COOKIE), conditionsFromItem(Items.COOKIE))

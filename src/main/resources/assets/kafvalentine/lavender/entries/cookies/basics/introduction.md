@@ -6,12 +6,13 @@
 }
 ```
 
-Lorem ipsum dolor sit amet.
+To start the mod you'll need some cotton candy. You can get their seeds by breaks grass.
+
+Once you have some cotton candy go ahead and make a Lovey Dovey Infuser.
+
+<item;kafvalentine:cotton_candy>
+<item;kafvalentine:cotton_candy_seeds>
 
 ;;;;;
 
-Lorem ipsum dolor sit amet.
-
-;;;;;
-
-![](kafvalentine:textures/gui/lovey_dovey_infuser_gui.png,fit)
+<recipe;kafvalentine:lovey_dovey_infuser>

@@ -1,4 +1,4 @@
-// 1.20.1	2024-03-21T12:01:54.8087117	Kaf's Valentine Special/Recipes
+// 1.20.1	2024-03-22T11:46:52.8773102	Kaf's Valentine Special/Recipes
 8839a7102aead55bc35c0586436302bdc0ab6a5c data\kafvalentine\recipes\special_fire_cookie_from_infusing_fire_cookie.json
 fbe69f5f9005fc83b59264687183c72394e9e9b2 data\kafvalentine\advancements\recipes\food\berry_cookie.json
 4da9f258446eb8f43829e51a9f7ecefba393c497 data\kafvalentine\recipes\golden_cookie.json
@@ -22,6 +22,7 @@ d42e320a294902cb8496bc76809f977dd36218eb data\kafvalentine\advancements\recipes\
 c629c5f98def11417f8a0de233b73f30dbfc2f97 data\kafvalentine\recipes\special_medic_cookie_from_infusing_medic_cookie.json
 85e552b6ce3ac0a371aeedd425e060f75e431b92 data\kafvalentine\advancements\recipes\food\medic_cookie.json
 bf6b8d90f0fa1e8532af027cc86a0aa3e7ab4e9d data\kafvalentine\advancements\recipes\food\melon_cookie.json
+d650a321955f1642eb9779d36055e8f5f307bb5e data\kafvalentine\recipes\cookie_book.json
 eae396dacf3a564c4ec5cd432c59386d5eaec8c8 data\kafvalentine\recipes\extra_special_chocolate_cookie_from_infusing_special_chocolate_cookie.json
 b566d932a10adac042ece3a35979e2ebc9c77f52 data\kafvalentine\recipes\evil_cookie.json
 97c6f906b2500aad3e16702e661de831898c34c8 data\kafvalentine\recipes\special_prismatic_cookie_from_infusing_prismatic_cookie.json
@@ -42,6 +43,7 @@ c1cc9217ccf7676e4cbc9a449dbb8672ce34c799 data\kafvalentine\recipes\special_explo
 872378dd4d174d626a8c05b55b63aa08f92cea6f data\kafvalentine\recipes\purple_dye.json
 472a618e96d8344e5c01864a737bc3b608b6f503 data\kafvalentine\recipes\good_vision_cookie.json
 35347ebac8c71a8c4f957af799be0b51225adf7a data\kafvalentine\recipes\special_omega_cookie_from_infusing_omega_cookie.json
+8438ddc420bad15f116242b9ffb4122ee68319c1 data\kafvalentine\advancements\recipes\misc\cookie_book.json
 83d2528eabb46957bc979ee27cee6791c6d01f27 data\kafvalentine\recipes\glow_cookie.json
 4dde57908590814abd8415477119dd1c0bbdbf00 data\kafvalentine\recipes\fire_cookie.json
 14dc3c0d162bb7ec88fc947b3c78761459d91f8e data\kafvalentine\recipes\explosive_cookie.json

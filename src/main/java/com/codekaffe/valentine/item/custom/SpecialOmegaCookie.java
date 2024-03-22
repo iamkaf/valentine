@@ -20,11 +20,11 @@ import java.util.List;
 
 public class SpecialOmegaCookie extends OmegaCookie {
 
-    private static StatusEffectInstance EFFECT_PRIMARY = new StatusEffectInstance(StatusEffects.REGENERATION,
+    private static final StatusEffectInstance EFFECT_PRIMARY = new StatusEffectInstance(StatusEffects.REGENERATION,
             1200,
             2
     );
-    private static StatusEffectInstance EFFECT_SECONDARY = new StatusEffectInstance(StatusEffects.ABSORPTION,
+    private static final StatusEffectInstance EFFECT_SECONDARY = new StatusEffectInstance(StatusEffects.ABSORPTION,
             1200,
             4
     );
