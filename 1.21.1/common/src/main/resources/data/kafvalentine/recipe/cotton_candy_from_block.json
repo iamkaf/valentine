@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "food",
+  "ingredients": [
+    {
+      "item": "kafvalentine:cotton_candy_block"
+    }
+  ],
+  "result": {
+    "id": "kafvalentine:cotton_candy",
+    "count": 9
+  }
+}

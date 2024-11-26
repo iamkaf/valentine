@@ -1,0 +1,26 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "kafvalentine:item/colorful_cotton_candy"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "kafvalentine:color": 0.1
+      },
+      "model": "kafvalentine:item/colorful_cotton_candy1"
+    },
+    {
+      "predicate": {
+        "kafvalentine:color": 0.2
+      },
+      "model": "kafvalentine:item/colorful_cotton_candy2"
+    },
+    {
+      "predicate": {
+        "kafvalentine:color": 0.3
+      },
+      "model": "kafvalentine:item/colorful_cotton_candy3"
+    }
+  ]
+}

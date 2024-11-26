@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "blocks",
+  "pattern": [
+    "AAA",
+    "AAA",
+    "AAA"
+  ],
+  "key": {
+    "A": {
+      "item": "kafvalentine:cotton_candy"
+    }
+  },
+  "result": {
+    "id": "kafvalentine:cotton_candy_block",
+    "count": 1
+  }
+}

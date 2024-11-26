@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "O": {
+      "item": "kafvalentine:cotton_candy"
+    },
+    "X": {
+      "item": "minecraft:iron_ingot"
+    }
+  },
+  "pattern": [
+    "OOO",
+    "XXX",
+    "X X"
+  ],
+  "result": {
+    "id": "kafvalentine:lovey_dovey_infuser",
+    "count": 1
+  },
+  "show_notification": true
+}
