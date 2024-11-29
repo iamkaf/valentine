@@ -80,6 +80,7 @@
   "item.kafvalentine.special_berry_cookie.tooltip": "You're looking berry cute today.",
   "item.kafvalentine.omega_cookie": "Omega Cookie",
   "item.kafvalentine.omega_cookie.tooltip": "You are what I hold dearest.",
+  "item.kafvalentine.omega_cookie.usage": "%s used an Omega Cookie!",
   "item.kafvalentine.special_omega_cookie": "Special Omega Cookie",
   "item.kafvalentine.special_omega_cookie.tooltip": "You are what I hold dearest.",
 
@@ -100,6 +101,8 @@
   "item.minecraft.lingering_potion.effect.smitten_potion": "Lovely Lingering Potion",
   "item.minecraft.tipped_arrow.effect.smitten_potion": "Lovely Arrow",
   "effect.kafvalentine.smitten": "Smitten",
+
+  "text.kafvalentine.hold_shift": "[Hold Shift For More]",
 
   "creativetab.kafvalentine.valentine": "Kaf's Valentine Special"
 }

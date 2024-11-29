@@ -13,11 +13,12 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
+import java.util.function.Supplier;
 
 public class CookieItem extends Item {
     private final String id;
     private final ChatFormatting tooltipColor;
-    private Item specialCookie = null;
+    private Supplier<? extends Item> specialCookie = () -> null;
 
     public CookieItem(Properties properties, String id, ChatFormatting tooltipColor) {
         super(properties);
@@ -41,11 +42,11 @@ public class CookieItem extends Item {
         return super.finishUsingItem(stack, level, livingEntity);
     }
 
-    public void setUpgrade(Item upgrade) {
+    public void setUpgrade(Supplier<? extends Item> upgrade) {
         this.specialCookie = upgrade;
     }
 
     public @Nullable Item upgrade() {
-        return this.specialCookie;
+        return this.specialCookie.get();
     }
 }

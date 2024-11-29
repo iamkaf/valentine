@@ -12,6 +12,7 @@ import com.iamkaf.valentine.item.custom.CottonCandyItem;
 import com.iamkaf.valentine.loot.LootModifications;
 import com.iamkaf.valentine.worldgen.WorldGen;
 import com.mojang.logging.LogUtils;
+import dev.architectury.event.events.common.LifecycleEvent;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
@@ -493,26 +494,28 @@ public final class Valentine {
 
     public static class Upgrades {
         static void init() {
-            Items.SPECIAL_CHOCOLATE_COOKIE.get().setUpgrade(Items.EXTRA_SPECIAL_CHOCOLATE_COOKIE.get());
-            Items.MEDIC_COOKIE.get().setUpgrade(Items.SPECIAL_MEDIC_COOKIE.get());
-            Items.GOOD_VISION_COOKIE.get().setUpgrade(Items.SPECIAL_GOOD_VISION_COOKIE.get());
-            Items.FIRE_COOKIE.get().setUpgrade(Items.SPECIAL_FIRE_COOKIE.get());
-            Items.MELON_COOKIE.get().setUpgrade(Items.SPECIAL_MELON_COOKIE.get());
-            Items.APPLE_COOKIE.get().setUpgrade(Items.SPECIAL_APPLE_COOKIE.get());
-            Items.NETHER_WART_COOKIE.get().setUpgrade(Items.SPECIAL_NETHER_WART_COOKIE.get());
-            Items.GLOW_COOKIE.get().setUpgrade(Items.SPECIAL_GLOW_COOKIE.get());
-            Items.CARAMEL_COOKIE.get().setUpgrade(Items.SPECIAL_CARAMEL_COOKIE.get());
-            Items.EXPLOSIVE_COOKIE.get().setUpgrade(Items.SPECIAL_EXPLOSIVE_COOKIE.get());
-            Items.GOLDEN_COOKIE.get().setUpgrade(Items.SPECIAL_GOLDEN_COOKIE.get());
-            Items.EVIL_COOKIE.get().setUpgrade(Items.SPECIAL_EVIL_COOKIE.get());
-            Items.ARISTEA_COOKIE.get().setUpgrade(Items.SPECIAL_ARISTEA_COOKIE.get());
-            Items.ROCKET_COOKIE.get().setUpgrade(Items.SPECIAL_ROCKET_COOKIE.get());
-            Items.SPOOKY_COOKIE.get().setUpgrade(Items.SPECIAL_SPOOKY_COOKIE.get());
-            Items.PECULIAR_COOKIE.get().setUpgrade(Items.SPECIAL_PECULIAR_COOKIE.get());
-            Items.PRISMATIC_COOKIE.get().setUpgrade(Items.SPECIAL_PRISMATIC_COOKIE.get());
-            Items.CHORUS_COOKIE.get().setUpgrade(Items.SPECIAL_CHORUS_COOKIE.get());
-            Items.BERRY_COOKIE.get().setUpgrade(Items.SPECIAL_BERRY_COOKIE.get());
-            Items.OMEGA_COOKIE.get().setUpgrade(Items.SPECIAL_OMEGA_COOKIE.get());
+            LifecycleEvent.SERVER_LEVEL_LOAD.register(_world -> {
+                Items.SPECIAL_CHOCOLATE_COOKIE.get().setUpgrade(Items.EXTRA_SPECIAL_CHOCOLATE_COOKIE);
+                Items.MEDIC_COOKIE.get().setUpgrade(Items.SPECIAL_MEDIC_COOKIE);
+                Items.GOOD_VISION_COOKIE.get().setUpgrade(Items.SPECIAL_GOOD_VISION_COOKIE);
+                Items.FIRE_COOKIE.get().setUpgrade(Items.SPECIAL_FIRE_COOKIE);
+                Items.MELON_COOKIE.get().setUpgrade(Items.SPECIAL_MELON_COOKIE);
+                Items.APPLE_COOKIE.get().setUpgrade(Items.SPECIAL_APPLE_COOKIE);
+                Items.NETHER_WART_COOKIE.get().setUpgrade(Items.SPECIAL_NETHER_WART_COOKIE);
+                Items.GLOW_COOKIE.get().setUpgrade(Items.SPECIAL_GLOW_COOKIE);
+                Items.CARAMEL_COOKIE.get().setUpgrade(Items.SPECIAL_CARAMEL_COOKIE);
+                Items.EXPLOSIVE_COOKIE.get().setUpgrade(Items.SPECIAL_EXPLOSIVE_COOKIE);
+                Items.GOLDEN_COOKIE.get().setUpgrade(Items.SPECIAL_GOLDEN_COOKIE);
+                Items.EVIL_COOKIE.get().setUpgrade(Items.SPECIAL_EVIL_COOKIE);
+                Items.ARISTEA_COOKIE.get().setUpgrade(Items.SPECIAL_ARISTEA_COOKIE);
+                Items.ROCKET_COOKIE.get().setUpgrade(Items.SPECIAL_ROCKET_COOKIE);
+                Items.SPOOKY_COOKIE.get().setUpgrade(Items.SPECIAL_SPOOKY_COOKIE);
+                Items.PECULIAR_COOKIE.get().setUpgrade(Items.SPECIAL_PECULIAR_COOKIE);
+                Items.PRISMATIC_COOKIE.get().setUpgrade(Items.SPECIAL_PRISMATIC_COOKIE);
+                Items.CHORUS_COOKIE.get().setUpgrade(Items.SPECIAL_CHORUS_COOKIE);
+                Items.BERRY_COOKIE.get().setUpgrade(Items.SPECIAL_BERRY_COOKIE);
+                Items.OMEGA_COOKIE.get().setUpgrade(Items.SPECIAL_OMEGA_COOKIE);
+            });
         }
     }
 

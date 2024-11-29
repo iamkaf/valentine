@@ -89,8 +89,7 @@ public class OnCookieEaten {
     }
 
     private static void berryCookie(Player user, Level world) {
-        world.playLocalSound(
-                user.getX(),
+        world.playLocalSound(user.getX(),
                 user.getY(),
                 user.getZ(),
                 SoundEvents.FOX_AMBIENT,
@@ -103,8 +102,7 @@ public class OnCookieEaten {
 
     private static void aristeaCookie(Player user, Level world) {
         if (world instanceof ServerLevel serverLevel) {
-            serverLevel.sendParticles(
-                    ParticleTypes.HEART,
+            serverLevel.sendParticles(ParticleTypes.HEART,
                     user.getX(),
                     user.getY() + 1,
                     user.getZ(),
@@ -144,8 +142,7 @@ public class OnCookieEaten {
                         soundSource = SoundSource.PLAYERS;
                     }
 
-                    world.playSound(
-                            null,
+                    world.playSound(null,
                             livingEntity.getX(),
                             livingEntity.getY(),
                             livingEntity.getZ(),
@@ -169,8 +166,7 @@ public class OnCookieEaten {
     private static void explosiveCookie(Player user, Level world, boolean isSpecial) {
         // gg
         if (!world.isClientSide) {
-            world.explode(
-                    null,
+            world.explode(null,
                     user.getX(),
                     user.getY(),
                     user.getZ(),
@@ -194,8 +190,7 @@ public class OnCookieEaten {
                 // play sound
                 player.playSound(SoundEvents.TOTEM_USE);
                 // spawn totem particles
-                serverWorld.sendParticles(
-                        ParticleTypes.TOTEM_OF_UNDYING,
+                serverWorld.sendParticles(ParticleTypes.TOTEM_OF_UNDYING,
                         user.getX(),
                         user.getY() + 1,
                         user.getZ(),
@@ -215,14 +210,13 @@ public class OnCookieEaten {
     }
 
     private static Component getMessage(LivingEntity user) {
-        return Component.literal(user.getName().getString() + " used an Omega Cookie!")
+        return Component.translatable("item.kafvalentine.omega_cookie.usage", user.getName().getString())
                 .withStyle(ChatFormatting.GOLD, ChatFormatting.BOLD);
     }
 
     private static void peculiarCookie(Player user, Level world) {
         if (world instanceof ServerLevel serverLevel) {
-            serverLevel.sendParticles(
-                    ParticleTypes.CLOUD,
+            serverLevel.sendParticles(ParticleTypes.CLOUD,
                     user.getX(),
                     user.getY() + 1,
                     user.getZ(),
@@ -236,8 +230,7 @@ public class OnCookieEaten {
     }
 
     private static void prismaticCookie(Player user, Level world) {
-        world.playLocalSound(
-                user.getX(),
+        world.playLocalSound(user.getX(),
                 user.getY(),
                 user.getZ(),
                 SoundEvents.BREWING_STAND_BREW,
@@ -247,8 +240,7 @@ public class OnCookieEaten {
                 false
         );
         if (world instanceof ServerLevel serverLevel) {
-            serverLevel.sendParticles(
-                    ParticleTypes.BUBBLE,
+            serverLevel.sendParticles(ParticleTypes.BUBBLE,
                     user.getX(),
                     user.getY() + 1,
                     user.getZ(),
@@ -290,8 +282,7 @@ public class OnCookieEaten {
     }
 
     private static void spookyCookie(Player user, Level world) {
-        world.playLocalSound(
-                user.getX(),
+        world.playLocalSound(user.getX(),
                 user.getY(),
                 user.getZ(),
                 SoundEvents.GHAST_SCREAM,
@@ -300,8 +291,7 @@ public class OnCookieEaten {
                 0.8f,
                 false
         );
-        world.playLocalSound(
-                user.getX(),
+        world.playLocalSound(user.getX(),
                 user.getY(),
                 user.getZ(),
                 SoundEvents.GHAST_SHOOT,
@@ -311,8 +301,7 @@ public class OnCookieEaten {
                 false
         );
         if (world instanceof ServerLevel serverLevel) {
-            serverLevel.sendParticles(
-                    ParticleTypes.WITCH,
+            serverLevel.sendParticles(ParticleTypes.WITCH,
                     user.getX(),
                     user.getY() + 1,
                     user.getZ(),

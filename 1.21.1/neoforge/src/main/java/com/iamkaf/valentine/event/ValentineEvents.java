@@ -13,8 +13,7 @@ public class ValentineEvents {
     public static void onBrewingRecipeRegister(RegisterBrewingRecipesEvent event) {
         PotionBrewing.Builder builder = event.getBuilder();
 
-        builder.addMix(
-                Potions.AWKWARD,
+        builder.addMix(Potions.AWKWARD,
                 Valentine.Blocks.ARISTEA.get().asItem(),
                 Valentine.Potions.SMITTEN_POTION
         );

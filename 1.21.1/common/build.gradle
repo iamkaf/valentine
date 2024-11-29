@@ -1,21 +1,5 @@
-architectury {
-    common rootProject.enabled_platforms.split(',')
-}
-
-def generatedResources = file('../common/src/main/generated')
-
-sourceSets {
-    main {
-        resources.srcDirs += [generatedResources]
-    }
-}
+apply from: "https://raw.githubusercontent.com/iamkaf/modresources/main/gradle/${minecraft_version}/common.gradle"
 
 dependencies {
-    // We depend on Fabric Loader here to use the Fabric @Environment annotations,
-    // which get remapped to the correct annotations on each platform.
-    // Do NOT use other classes from Fabric Loader.
-    modImplementation "net.fabricmc:fabric-loader:$rootProject.fabric_loader_version"
-
-    // Architectury API. This is optional, and you can comment it out if you don't need it.
-    modImplementation "dev.architectury:architectury:$rootProject.architectury_api_version"
+    modImplementation "com.iamkaf.amber:amber-common:$rootProject.amber_version"
 }
