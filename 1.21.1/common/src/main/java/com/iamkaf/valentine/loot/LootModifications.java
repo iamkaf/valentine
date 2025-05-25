@@ -16,8 +16,8 @@ import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 import java.util.List;
 
 public class LootModifications {
-    private static final ResourceKey<LootTable> GRASS = Blocks.SHORT_GRASS.getLootTable();
-    private static final ResourceKey<LootTable> TALL_GRASS = Blocks.TALL_GRASS.getLootTable();
+    private static final ResourceKey<LootTable> GRASS = Blocks.SHORT_GRASS.getLootTable().orElseThrow();
+    private static final ResourceKey<LootTable> TALL_GRASS = Blocks.TALL_GRASS.getLootTable().orElseThrow();
 
     static {
         LootEvent.MODIFY_LOOT_TABLE.register((key, context, builtin) -> {

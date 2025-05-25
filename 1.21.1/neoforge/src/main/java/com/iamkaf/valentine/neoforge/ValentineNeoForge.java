@@ -13,7 +13,6 @@ public final class ValentineNeoForge {
         RegisterImpl.BLOCKS.register(eBussy);
         RegisterImpl.TABS.register(eBussy);
         RegisterImpl.DATA_COMPONENT_TYPES.register(eBussy);
-        RegisterImpl.ARMOR_MATERIAL.register(eBussy);
         RegisterImpl.MOB_EFFECT.register(eBussy);
         RegisterImpl.POTION.register(eBussy);
     }

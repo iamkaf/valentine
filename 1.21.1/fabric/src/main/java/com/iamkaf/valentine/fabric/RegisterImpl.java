@@ -3,14 +3,16 @@ package com.iamkaf.valentine.fabric;
 import com.iamkaf.valentine.Valentine;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.fabricmc.fabric.api.registry.CompostingChanceRegistry;
-import net.fabricmc.fabric.api.registry.FuelRegistry;
 import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.effect.MobEffect;
-import net.minecraft.world.item.*;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.alchemy.Potion;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
@@ -23,7 +25,10 @@ public class RegisterImpl {
         var obj = Registry.register(BuiltInRegistries.BLOCK, Valentine.resource(id), supplier.get());
         // TODO: i need to find a better way to do this in the future
         if (!id.contains("crop")) {
-            item(id, () -> new BlockItem(obj, new Item.Properties()));
+            item(
+                    id,
+                    () -> new BlockItem(obj, new Item.Properties().setId(Valentine.itemKey(id)).useBlockDescriptionPrefix())
+            );
         }
         return () -> obj;
     }
@@ -33,12 +38,9 @@ public class RegisterImpl {
         return () -> obj;
     }
 
-    public static <T extends Item> void fuelItem(Supplier<T> supplier, int burnTime) {
-        FuelRegistry.INSTANCE.add(supplier.get(), burnTime);
-    }
-
     public static Supplier<CreativeModeTab> creativeModeTab(Supplier<? extends Item> icon, String tabName) {
-        var obj = Registry.register(BuiltInRegistries.CREATIVE_MODE_TAB,
+        var obj = Registry.register(
+                BuiltInRegistries.CREATIVE_MODE_TAB,
                 Valentine.resource(tabName),
                 FabricItemGroup.builder()
                         .icon(() -> new ItemStack(icon.get()))
@@ -55,19 +57,12 @@ public class RegisterImpl {
 
     public static <T> Supplier<DataComponentType<T>> dataComponentType(String name,
             UnaryOperator<DataComponentType.Builder<T>> builderOperator) {
-        var obj = Registry.register(BuiltInRegistries.DATA_COMPONENT_TYPE,
+        var obj = Registry.register(
+                BuiltInRegistries.DATA_COMPONENT_TYPE,
                 Valentine.resource(name),
                 builderOperator.apply(DataComponentType.builder()).build()
         );
         return () -> obj;
-    }
-
-    public static Holder<ArmorMaterial> armorMaterial(String name, ArmorMaterial material) {
-        var obj = Registry.registerForHolder(BuiltInRegistries.ARMOR_MATERIAL,
-                Valentine.resource(name),
-                material
-        );
-        return obj;
     }
 
     public static <T extends ItemLike> void compostable(Supplier<T> item, float chance) {

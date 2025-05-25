@@ -13,8 +13,8 @@ public class SmittenEffect extends MobEffect {
     }
 
     @Override
-    public boolean applyEffectTick(LivingEntity livingEntity, int amplifier) {
-        if (livingEntity.level() instanceof ServerLevel serverLevel) {
+    public boolean applyEffectTick(ServerLevel level, LivingEntity livingEntity, int amplifier) {
+        if (level instanceof ServerLevel serverLevel) {
             serverLevel.sendParticles(
                     ParticleTypes.HEART,
                     livingEntity.getX(),
@@ -27,7 +27,7 @@ public class SmittenEffect extends MobEffect {
                     0.8d
             );
         }
-        return super.applyEffectTick(livingEntity, amplifier);
+        return super.applyEffectTick(level, livingEntity, amplifier);
     }
 
     @Override

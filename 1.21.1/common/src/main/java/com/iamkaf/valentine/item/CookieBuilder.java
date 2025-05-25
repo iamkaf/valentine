@@ -1,17 +1,22 @@
 package com.iamkaf.valentine.item;
 
+import com.iamkaf.valentine.Valentine;
 import com.iamkaf.valentine.item.custom.CookieItem;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.Holder;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Rarity;
+import net.minecraft.world.item.component.Consumable;
+import net.minecraft.world.item.component.Consumables;
+import net.minecraft.world.item.consume_effects.ApplyStatusEffectsConsumeEffect;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Supplier;
 
 public class CookieBuilder {
     private final String id;
@@ -22,6 +27,7 @@ public class CookieBuilder {
     private Rarity rarity = Rarity.COMMON;
     private ChatFormatting tooltipColor = ChatFormatting.AQUA;
     private boolean fireproof = false;
+    private float cooldown;
 
     public CookieBuilder(String id) {
         this.id = id;
@@ -58,24 +64,36 @@ public class CookieBuilder {
         return this;
     }
 
+    public CookieBuilder setCooldown(float cooldownSeconds) {
+        this.cooldown = cooldownSeconds;
+        return this;
+    }
+
     public CookieItem build() {
         Item.Properties properties =
-                new Item.Properties().food(makeFoodComponent()).stacksTo(16).rarity(rarity);
+                new Item.Properties().food(makeFoodComponent(), makeConsumableComponent()).stacksTo(16).rarity(rarity);
         if (fireproof) {
             properties = properties.fireResistant();
         }
-        return new CookieItem(properties, id, tooltipColor);
+        if (cooldown > 0f) {
+            properties = properties.useCooldown(cooldown);
+        }
+
+        ResourceKey<Item> itemId = ResourceKey.create(Registries.ITEM, Valentine.resource(id));
+
+        return new CookieItem(properties.setId(itemId), id, tooltipColor);
+    }
+
+    private Consumable makeConsumableComponent() {
+        return Consumables.defaultFood()
+                .onConsume(new ApplyStatusEffectsConsumeEffect(effects))
+                .consumeSeconds(0.8F)
+                .build();
     }
 
     private FoodProperties makeFoodComponent() {
-        FoodProperties.Builder foodBuilder = new FoodProperties.Builder().nutrition(nutrition)
-                .saturationModifier(saturationModifier)
-                .fast()
-                .alwaysEdible();
-
-        for (int i = 0; i < effects.size(); i++) {
-            foodBuilder.effect(effects.get(i), effectProbabilities.get(i));
-        }
+        FoodProperties.Builder foodBuilder =
+                new FoodProperties.Builder().nutrition(nutrition).saturationModifier(saturationModifier).alwaysEdible();
 
         return foodBuilder.build();
     }

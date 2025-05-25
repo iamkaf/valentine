@@ -1,6 +1,7 @@
 package com.iamkaf.valentine.block;
 
 import com.iamkaf.valentine.Valentine;
+import com.mojang.serialization.MapCodec;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.CropBlock;
@@ -12,10 +13,15 @@ import org.jetbrains.annotations.NotNull;
 
 public class CottonCandyCropBlock extends CropBlock {
     public static final int MAX_AGE = 5;
-    public static final IntegerProperty AGE = BlockStateProperties.AGE_5;
+    public static final MapCodec<CropBlock> CODEC = simpleCodec(CottonCandyCropBlock::new);
 
     public CottonCandyCropBlock(Properties settings) {
         super(settings);
+    }
+
+    @Override
+    public @NotNull MapCodec<? extends CropBlock> codec() {
+        return CODEC;
     }
 
     @Override
@@ -24,17 +30,7 @@ public class CottonCandyCropBlock extends CropBlock {
     }
 
     @Override
-    public @NotNull IntegerProperty getAgeProperty() {
-        return AGE;
-    }
-
-    @Override
     public int getMaxAge() {
         return MAX_AGE;
-    }
-
-    @Override
-    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(AGE);
     }
 }

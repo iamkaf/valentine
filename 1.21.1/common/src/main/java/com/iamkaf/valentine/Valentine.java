@@ -9,6 +9,7 @@ import com.iamkaf.valentine.item.CookieBuilder;
 import com.iamkaf.valentine.item.ItemColorDataComponent;
 import com.iamkaf.valentine.item.custom.CookieItem;
 import com.iamkaf.valentine.item.custom.CottonCandyItem;
+import com.iamkaf.valentine.item.custom.Love;
 import com.iamkaf.valentine.loot.LootModifications;
 import com.iamkaf.valentine.worldgen.WorldGen;
 import com.mojang.logging.LogUtils;
@@ -18,14 +19,9 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.network.protocol.game.ClientboundSoundPacket;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.TagKey;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -33,9 +29,11 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.food.FoodProperties;
-import net.minecraft.world.item.*;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.alchemy.Potion;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.Level;
@@ -48,8 +46,6 @@ import org.slf4j.Logger;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Supplier;
-
-import static com.iamkaf.valentine.events.OnPat.patVFX;
 
 public final class Valentine {
     public static final String MOD_ID = "kafvalentine";
@@ -77,6 +73,17 @@ public final class Valentine {
      */
     public static ResourceLocation resource(String path) {
         return ResourceLocation.fromNamespaceAndPath(MOD_ID, path);
+    }
+
+    /**
+     * Creates a resource key in the mod namespace with the given path.
+     */
+    public static ResourceKey<Item> itemKey(String path) {
+        return ResourceKey.create(Registries.ITEM, resource(path));
+    }
+
+    public static ResourceKey<Block> blockKey(String path) {
+        return ResourceKey.create(Registries.BLOCK, resource(path));
     }
 
     public static class CreativeModeTabs {
@@ -127,7 +134,7 @@ public final class Valentine {
             tabItems.add(Items.OMEGA_COOKIE.get());
             tabItems.add(Items.SPECIAL_OMEGA_COOKIE.get());
             tabItems.add(Items.COTTON_CANDY.get());
-            tabItems.add(Items.COLORFUL_COTTON_CANDY.get());
+            tabItems.add(Items.CANDIED_COTTON_CANDY_CANDY.get());
             tabItems.add(Items.COTTON_CANDY_SEEDS.get());
 
             tabItems.add(Blocks.ARISTEA.get());
@@ -150,53 +157,66 @@ public final class Valentine {
         public static final float NORMAL_COOKIE_SATURATION = 0.1f;
         public static final float SPECIAL_COOKIE_SATURATION = 0.2f;
 
-        public static final Supplier<Item> COTTON_CANDY = Register.item("cotton_candy",
+        public static final Supplier<Item> COTTON_CANDY = Register.item(
+                "cotton_candy",
                 () -> new CottonCandyItem(new Item.Properties().food(new FoodProperties.Builder().nutrition(4)
                         .saturationModifier(0.3f)
-                        .build()))
-        );
-        public static final Supplier<Item> COLORFUL_COTTON_CANDY = Register.item("colorful_cotton_candy",
-                () -> new Item(new Item.Properties().food(new FoodProperties.Builder().nutrition(6)
-                        .saturationModifier(0.7f)
-                        .build()))
+                        .build()).setId(itemKey("cotton_candy")))
         );
 
-        public static final Supplier<Item> COTTON_CANDY_SEEDS = Register.item("cotton_candy_seeds",
-                () -> new ItemNameBlockItem(Blocks.COTTON_CANDY_CROP.get(), new Item.Properties())
+        public static final Supplier<Item> CANDIED_COTTON_CANDY_CANDY = Register.item(
+                "candied_cotton_candy_candy",
+                () -> new Item(new Item.Properties().food(new FoodProperties.Builder().nutrition(6)
+                        .saturationModifier(0.7f)
+                        .build()).setId(itemKey("candied_cotton_candy_candy")))
         );
+
+        public static final Supplier<Item> COTTON_CANDY_SEEDS = Register.item(
+                "cotton_candy_seeds",
+                () -> new BlockItem(Blocks.COTTON_CANDY_CROP.get(), new Item.Properties().setId(itemKey("cotton_candy_seeds")).useItemDescriptionPrefix())
+        );
+
         public static final Supplier<CookieItem> SPECIAL_CHOCOLATE_COOKIE = Register.item(
                 "special_chocolate_cookie",
                 () -> new CookieBuilder("special_chocolate_cookie").setNutrition(NORMAL_COOKIE_NUTRITION)
                         .setSaturationModifier(NORMAL_COOKIE_SATURATION)
                         .build()
         );
+
         public static final Supplier<CookieItem> EXTRA_SPECIAL_CHOCOLATE_COOKIE = Register.item(
                 "extra_special_chocolate_cookie",
-                () -> new CookieBuilder("special_chocolate_cookie").setNutrition(SPECIAL_COOKIE_NUTRITION)
+                () -> new CookieBuilder("extra_special_chocolate_cookie").setNutrition(SPECIAL_COOKIE_NUTRITION)
                         .setSaturationModifier(SPECIAL_COOKIE_SATURATION)
                         .build()
         );
-        public static final Supplier<CookieItem> MEDIC_COOKIE = Register.item("medic_cookie",
+
+        public static final Supplier<CookieItem> MEDIC_COOKIE = Register.item(
+                "medic_cookie",
                 () -> new CookieBuilder("medic_cookie").setNutrition(NORMAL_COOKIE_NUTRITION)
                         .setSaturationModifier(NORMAL_COOKIE_SATURATION)
                         .addEffect(MobEffects.HEAL, 1, 0, 1)
                         .setTooltipColor(ChatFormatting.RED)
                         .build()
         );
-        public static final Supplier<CookieItem> SPECIAL_MEDIC_COOKIE = Register.item("special_medic_cookie",
+
+        public static final Supplier<CookieItem> SPECIAL_MEDIC_COOKIE = Register.item(
+                "special_medic_cookie",
                 () -> new CookieBuilder("special_medic_cookie").setNutrition(SPECIAL_COOKIE_NUTRITION)
                         .setSaturationModifier(SPECIAL_COOKIE_SATURATION)
                         .addEffect(MobEffects.HEAL, 1, 0, 1)
                         .setTooltipColor(ChatFormatting.RED)
                         .build()
         );
-        public static final Supplier<CookieItem> GOOD_VISION_COOKIE = Register.item("good_vision_cookie",
+
+        public static final Supplier<CookieItem> GOOD_VISION_COOKIE = Register.item(
+                "good_vision_cookie",
                 () -> new CookieBuilder("good_vision_cookie").setNutrition(NORMAL_COOKIE_NUTRITION)
                         .setSaturationModifier(NORMAL_COOKIE_SATURATION)
                         .addEffect(MobEffects.NIGHT_VISION, 2400, 0, 1)
                         .setTooltipColor(ChatFormatting.GOLD)
                         .build()
         );
+
         public static final Supplier<CookieItem> SPECIAL_GOOD_VISION_COOKIE = Register.item(
                 "special_good_vision_cookie",
                 () -> new CookieBuilder("special_good_vision_cookie").setNutrition(SPECIAL_COOKIE_NUTRITION)
@@ -205,7 +225,9 @@ public final class Valentine {
                         .setTooltipColor(ChatFormatting.GOLD)
                         .build()
         );
-        public static final Supplier<CookieItem> FIRE_COOKIE = Register.item("fire_cookie",
+
+        public static final Supplier<CookieItem> FIRE_COOKIE = Register.item(
+                "fire_cookie",
                 () -> new CookieBuilder("fire_cookie").setNutrition(NORMAL_COOKIE_NUTRITION)
                         .setSaturationModifier(NORMAL_COOKIE_SATURATION)
                         .addEffect(MobEffects.FIRE_RESISTANCE, 1200, 0, 1)
@@ -213,7 +235,9 @@ public final class Valentine {
                         .setFireproof(true)
                         .build()
         );
-        public static final Supplier<CookieItem> SPECIAL_FIRE_COOKIE = Register.item("special_fire_cookie",
+
+        public static final Supplier<CookieItem> SPECIAL_FIRE_COOKIE = Register.item(
+                "special_fire_cookie",
                 () -> new CookieBuilder("special_fire_cookie").setNutrition(SPECIAL_COOKIE_NUTRITION)
                         .setSaturationModifier(SPECIAL_COOKIE_SATURATION)
                         .addEffect(MobEffects.FIRE_RESISTANCE, 2400, 1, 1)
@@ -221,39 +245,50 @@ public final class Valentine {
                         .setFireproof(true)
                         .build()
         );
-        public static final Supplier<CookieItem> MELON_COOKIE = Register.item("melon_cookie",
+
+        public static final Supplier<CookieItem> MELON_COOKIE = Register.item(
+                "melon_cookie",
                 () -> new CookieBuilder("melon_cookie").setNutrition(NORMAL_COOKIE_NUTRITION)
                         .setSaturationModifier(NORMAL_COOKIE_SATURATION)
                         .addEffect(MobEffects.DIG_SPEED, 1200, 0, 1)
                         .setTooltipColor(ChatFormatting.GREEN)
                         .build()
         );
-        public static final Supplier<CookieItem> SPECIAL_MELON_COOKIE = Register.item("special_melon_cookie",
+
+        public static final Supplier<CookieItem> SPECIAL_MELON_COOKIE = Register.item(
+                "special_melon_cookie",
                 () -> new CookieBuilder("special_melon_cookie").setNutrition(SPECIAL_COOKIE_NUTRITION)
                         .setSaturationModifier(SPECIAL_COOKIE_SATURATION)
                         .addEffect(MobEffects.DIG_SPEED, 2400, 1, 1)
                         .setTooltipColor(ChatFormatting.GREEN)
                         .build()
         );
-        public static final Supplier<CookieItem> APPLE_COOKIE = Register.item("apple_cookie",
+
+        public static final Supplier<CookieItem> APPLE_COOKIE = Register.item(
+                "apple_cookie",
                 () -> new CookieBuilder("apple_cookie").setTooltipColor(ChatFormatting.RED)
                         .addEffect(MobEffects.LUCK, 1200, 0, 1)
                         .build()
         );
-        public static final Supplier<CookieItem> SPECIAL_APPLE_COOKIE = Register.item("special_apple_cookie",
+
+        public static final Supplier<CookieItem> SPECIAL_APPLE_COOKIE = Register.item(
+                "special_apple_cookie",
                 () -> new CookieBuilder("special_apple_cookie").setNutrition(SPECIAL_COOKIE_NUTRITION)
                         .setSaturationModifier(SPECIAL_COOKIE_SATURATION)
                         .addEffect(MobEffects.LUCK, 2400, 1, 1)
                         .setTooltipColor(ChatFormatting.RED)
                         .build()
         );
-        public static final Supplier<CookieItem> NETHER_WART_COOKIE = Register.item("nether_wart_cookie",
+
+        public static final Supplier<CookieItem> NETHER_WART_COOKIE = Register.item(
+                "nether_wart_cookie",
                 () -> new CookieBuilder("nether_wart_cookie").setNutrition(NORMAL_COOKIE_NUTRITION)
                         .setSaturationModifier(NORMAL_COOKIE_SATURATION)
                         .addEffect(MobEffects.POISON, 100, 0, 1)
                         .setTooltipColor(ChatFormatting.GOLD)
                         .build()
         );
+
         public static final Supplier<CookieItem> SPECIAL_NETHER_WART_COOKIE = Register.item(
                 "special_nether_wart_cookie",
                 () -> new CookieBuilder("special_nether_wart_cookie").setNutrition(SPECIAL_COOKIE_NUTRITION)
@@ -262,27 +297,34 @@ public final class Valentine {
                         .setTooltipColor(ChatFormatting.GOLD)
                         .build()
         );
-        public static final Supplier<CookieItem> GLOW_COOKIE = Register.item("glow_cookie",
+
+        public static final Supplier<CookieItem> GLOW_COOKIE = Register.item(
+                "glow_cookie",
                 () -> new CookieBuilder("glow_cookie").setNutrition(NORMAL_COOKIE_NUTRITION)
                         .setSaturationModifier(NORMAL_COOKIE_SATURATION)
                         .addEffect(MobEffects.GLOWING, 1200, 0, 1)
                         .setTooltipColor(ChatFormatting.AQUA)
                         .build()
         );
-        public static final Supplier<CookieItem> SPECIAL_GLOW_COOKIE = Register.item("special_glow_cookie",
+
+        public static final Supplier<CookieItem> SPECIAL_GLOW_COOKIE = Register.item(
+                "special_glow_cookie",
                 () -> new CookieBuilder("special_glow_cookie").setNutrition(SPECIAL_COOKIE_NUTRITION)
                         .setSaturationModifier(SPECIAL_COOKIE_SATURATION)
                         .addEffect(MobEffects.GLOWING, 2400, 1, 1)
                         .setTooltipColor(ChatFormatting.AQUA)
                         .build()
         );
-        public static final Supplier<CookieItem> CARAMEL_COOKIE = Register.item("caramel_cookie",
+
+        public static final Supplier<CookieItem> CARAMEL_COOKIE = Register.item(
+                "caramel_cookie",
                 () -> new CookieBuilder("caramel_cookie").setNutrition(NORMAL_COOKIE_NUTRITION)
                         .setSaturationModifier(NORMAL_COOKIE_SATURATION)
                         .addEffect(MobEffects.ABSORPTION, 200, 0, 1)
                         .setTooltipColor(ChatFormatting.AQUA)
                         .build()
         );
+
         public static final Supplier<CookieItem> SPECIAL_CARAMEL_COOKIE = Register.item(
                 "special_caramel_cookie",
                 () -> new CookieBuilder("special_caramel_cookie").setNutrition(SPECIAL_COOKIE_NUTRITION)
@@ -291,13 +333,16 @@ public final class Valentine {
                         .setTooltipColor(ChatFormatting.AQUA)
                         .build()
         );
-        public static final Supplier<CookieItem> EXPLOSIVE_COOKIE = Register.item("explosive_cookie",
+
+        public static final Supplier<CookieItem> EXPLOSIVE_COOKIE = Register.item(
+                "explosive_cookie",
                 () -> new CookieBuilder("explosive_cookie").setNutrition(NORMAL_COOKIE_NUTRITION)
                         .setSaturationModifier(NORMAL_COOKIE_SATURATION)
                         .addEffect(MobEffects.ABSORPTION, 200, 0, 1)
                         .setTooltipColor(ChatFormatting.RED)
                         .build()
         );
+
         public static final Supplier<CookieItem> SPECIAL_EXPLOSIVE_COOKIE = Register.item(
                 "special_explosive_cookie",
                 () -> new CookieBuilder("special_explosive_cookie").setNutrition(SPECIAL_COOKIE_NUTRITION)
@@ -306,7 +351,9 @@ public final class Valentine {
                         .setTooltipColor(ChatFormatting.RED)
                         .build()
         );
-        public static final Supplier<CookieItem> GOLDEN_COOKIE = Register.item("golden_cookie",
+
+        public static final Supplier<CookieItem> GOLDEN_COOKIE = Register.item(
+                "golden_cookie",
                 () -> new CookieBuilder("golden_cookie").setNutrition(NORMAL_COOKIE_NUTRITION)
                         .setSaturationModifier(NORMAL_COOKIE_SATURATION)
                         .addEffect(MobEffects.REGENERATION, 100, 1, 1)
@@ -315,19 +362,22 @@ public final class Valentine {
                         .setRarity(Rarity.RARE)
                         .build()
         );
-        public static final Supplier<CookieItem> SPECIAL_GOLDEN_COOKIE =
-                Register.item("special_golden_cookie",
-                        () -> new CookieBuilder("special_golden_cookie").setNutrition(SPECIAL_COOKIE_NUTRITION)
-                                .setSaturationModifier(SPECIAL_COOKIE_SATURATION)
-                                .addEffect(MobEffects.REGENERATION, 400, 1, 1)
-                                .addEffect(MobEffects.ABSORPTION, 2400, 3, 1)
-                                .addEffect(MobEffects.DAMAGE_RESISTANCE, 6000, 0, 1)
-                                .addEffect(MobEffects.FIRE_RESISTANCE, 6000, 0, 1)
-                                .setTooltipColor(ChatFormatting.YELLOW)
-                                .setRarity(Rarity.RARE)
-                                .build()
-                );
-        public static final Supplier<CookieItem> EVIL_COOKIE = Register.item("evil_cookie",
+
+        public static final Supplier<CookieItem> SPECIAL_GOLDEN_COOKIE = Register.item(
+                "special_golden_cookie",
+                () -> new CookieBuilder("special_golden_cookie").setNutrition(SPECIAL_COOKIE_NUTRITION)
+                        .setSaturationModifier(SPECIAL_COOKIE_SATURATION)
+                        .addEffect(MobEffects.REGENERATION, 400, 1, 1)
+                        .addEffect(MobEffects.ABSORPTION, 2400, 3, 1)
+                        .addEffect(MobEffects.DAMAGE_RESISTANCE, 6000, 0, 1)
+                        .addEffect(MobEffects.FIRE_RESISTANCE, 6000, 0, 1)
+                        .setTooltipColor(ChatFormatting.YELLOW)
+                        .setRarity(Rarity.RARE)
+                        .build()
+        );
+
+        public static final Supplier<CookieItem> EVIL_COOKIE = Register.item(
+                "evil_cookie",
                 () -> new CookieBuilder("evil_cookie").setNutrition(NORMAL_COOKIE_NUTRITION)
                         .setSaturationModifier(NORMAL_COOKIE_SATURATION)
                         .addEffect(MobEffects.WITHER, 200, 0, 1)
@@ -335,7 +385,9 @@ public final class Valentine {
                         .setTooltipColor(ChatFormatting.DARK_RED)
                         .build()
         );
-        public static final Supplier<CookieItem> SPECIAL_EVIL_COOKIE = Register.item("special_evil_cookie",
+
+        public static final Supplier<CookieItem> SPECIAL_EVIL_COOKIE = Register.item(
+                "special_evil_cookie",
                 () -> new CookieBuilder("special_evil_cookie").setNutrition(SPECIAL_COOKIE_NUTRITION)
                         .setSaturationModifier(SPECIAL_COOKIE_SATURATION)
                         .addEffect(MobEffects.WITHER, 600, 0, 1)
@@ -343,7 +395,9 @@ public final class Valentine {
                         .setTooltipColor(ChatFormatting.DARK_RED)
                         .build()
         );
-        public static final Supplier<CookieItem> ARISTEA_COOKIE = Register.item("aristea_cookie",
+
+        public static final Supplier<CookieItem> ARISTEA_COOKIE = Register.item(
+                "aristea_cookie",
                 () -> new CookieBuilder("aristea_cookie").setNutrition(NORMAL_COOKIE_NUTRITION)
                         .setSaturationModifier(NORMAL_COOKIE_SATURATION)
                         .addEffect(MobEffects.LUCK, 1200, 0, 1)
@@ -351,6 +405,7 @@ public final class Valentine {
                         .setTooltipColor(ChatFormatting.BLUE)
                         .build()
         );
+
         public static final Supplier<CookieItem> SPECIAL_ARISTEA_COOKIE = Register.item(
                 "special_aristea_cookie",
                 () -> new CookieBuilder("special_aristea_cookie").setNutrition(SPECIAL_COOKIE_NUTRITION)
@@ -360,41 +415,50 @@ public final class Valentine {
                         .setTooltipColor(ChatFormatting.BLUE)
                         .build()
         );
-        public static final Supplier<CookieItem> ROCKET_COOKIE = Register.item("rocket_cookie",
+
+        public static final Supplier<CookieItem> ROCKET_COOKIE = Register.item(
+                "rocket_cookie",
                 () -> new CookieBuilder("rocket_cookie").setNutrition(NORMAL_COOKIE_NUTRITION)
                         .setSaturationModifier(NORMAL_COOKIE_SATURATION)
                         .setTooltipColor(ChatFormatting.GOLD)
                         .build()
         );
-        public static final Supplier<CookieItem> SPECIAL_ROCKET_COOKIE =
-                Register.item("special_rocket_cookie",
-                        () -> new CookieBuilder("special_rocket_cookie").setNutrition(SPECIAL_COOKIE_NUTRITION)
-                                .setSaturationModifier(SPECIAL_COOKIE_SATURATION)
-                                .setTooltipColor(ChatFormatting.GOLD)
-                                .build()
-                );
-        public static final Supplier<CookieItem> SPOOKY_COOKIE = Register.item("spooky_cookie",
+
+        public static final Supplier<CookieItem> SPECIAL_ROCKET_COOKIE = Register.item(
+                "special_rocket_cookie",
+                () -> new CookieBuilder("special_rocket_cookie").setNutrition(SPECIAL_COOKIE_NUTRITION)
+                        .setSaturationModifier(SPECIAL_COOKIE_SATURATION)
+                        .setTooltipColor(ChatFormatting.GOLD)
+                        .build()
+        );
+
+        public static final Supplier<CookieItem> SPOOKY_COOKIE = Register.item(
+                "spooky_cookie",
                 () -> new CookieBuilder("spooky_cookie").setNutrition(NORMAL_COOKIE_NUTRITION)
                         .setSaturationModifier(NORMAL_COOKIE_SATURATION)
                         .addEffect(MobEffects.DARKNESS, 200, 0, 1)
                         .setTooltipColor(ChatFormatting.GOLD)
                         .build()
         );
-        public static final Supplier<CookieItem> SPECIAL_SPOOKY_COOKIE =
-                Register.item("special_spooky_cookie",
-                        () -> new CookieBuilder("special_spooky_cookie").setNutrition(SPECIAL_COOKIE_NUTRITION)
-                                .setSaturationModifier(SPECIAL_COOKIE_SATURATION)
-                                .addEffect(MobEffects.DARKNESS, 400, 1, 1)
-                                .setTooltipColor(ChatFormatting.GOLD)
-                                .build()
-                );
-        public static final Supplier<CookieItem> PECULIAR_COOKIE = Register.item("peculiar_cookie",
+
+        public static final Supplier<CookieItem> SPECIAL_SPOOKY_COOKIE = Register.item(
+                "special_spooky_cookie",
+                () -> new CookieBuilder("special_spooky_cookie").setNutrition(SPECIAL_COOKIE_NUTRITION)
+                        .setSaturationModifier(SPECIAL_COOKIE_SATURATION)
+                        .addEffect(MobEffects.DARKNESS, 400, 1, 1)
+                        .setTooltipColor(ChatFormatting.GOLD)
+                        .build()
+        );
+
+        public static final Supplier<CookieItem> PECULIAR_COOKIE = Register.item(
+                "peculiar_cookie",
                 () -> new CookieBuilder("peculiar_cookie").setNutrition(NORMAL_COOKIE_NUTRITION)
                         .setSaturationModifier(NORMAL_COOKIE_SATURATION)
                         .addEffect(MobEffects.LEVITATION, 100, 0, 1)
                         .setTooltipColor(ChatFormatting.AQUA)
                         .build()
         );
+
         public static final Supplier<CookieItem> SPECIAL_PECULIAR_COOKIE = Register.item(
                 "special_peculiar_cookie",
                 () -> new CookieBuilder("special_peculiar_cookie").setNutrition(SPECIAL_COOKIE_NUTRITION)
@@ -403,13 +467,16 @@ public final class Valentine {
                         .setTooltipColor(ChatFormatting.AQUA)
                         .build()
         );
-        public static final Supplier<CookieItem> PRISMATIC_COOKIE = Register.item("prismatic_cookie",
+
+        public static final Supplier<CookieItem> PRISMATIC_COOKIE = Register.item(
+                "prismatic_cookie",
                 () -> new CookieBuilder("prismatic_cookie").setNutrition(NORMAL_COOKIE_NUTRITION)
                         .setSaturationModifier(NORMAL_COOKIE_SATURATION)
                         .addEffect(MobEffects.WATER_BREATHING, 1200, 0, 1)
                         .setTooltipColor(ChatFormatting.AQUA)
                         .build()
         );
+
         public static final Supplier<CookieItem> SPECIAL_PRISMATIC_COOKIE = Register.item(
                 "special_prismatic_cookie",
                 () -> new CookieBuilder("special_prismatic_cookie").setNutrition(SPECIAL_COOKIE_NUTRITION)
@@ -418,78 +485,71 @@ public final class Valentine {
                         .setTooltipColor(ChatFormatting.AQUA)
                         .build()
         );
-        public static final Supplier<CookieItem> CHORUS_COOKIE = Register.item("chorus_cookie",
+
+        public static final Supplier<CookieItem> CHORUS_COOKIE = Register.item(
+                "chorus_cookie",
                 () -> new CookieBuilder("chorus_cookie").setNutrition(NORMAL_COOKIE_NUTRITION)
                         .setSaturationModifier(NORMAL_COOKIE_SATURATION)
                         .setTooltipColor(ChatFormatting.LIGHT_PURPLE)
+                        .setCooldown(1f)
                         .build()
         );
-        public static final Supplier<CookieItem> SPECIAL_CHORUS_COOKIE =
-                Register.item("special_chorus_cookie",
-                        () -> new CookieBuilder("special_chorus_cookie").setNutrition(SPECIAL_COOKIE_NUTRITION)
-                                .setSaturationModifier(SPECIAL_COOKIE_SATURATION)
-                                .setTooltipColor(ChatFormatting.LIGHT_PURPLE)
-                                .build()
-                );
-        public static final Supplier<CookieItem> BERRY_COOKIE = Register.item("berry_cookie",
+
+        public static final Supplier<CookieItem> SPECIAL_CHORUS_COOKIE = Register.item(
+                "special_chorus_cookie",
+                () -> new CookieBuilder("special_chorus_cookie").setNutrition(SPECIAL_COOKIE_NUTRITION)
+                        .setSaturationModifier(SPECIAL_COOKIE_SATURATION)
+                        .setTooltipColor(ChatFormatting.LIGHT_PURPLE)
+                        .setCooldown(1f)
+                        .build()
+        );
+
+        public static final Supplier<CookieItem> BERRY_COOKIE = Register.item(
+                "berry_cookie",
                 () -> new CookieBuilder("berry_cookie").setNutrition(NORMAL_COOKIE_NUTRITION)
                         .setSaturationModifier(NORMAL_COOKIE_SATURATION)
                         .addEffect(MobEffects.JUMP, 600, 1, 1)
                         .setTooltipColor(ChatFormatting.DARK_RED)
                         .build()
         );
-        public static final Supplier<CookieItem> SPECIAL_BERRY_COOKIE = Register.item("special_berry_cookie",
+
+        public static final Supplier<CookieItem> SPECIAL_BERRY_COOKIE = Register.item(
+                "special_berry_cookie",
                 () -> new CookieBuilder("special_berry_cookie").setNutrition(SPECIAL_COOKIE_NUTRITION)
                         .setSaturationModifier(SPECIAL_COOKIE_SATURATION)
                         .addEffect(MobEffects.JUMP, 1200, 2, 1)
                         .setTooltipColor(ChatFormatting.DARK_RED)
                         .build()
         );
-        public static final Supplier<CookieItem> OMEGA_COOKIE = Register.item("omega_cookie",
+
+        public static final Supplier<CookieItem> OMEGA_COOKIE = Register.item(
+                "omega_cookie",
                 () -> new CookieBuilder("omega_cookie").setNutrition(NORMAL_COOKIE_NUTRITION)
                         .setSaturationModifier(NORMAL_COOKIE_SATURATION)
                         .addEffect(MobEffects.REGENERATION, 1200, 1, 1)
                         .addEffect(MobEffects.ABSORPTION, 1200, 1, 1)
                         .setTooltipColor(ChatFormatting.GOLD)
+                        .setRarity(Rarity.EPIC)
                         .build()
         );
-        public static final Supplier<CookieItem> SPECIAL_OMEGA_COOKIE = Register.item("special_omega_cookie",
+
+        public static final Supplier<CookieItem> SPECIAL_OMEGA_COOKIE = Register.item(
+                "special_omega_cookie",
                 () -> new CookieBuilder("special_omega_cookie").setNutrition(SPECIAL_COOKIE_NUTRITION)
                         .setSaturationModifier(SPECIAL_COOKIE_SATURATION)
                         .addEffect(MobEffects.REGENERATION, 1200, 2, 1)
                         .addEffect(MobEffects.ABSORPTION, 1200, 4, 1)
                         .setTooltipColor(ChatFormatting.GOLD)
+                        .setRarity(Rarity.EPIC)
                         .build()
         );
-        public static Supplier<Item> LOVE = Register.item("love", () -> new Item(new Item.Properties()) {
-            @Override
-            public InteractionResultHolder<ItemStack> use(Level level, Player player,
-                    InteractionHand usedHand) {
-                if (player.level().isClientSide) {
-                    return super.use(level, player, usedHand);
-                }
-                ServerPlayer serverPlayer = (ServerPlayer) player;
-                patVFX(serverPlayer);
-                ItemStack stack = serverPlayer.getItemInHand(usedHand);
-                stack.shrink(1);
-                serverPlayer.connection.send(new ClientboundSoundPacket(Holder.direct(SoundEvents.ITEM_PICKUP),
-                        SoundSource.PLAYERS,
-                        player.getX(),
-                        player.getY(),
-                        player.getZ(),
-                        1f,
-                        1f,
-                        level.getRandom().nextLong()
-                ));
-                return InteractionResultHolder.consume(stack);
-            }
-        });
+
+        public static Supplier<Item> LOVE =
+                Register.item("love", () -> new Love(new Item.Properties().setId(itemKey("love"))));
 
         private static void init() {
 
         }
-
-
     }
 
     public static class Upgrades {
@@ -520,33 +580,45 @@ public final class Valentine {
     }
 
     public static class Blocks {
-        public static final Supplier<Block> LOVEY_DOVEY_INFUSER = Register.block("lovey_dovey_infuser",
-                () -> new LoveyDoveyInfuserBlock(BlockBehaviour.Properties.ofFullCopy(net.minecraft.world.level.block.Blocks.IRON_BLOCK))
+        public static final Supplier<Block> LOVEY_DOVEY_INFUSER = Register.block(
+                "lovey_dovey_infuser",
+                () -> new LoveyDoveyInfuserBlock(BlockBehaviour.Properties.ofFullCopy(net.minecraft.world.level.block.Blocks.IRON_BLOCK)
+                        .setId(blockKey("lovey_dovey_infuser")))
         );
 
-        public static final Supplier<Block> COTTON_CANDY_CROP = Register.block("cotton_candy_crop",
-                () -> new CottonCandyCropBlock(BlockBehaviour.Properties.ofFullCopy(net.minecraft.world.level.block.Blocks.WHEAT))
+        public static final Supplier<Block> COTTON_CANDY_CROP = Register.block(
+                "cotton_candy_crop",
+                () -> new CottonCandyCropBlock(BlockBehaviour.Properties.ofFullCopy(net.minecraft.world.level.block.Blocks.WHEAT)
+                        .setId(blockKey("cotton_candy_crop")))
         );
 
-        public static final Supplier<Block> ARISTEA = Register.block("aristea", () -> new AristeaBlock(
-                MobEffects.MOVEMENT_SPEED,
-                10,
-                BlockBehaviour.Properties.ofFullCopy(net.minecraft.world.level.block.Blocks.ALLIUM)
-                        .noOcclusion()
-                        .noCollission()
-        ));
-        public static final Supplier<Block> POTTED_ARISTEA =
-                Register.block("potted_aristea", () -> new FlowerPotBlock(ARISTEA.get(),
+        public static final Supplier<Block> ARISTEA = Register.block(
+                "aristea", () -> new AristeaBlock(
+                        MobEffects.MOVEMENT_SPEED,
+                        10,
+                        BlockBehaviour.Properties.ofFullCopy(net.minecraft.world.level.block.Blocks.ALLIUM)
+                                .noOcclusion()
+                                .noCollission()
+                                .setId(blockKey("aristea"))
+                )
+        );
+
+        public static final Supplier<Block> POTTED_ARISTEA = Register.block(
+                "potted_aristea", () -> new FlowerPotBlock(
+                        ARISTEA.get(),
                         BlockBehaviour.Properties.ofFullCopy(net.minecraft.world.level.block.Blocks.POTTED_ALLIUM)
                                 .noOcclusion()
-                ));
+                                .setId(blockKey("potted_aristea"))
+                )
+        );
 
-        public static final Supplier<Block> COTTON_CANDY_BLOCK = Register.block("cotton_candy_block",
+        public static final Supplier<Block> COTTON_CANDY_BLOCK = Register.block(
+                "cotton_candy_block",
                 () -> new Block(BlockBehaviour.Properties.ofFullCopy(net.minecraft.world.level.block.Blocks.WHITE_WOOL)
-                        .strength(0.2f)) {
+                        .strength(0.2f)
+                        .setId(blockKey("cotton_candy_block"))) {
                     @Override
-                    public void fallOn(Level level, BlockState state, BlockPos pos, Entity entity,
-                            float fallDistance) {
+                    public void fallOn(Level level, BlockState state, BlockPos pos, Entity entity, float fallDistance) {
                         entity.causeFallDamage(fallDistance, 0.2F, level.damageSources().fall());
                     }
                 }
@@ -558,9 +630,7 @@ public final class Valentine {
 
     public static class DataComponents {
         public static final Supplier<DataComponentType<ItemColorDataComponent>> COLOR =
-                Register.dataComponentType("color",
-                        builder -> builder.persistent(ItemColorDataComponent.CODEC)
-                );
+                Register.dataComponentType("color", builder -> builder.persistent(ItemColorDataComponent.CODEC));
 
         static void init() {
 
@@ -568,8 +638,8 @@ public final class Valentine {
     }
 
     public static class Effects {
-        public static final Holder<MobEffect> SMITTEN_EFFECT = Register.mobEffect("smitten",
-                () -> new SmittenEffect(MobEffectCategory.BENEFICIAL, 0xf75477).addAttributeModifier(
+        public static final Holder<MobEffect> SMITTEN_EFFECT = Register.mobEffect(
+                "smitten", () -> new SmittenEffect(MobEffectCategory.BENEFICIAL, 0xf75477).addAttributeModifier(
                         Attributes.MOVEMENT_SPEED,
                         resource("smitten"),
                         0.15f,
@@ -582,8 +652,9 @@ public final class Valentine {
     }
 
     public static class Potions {
-        public static Holder<Potion> SMITTEN_POTION = Register.potion("smitten_potion",
-                () -> new Potion(new MobEffectInstance(Effects.SMITTEN_EFFECT, 1200, 0))
+        public static Holder<Potion> SMITTEN_POTION = Register.potion(
+                "smitten_potion",
+                () -> new Potion("smitten_potion", new MobEffectInstance(Effects.SMITTEN_EFFECT, 1200, 0))
         );
 
         static void init() {
@@ -614,17 +685,14 @@ public final class Valentine {
             public static final TagKey<Item> ARISTEA = createItemTag("c", "aristeas");
             public static final TagKey<Item> FLOWERS = createItemTag("c", "flowers");
             public static final TagKey<Item> SEEDS = createItemTag("c", "seeds");
-            public static final TagKey<Item> MINECRAFT_SEEDS =
-                    createItemTag("minecraft", "villager_plantable_seeds");
+            public static final TagKey<Item> MINECRAFT_SEEDS = createItemTag("minecraft", "villager_plantable_seeds");
             public static final TagKey<Item> GOLDEN_APPLES = createItemTag("c", "golden_apples");
 
             // Compat
             public static final TagKey<Item> UNDIET_FOODS = createItemTag("origins", "ignore_diet");
             // public static final TagKey<Item> MEAT_FOODS = createTag("origins", "meat");
-            public static final TagKey<Item> BOTANIA_SEEDS =
-                    createItemTag("botania", "seed_apothecary_reagent");
-            public static final TagKey<Item> NATURALIST_SEEDS =
-                    createItemTag("naturalist", "bird_food_items");
+            public static final TagKey<Item> BOTANIA_SEEDS = createItemTag("botania", "seed_apothecary_reagent");
+            public static final TagKey<Item> NATURALIST_SEEDS = createItemTag("naturalist", "bird_food_items");
         }
     }
 

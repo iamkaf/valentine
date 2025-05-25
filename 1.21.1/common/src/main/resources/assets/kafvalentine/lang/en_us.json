@@ -85,9 +85,9 @@
   "item.kafvalentine.special_omega_cookie.tooltip": "You are what I hold dearest.",
 
   "item.kafvalentine.cotton_candy": "Cotton Candy",
-  "item.kafvalentine.cotton_candy.tooltip": "Use on Honey Comb Block to make Colorful Cotton Candy",
+  "item.kafvalentine.cotton_candy.tooltip": "Use on Honey Block to make the candied version!",
   "block.kafvalentine.cotton_candy_block": "Cotton Candy Block",
-  "item.kafvalentine.colorful_cotton_candy": "Colorful Cotton Candy",
+  "item.kafvalentine.candied_cotton_candy_candy": "Candied Cotton Candy Candy",
   "item.kafvalentine.cotton_candy_seeds": "Cotton Candy Seeds",
 
   "item.kafvalentine.love": "Love",

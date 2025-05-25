@@ -121,8 +121,8 @@ public class OnCookieEaten {
                 double d = livingEntity.getX() + (livingEntity.getRandom().nextDouble() - 0.5) * 16.0;
                 double e =
                         Mth.clamp(livingEntity.getY() + (double) (livingEntity.getRandom().nextInt(16) - 8),
-                                (double) world.getMinBuildHeight(),
-                                (double) (world.getMinBuildHeight() + ((ServerLevel) world).getLogicalHeight() - 1)
+                                (double) world.getMinY(),
+                                (double) (world.getMaxY() + ((ServerLevel) world).getLogicalHeight() - 1)
                         );
                 double f = livingEntity.getZ() + (livingEntity.getRandom().nextDouble() - 0.5) * 16.0;
                 if (livingEntity.isPassenger()) {
@@ -152,13 +152,6 @@ public class OnCookieEaten {
                     livingEntity.resetFallDistance();
                     break;
                 }
-            }
-
-            if (livingEntity instanceof Player player) {
-                player.resetCurrentImpulseContext();
-                player.getCooldowns().addCooldown(Valentine.Items.CHORUS_COOKIE.get(), 20);
-                player.getCooldowns().addCooldown(Valentine.Items.SPECIAL_CHORUS_COOKIE.get(), 20);
-                player.getCooldowns().addCooldown(Items.CHORUS_FRUIT, 20);
             }
         }
     }

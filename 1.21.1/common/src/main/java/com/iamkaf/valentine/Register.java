@@ -4,7 +4,6 @@ import dev.architectury.injectables.annotations.ExpectPlatform;
 import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.world.effect.MobEffect;
-import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.alchemy.Potion;
@@ -31,18 +30,8 @@ public class Register {
     }
 
     @ExpectPlatform
-    public static <T extends Item> void fuelItem(Supplier<T> supplier, int burnTime) {
-        throw new AssertionError();
-    }
-
-    @ExpectPlatform
     public static <T> Supplier<DataComponentType<T>> dataComponentType(String name,
             UnaryOperator<DataComponentType.Builder<T>> builderUnaryOperator) {
-        throw new AssertionError();
-    }
-
-    @ExpectPlatform
-    public static Holder<ArmorMaterial> armorMaterial(String name, ArmorMaterial material) {
         throw new AssertionError();
     }
 

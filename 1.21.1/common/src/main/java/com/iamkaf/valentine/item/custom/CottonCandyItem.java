@@ -36,12 +36,11 @@ public class CottonCandyItem extends Item {
         }
 
         BlockPos pos = context.getClickedPos();
-        if (level.getBlockState(pos).is(Blocks.HONEYCOMB_BLOCK)) {
-            ItemStack colorfulCottonCandy = new ItemStack(Valentine.Items.COLORFUL_COTTON_CANDY.get());
-            colorfulCottonCandy.set(Valentine.DataComponents.COLOR.get(),
-                    new ItemColorDataComponent(level.getRandom().nextInt(3) + 1)
-            );
-//            player.drop(colorfulCottonCandy, true, false);
+        if (level.getBlockState(pos).is(Blocks.HONEYCOMB_BLOCK) || level.getBlockState(pos).is(Blocks.HONEY_BLOCK)) {
+            ItemStack colorfulCottonCandy = new ItemStack(Valentine.Items.CANDIED_COTTON_CANDY_CANDY.get());
+//            colorfulCottonCandy.set(Valentine.DataComponents.COLOR.get(),
+//                    new ItemColorDataComponent(level.getRandom().nextInt(3) + 1)
+//            );
             level.addFreshEntity(new ItemEntity(level,
                     pos.getX() + 0.5f,
                     pos.getY() + 1,
@@ -51,7 +50,7 @@ public class CottonCandyItem extends Item {
             context.getItemInHand().shrink(1);
             level.playSound(null, pos, SoundEvents.HONEY_BLOCK_PLACE, SoundSource.BLOCKS, 1f, 1f);
 
-            if (level.getRandom().nextFloat() < 0.25) {
+            if (level.getRandom().nextFloat() < 0.15) {
                 level.destroyBlock(pos, false, player);
             }
             return InteractionResult.SUCCESS;

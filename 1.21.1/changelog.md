@@ -2,6 +2,11 @@
 
 See the full changelog at https://github.com/iamkaf/valentine/commits/main
 
+## 3.0.0
+
+- Ported to 1.21.4
+- Removed the colored cotton candy in favor of the new candied cotton candy candy
+
 ## 2.1.0
 
 - Ported to NeoForge

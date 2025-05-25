@@ -26,7 +26,6 @@ public class ModModelProvider extends FabricModelProvider {
                 4,
                 5
         );
-        PickaxeItem
 
         blockStateModelGenerator.registerFlowerPotPlant(ModBlocks.ARISTEA,
                 ModBlocks.POTTED_ARISTEA,

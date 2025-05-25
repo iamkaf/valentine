@@ -1,0 +1,8 @@
+// 1.21.4	2025-05-24T16:36:04.0568673	Valentine/Tags for minecraft:block
+f42ffc5c31c70c0a7658cd412e65991770071bb4 data\minecraft\tags\block\mineable\pickaxe.json
+f42ffc5c31c70c0a7658cd412e65991770071bb4 data\minecraft\tags\block\needs_stone_tool.json
+ad880b505333caed4eb896595f8244697b0b9266 data\minecraft\tags\block\maintains_farmland.json
+e17641fb2098c4a1e3522029f8918451350eaf50 data\minecraft\tags\block\flowers.json
+ad880b505333caed4eb896595f8244697b0b9266 data\minecraft\tags\block\crops.json
+e17641fb2098c4a1e3522029f8918451350eaf50 data\minecraft\tags\block\small_flowers.json
+17374fc5b43f0fc650b0298ea98bec330dd05a70 data\minecraft\tags\block\bee_growables.json

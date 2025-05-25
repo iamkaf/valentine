@@ -1,8 +1,11 @@
 package com.iamkaf.valentine.fabric;
 
 import com.iamkaf.valentine.Valentine;
+import com.iamkaf.valentine.block.CottonCandyCropBlock;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.registry.FabricBrewingRecipeRegistryBuilder;
+import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.item.alchemy.Potions;
 
 public final class ValentineFabric implements ModInitializer {
@@ -14,6 +17,7 @@ public final class ValentineFabric implements ModInitializer {
 
         // Run our common setup.
         Valentine.init();
+        Registry.register(BuiltInRegistries.BLOCK_TYPE, Valentine.resource("cotton_candy_crop"), CottonCandyCropBlock.CODEC);
 
         registerPotionRecipes();
     }
