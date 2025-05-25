@@ -2,6 +2,10 @@
 
 See the full changelog at https://github.com/iamkaf/valentine/commits/main
 
+## 4.0.0
+
+- Ported to 1.21.5
+
 ## 3.0.0
 
 - Ported to 1.21.4
