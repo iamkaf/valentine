@@ -9,5 +9,6 @@ dependencies {
 
     modImplementation "com.iamkaf.amber:amber-neoforge:$rootProject.amber_version"
 //    modRuntimeOnly("dev.emi:emi-neoforge:${rootProject.emi_version}")
+    modImplementation "dev.architectury:architectury-neoforge:$architectury_api_version"
 }
 

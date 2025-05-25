@@ -10,4 +10,5 @@ dependencies {
 
     modImplementation "com.iamkaf.amber:amber-fabric:$rootProject.amber_version"
 //    modRuntimeOnly("dev.emi:emi-fabric:${rootProject.emi_version}")
+    modImplementation "dev.architectury:architectury-fabric:$architectury_api_version"
 }

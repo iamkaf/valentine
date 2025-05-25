@@ -194,7 +194,7 @@ public final class Valentine {
                 "medic_cookie",
                 () -> new CookieBuilder("medic_cookie").setNutrition(NORMAL_COOKIE_NUTRITION)
                         .setSaturationModifier(NORMAL_COOKIE_SATURATION)
-                        .addEffect(MobEffects.HEAL, 1, 0, 1)
+                        .addEffect(MobEffects.INSTANT_HEALTH, 1, 0, 1)
                         .setTooltipColor(ChatFormatting.RED)
                         .build()
         );
@@ -203,7 +203,7 @@ public final class Valentine {
                 "special_medic_cookie",
                 () -> new CookieBuilder("special_medic_cookie").setNutrition(SPECIAL_COOKIE_NUTRITION)
                         .setSaturationModifier(SPECIAL_COOKIE_SATURATION)
-                        .addEffect(MobEffects.HEAL, 1, 0, 1)
+                        .addEffect(MobEffects.INSTANT_HEALTH, 1, 0, 1)
                         .setTooltipColor(ChatFormatting.RED)
                         .build()
         );
@@ -250,7 +250,7 @@ public final class Valentine {
                 "melon_cookie",
                 () -> new CookieBuilder("melon_cookie").setNutrition(NORMAL_COOKIE_NUTRITION)
                         .setSaturationModifier(NORMAL_COOKIE_SATURATION)
-                        .addEffect(MobEffects.DIG_SPEED, 1200, 0, 1)
+                        .addEffect(MobEffects.HASTE, 1200, 0, 1)
                         .setTooltipColor(ChatFormatting.GREEN)
                         .build()
         );
@@ -259,7 +259,7 @@ public final class Valentine {
                 "special_melon_cookie",
                 () -> new CookieBuilder("special_melon_cookie").setNutrition(SPECIAL_COOKIE_NUTRITION)
                         .setSaturationModifier(SPECIAL_COOKIE_SATURATION)
-                        .addEffect(MobEffects.DIG_SPEED, 2400, 1, 1)
+                        .addEffect(MobEffects.HASTE, 2400, 1, 1)
                         .setTooltipColor(ChatFormatting.GREEN)
                         .build()
         );
@@ -369,7 +369,7 @@ public final class Valentine {
                         .setSaturationModifier(SPECIAL_COOKIE_SATURATION)
                         .addEffect(MobEffects.REGENERATION, 400, 1, 1)
                         .addEffect(MobEffects.ABSORPTION, 2400, 3, 1)
-                        .addEffect(MobEffects.DAMAGE_RESISTANCE, 6000, 0, 1)
+                        .addEffect(MobEffects.RESISTANCE, 6000, 0, 1)
                         .addEffect(MobEffects.FIRE_RESISTANCE, 6000, 0, 1)
                         .setTooltipColor(ChatFormatting.YELLOW)
                         .setRarity(Rarity.RARE)
@@ -508,7 +508,7 @@ public final class Valentine {
                 "berry_cookie",
                 () -> new CookieBuilder("berry_cookie").setNutrition(NORMAL_COOKIE_NUTRITION)
                         .setSaturationModifier(NORMAL_COOKIE_SATURATION)
-                        .addEffect(MobEffects.JUMP, 600, 1, 1)
+                        .addEffect(MobEffects.JUMP_BOOST, 600, 1, 1)
                         .setTooltipColor(ChatFormatting.DARK_RED)
                         .build()
         );
@@ -517,7 +517,7 @@ public final class Valentine {
                 "special_berry_cookie",
                 () -> new CookieBuilder("special_berry_cookie").setNutrition(SPECIAL_COOKIE_NUTRITION)
                         .setSaturationModifier(SPECIAL_COOKIE_SATURATION)
-                        .addEffect(MobEffects.JUMP, 1200, 2, 1)
+                        .addEffect(MobEffects.JUMP_BOOST, 1200, 2, 1)
                         .setTooltipColor(ChatFormatting.DARK_RED)
                         .build()
         );
@@ -594,7 +594,7 @@ public final class Valentine {
 
         public static final Supplier<Block> ARISTEA = Register.block(
                 "aristea", () -> new AristeaBlock(
-                        MobEffects.MOVEMENT_SPEED,
+                        MobEffects.SPEED,
                         10,
                         BlockBehaviour.Properties.ofFullCopy(net.minecraft.world.level.block.Blocks.ALLIUM)
                                 .noOcclusion()
@@ -618,7 +618,8 @@ public final class Valentine {
                         .strength(0.2f)
                         .setId(blockKey("cotton_candy_block"))) {
                     @Override
-                    public void fallOn(Level level, BlockState state, BlockPos pos, Entity entity, float fallDistance) {
+                    public void fallOn(Level level, BlockState state, BlockPos pos, Entity entity, double fallDistance) {
+                        // this block is very soft, so it should not deal as much fall damage
                         entity.causeFallDamage(fallDistance, 0.2F, level.damageSources().fall());
                     }
                 }

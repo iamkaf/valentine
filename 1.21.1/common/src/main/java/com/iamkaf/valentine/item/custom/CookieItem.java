@@ -8,11 +8,12 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.component.TooltipDisplay;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.List;
+import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 public class CookieItem extends Item {
@@ -27,10 +28,9 @@ public class CookieItem extends Item {
     }
 
     @Override
-    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents,
-            TooltipFlag tooltipFlag) {
-        tooltipComponents.add(Component.translatable("item.kafvalentine." + id + ".tooltip")
-                .withStyle(tooltipColor));
+    public void appendHoverText(ItemStack stack, TooltipContext context, TooltipDisplay tooltipDisplay,
+            Consumer<Component> tooltipAdder, TooltipFlag flag) {
+        tooltipAdder.accept(Component.translatable("item.kafvalentine." + id + ".tooltip").withStyle(tooltipColor));
     }
 
     @Override
