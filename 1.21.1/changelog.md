@@ -2,6 +2,10 @@
 
 See the full changelog at https://github.com/iamkaf/valentine/commits/main
 
+## 4.1.0
+
+- Updated for Minecraft 1.21.7
+
 ## 4.0.0
 
 - Ported to 1.21.5

@@ -3,7 +3,7 @@ package com.iamkaf.valentine.neoforge;
 import com.iamkaf.valentine.Valentine;
 import com.iamkaf.valentine.item.CustomItemProperties;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
-import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.chunk.ChunkSectionLayer;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.common.Mod;
@@ -22,9 +22,9 @@ public class ValentineNeoForgeClient {
         // This has been deprecated for 3 years. I'll take my chances.
         // The render layer is set here instead of the model json because datagen is done on the fabric side.
         // If this ever breaks I'll go ahead and do it the "right" way.
-        ItemBlockRenderTypes.setRenderLayer(Valentine.Blocks.COTTON_CANDY_CROP.get(), RenderType.cutout());
-        ItemBlockRenderTypes.setRenderLayer(Valentine.Blocks.ARISTEA.get(), RenderType.cutout());
-        ItemBlockRenderTypes.setRenderLayer(Valentine.Blocks.POTTED_ARISTEA.get(), RenderType.cutout());
+        ItemBlockRenderTypes.setRenderLayer(Valentine.Blocks.COTTON_CANDY_CROP.get(), ChunkSectionLayer.CUTOUT);
+        ItemBlockRenderTypes.setRenderLayer(Valentine.Blocks.ARISTEA.get(), ChunkSectionLayer.CUTOUT);
+        ItemBlockRenderTypes.setRenderLayer(Valentine.Blocks.POTTED_ARISTEA.get(), ChunkSectionLayer.CUTOUT);
         CustomItemProperties.init();
     }
 

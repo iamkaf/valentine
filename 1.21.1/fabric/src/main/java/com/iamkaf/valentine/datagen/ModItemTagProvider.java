@@ -62,9 +62,9 @@ public class ModItemTagProvider extends FabricTagProvider.ItemTagProvider {
                 Valentine.Items.SPECIAL_OMEGA_COOKIE.get()
         );
 
-        var cookieBuilder = getOrCreateTagBuilder(Valentine.Tags.Items.COOKIES);
-        var modCookieBuilder = getOrCreateTagBuilder(Valentine.Tags.Items.MOD_COOKIES);
-        var originsBuilder = getOrCreateTagBuilder(Valentine.Tags.Items.UNDIET_FOODS);
+        var cookieBuilder = valueLookupBuilder(Valentine.Tags.Items.COOKIES);
+        var modCookieBuilder = valueLookupBuilder(Valentine.Tags.Items.MOD_COOKIES);
+        var originsBuilder = valueLookupBuilder(Valentine.Tags.Items.UNDIET_FOODS);
 
         for (var cookie : cookies) {
             cookieBuilder.add(cookie);
@@ -73,20 +73,20 @@ public class ModItemTagProvider extends FabricTagProvider.ItemTagProvider {
         }
 
         // Additional cookie tags
-        getOrCreateTagBuilder(Valentine.Tags.Items.GOLDEN_APPLES)
+        valueLookupBuilder(Valentine.Tags.Items.GOLDEN_APPLES)
                 .add(Valentine.Items.GOLDEN_COOKIE.get())
                 .add(Valentine.Items.SPECIAL_GOLDEN_COOKIE.get());
 
         // Flower tags
-        getOrCreateTagBuilder(Valentine.Tags.Items.ARISTEA).add(Valentine.Blocks.ARISTEA.get().asItem());
-        getOrCreateTagBuilder(Valentine.Tags.Items.FLOWERS).add(Valentine.Blocks.ARISTEA.get().asItem());
-        getOrCreateTagBuilder(ItemTags.SMALL_FLOWERS).add(Valentine.Blocks.ARISTEA.get().asItem());
+        valueLookupBuilder(Valentine.Tags.Items.ARISTEA).add(Valentine.Blocks.ARISTEA.get().asItem());
+        valueLookupBuilder(Valentine.Tags.Items.FLOWERS).add(Valentine.Blocks.ARISTEA.get().asItem());
+        valueLookupBuilder(ItemTags.SMALL_FLOWERS).add(Valentine.Blocks.ARISTEA.get().asItem());
 
         // Seed tags
-        getOrCreateTagBuilder(Valentine.Tags.Items.SEEDS).add(Valentine.Items.COTTON_CANDY_SEEDS.get());
-        getOrCreateTagBuilder(Valentine.Tags.Items.MINECRAFT_SEEDS).add(Valentine.Items.COTTON_CANDY_SEEDS.get());
-        getOrCreateTagBuilder(ItemTags.CHICKEN_FOOD).add(Valentine.Items.COTTON_CANDY_SEEDS.get());
-        getOrCreateTagBuilder(Valentine.Tags.Items.BOTANIA_SEEDS).add(Valentine.Items.COTTON_CANDY_SEEDS.get());
-        getOrCreateTagBuilder(Valentine.Tags.Items.NATURALIST_SEEDS).add(Valentine.Items.COTTON_CANDY_SEEDS.get());
+        valueLookupBuilder(Valentine.Tags.Items.SEEDS).add(Valentine.Items.COTTON_CANDY_SEEDS.get());
+        valueLookupBuilder(Valentine.Tags.Items.MINECRAFT_SEEDS).add(Valentine.Items.COTTON_CANDY_SEEDS.get());
+        valueLookupBuilder(ItemTags.CHICKEN_FOOD).add(Valentine.Items.COTTON_CANDY_SEEDS.get());
+        valueLookupBuilder(Valentine.Tags.Items.BOTANIA_SEEDS).add(Valentine.Items.COTTON_CANDY_SEEDS.get());
+        valueLookupBuilder(Valentine.Tags.Items.NATURALIST_SEEDS).add(Valentine.Items.COTTON_CANDY_SEEDS.get());
     }
 }
