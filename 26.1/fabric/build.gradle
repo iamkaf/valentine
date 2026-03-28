@@ -1,0 +1,9 @@
+plugins {
+    id 'com.iamkaf.multiloader.fabric'
+}
+
+dependencies {
+    compileOnly libs.amber
+    implementation libs.fabric.api
+    runtimeOnly libs.amber.fabric
+}
