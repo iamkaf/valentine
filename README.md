@@ -9,7 +9,7 @@ Kaf's Valentine Special adds themed cookies, cotton candy, Aristea flowers, and 
 
 ## Support
 
-- Minecraft `26.1.1`
+- Minecraft `26.1.2`
 - Fabric
 - NeoForge
 

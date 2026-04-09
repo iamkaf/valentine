@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "kafvalentine:item/special_nether_wart_cookie"
+  }
+}

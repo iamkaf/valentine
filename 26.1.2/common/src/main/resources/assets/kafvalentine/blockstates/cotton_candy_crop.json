@@ -1,0 +1,28 @@
+{
+  "variants": {
+    "age=0": {
+      "model": "kafvalentine:block/cotton_candy_crop_stage0"
+    },
+    "age=1": {
+      "model": "kafvalentine:block/cotton_candy_crop_stage1"
+    },
+    "age=2": {
+      "model": "kafvalentine:block/cotton_candy_crop_stage2"
+    },
+    "age=3": {
+      "model": "kafvalentine:block/cotton_candy_crop_stage3"
+    },
+    "age=4": {
+      "model": "kafvalentine:block/cotton_candy_crop_stage4"
+    },
+    "age=5": {
+      "model": "kafvalentine:block/cotton_candy_crop_stage5"
+    },
+    "age=6": {
+      "model": "kafvalentine:block/cotton_candy_crop_stage5"
+    },
+    "age=7": {
+      "model": "kafvalentine:block/cotton_candy_crop_stage5"
+    }
+  }
+}
