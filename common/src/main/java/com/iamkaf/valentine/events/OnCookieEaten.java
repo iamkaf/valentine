@@ -16,7 +16,7 @@ import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
-//? if =26.2-rc-2 {
+//? if =26.2 {
 /*import net.minecraft.world.entity.EntityTypes;
 *///?} else {
 import net.minecraft.world.entity.EntityType;
@@ -309,7 +309,7 @@ public class OnCookieEaten {
                     0.8d
             );
             var bat = new Bat(
-                    //? if =26.2-rc-2 {
+                    //? if =26.2 {
                     /*EntityTypes.BAT
                     *///?} else {
                     EntityType.BAT

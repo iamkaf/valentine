@@ -618,7 +618,7 @@ public final class Valentine {
         public static final Supplier<Block> COTTON_CANDY_BLOCK = Register.block(
                 "cotton_candy_block",
                 () -> new Block(BlockBehaviour.Properties.ofFullCopy(
-                        //? if =26.2-rc-2 {
+                        //? if =26.2 {
                         /*net.minecraft.world.level.block.Blocks.WOOL.white()
                         *///?} else {
                         net.minecraft.world.level.block.Blocks.WHITE_WOOL
