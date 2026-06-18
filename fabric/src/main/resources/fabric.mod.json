@@ -1,0 +1,36 @@
+{
+    "schemaVersion": 1,
+    "id": "${mod_id}",
+    "version": "${version}",
+    "name": "${mod_name}",
+    "description": "${description}",
+    "authors": [
+        "${mod_author}"
+    ],
+    "contact": {
+        "homepage": "https://github.com/${mod_author}/valentine",
+        "issues": "https://github.com/${mod_author}/valentine/issues",
+        "sources": "https://github.com/${mod_author}/valentine"
+    },
+    "license": "${license}",
+    "icon": "assets/${mod_id}/icon.png",
+    "environment": "*",
+    "entrypoints": {
+        "main": [
+            "com.iamkaf.valentine.fabric.ValentineFabric"
+        ],
+        "client": [
+            "com.iamkaf.valentine.fabric.client.ValentineFabricClient"
+        ]
+    },
+    "mixins": [
+        "${mod_id}.mixins.json"
+    ],
+    "depends": {
+        "fabricloader": ">=${fabric_loader_version}",
+        "fabric-api": "*",
+        "minecraft": "${fabric_version_range}",
+        "java": ">=${java_version}",
+        "amber": ">=${amber_version}"
+    }
+}

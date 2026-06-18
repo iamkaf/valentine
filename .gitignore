@@ -1,40 +1,39 @@
-# gradle
-
-.gradle/
-build/
-out/
-classes/
-
-# eclipse
-
-*.launch
-
-# idea
-
+.DS_Store
+Thumbs.db
 .idea/
+.vscode/
 *.iml
 *.ipr
 *.iws
+*.bak
+*.log
+*.launch
 
-# vscode
-
-.settings/
-.vscode/
+.gradle/
+.cache/
+.teakit/
+build/
+out/
 bin/
-.classpath
-.project
-
-# macos
-
-*.DS_Store
-
-# fabric
-
 run/
+runs/
+*/run/
+*/runs/
 
-# java
+common/versions/
+fabric/versions/
+forge/versions/
+neoforge/versions/
+versions/*/build/
+stonecutter.gradle
+src/main/generated/
+common/src/main/generated/
 
-hs_err_*.log
-replay_*.log
-*.hprof
-*.jfr
+.screens/
+.runclient-*/
+.runclient-check/
+.runclient-check-v2/
+.runclient-toml-check/
+.runclient-toml-rerun/
+forge/*.launch
+fabric/*.launch
