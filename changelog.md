@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- Ported to Minecraft 26.2.
+- Ported to Minecraft 1.21.11, 26.1, 26.1.1, 26.1.2, and 26.2.
 
 ## 5.0.0
 
