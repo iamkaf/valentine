@@ -51,7 +51,7 @@ public class OnPat {
                     1f,
                     serverLevel.getRandom().nextLong()
             ));
-            return InteractionResult.CONSUME;
+            return InteractionResult.SUCCESS;
         }
 
         return InteractionResult.PASS;
