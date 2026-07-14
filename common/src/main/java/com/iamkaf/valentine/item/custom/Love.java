@@ -1,6 +1,11 @@
 package com.iamkaf.valentine.item.custom;
 
+import com.iamkaf.valentine.Valentine;
 import net.minecraft.core.Holder;
+import net.minecraft.core.Position;
+import net.minecraft.core.dispenser.BlockSource;
+import net.minecraft.core.dispenser.DefaultDispenseItemBehavior;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.protocol.game.ClientboundSoundPacket;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
@@ -11,6 +16,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.DispenserBlock;
 import org.jetbrains.annotations.NotNull;
 
 import static com.iamkaf.valentine.events.OnPat.patVFX;
@@ -18,6 +24,28 @@ import static com.iamkaf.valentine.events.OnPat.patVFX;
 public class Love extends Item {
     public Love(Properties properties) {
         super(properties);
+    }
+
+    public static void registerDispenseBehavior() {
+        DispenserBlock.registerBehavior(Valentine.Items.LOVE.get(), new DefaultDispenseItemBehavior() {
+            @Override
+            protected ItemStack execute(BlockSource source, ItemStack stack) {
+                Position position = DispenserBlock.getDispensePosition(source);
+                source.level().sendParticles(
+                        ParticleTypes.HEART,
+                        position.x(),
+                        position.y(),
+                        position.z(),
+                        20,
+                        0.5,
+                        0.2,
+                        0.5,
+                        0.8d
+                );
+                stack.shrink(1);
+                return stack;
+            }
+        });
     }
 
     @Override
