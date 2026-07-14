@@ -1,5 +1,5 @@
 import { Capability, Readiness, describe, expect, test } from "@teakit/test";
-import type { ScenarioDefinition, TeaKitTestContext } from "@teakit/test";
+import type { TeaKitTestContext } from "@teakit/test";
 
 const ARENA = {
   min: { x: -6, y: 80, z: -6 },
@@ -49,8 +49,9 @@ describe.configure({
   timeout: "8m",
   readiness: [Readiness.ClientReady, Readiness.IntegratedServerReady, Readiness.PlayerSpawned],
   capabilities: [
-    Capability.LegacyJsonScenarios,
+    Capability.PlayerInteractions,
     Capability.PlayerInventory,
+    Capability.PlayerUseItem,
     Capability.RegistryLookup,
     Capability.RuntimeTiming,
     Capability.ServerCommands,
@@ -99,8 +100,7 @@ describe("Valentine", () => {
       await ctx.commands.assert(`/item replace entity @s weapon.mainhand with ${baseCookie} 2`);
       await ctx.commands.assert(`/execute if items entity @s weapon.mainhand ${baseCookie}[count=2]`);
 
-      const result = await ctx.scenario.run(useInfuserDefinition(`infuse-${baseCookie}`), { timeoutMs: 10_000 });
-      expect(result.error ?? null).toBeNull();
+      await useInfuser(ctx);
       await ctx.runtime.wait(150, { timeoutMs: 2_000 });
 
       await ctx.commands.assert(`/execute if items entity @s weapon.mainhand ${baseCookie}[count=1]`);
@@ -113,8 +113,7 @@ describe("Valentine", () => {
     await setAndAssertBlock(ctx, { x: 0, y: 80, z: 2 }, "kafvalentine:lovey_dovey_infuser");
 
     await ctx.commands.assert("/item replace entity @s weapon.mainhand with kafvalentine:extra_special_chocolate_cookie 1");
-    const result = await ctx.scenario.run(useInfuserDefinition("infuse-no-upgrade-cookie"), { timeoutMs: 10_000 });
-    expect(result.error ?? null).toBeNull();
+    await useInfuser(ctx);
 
     await ctx.commands.assert(
       "/execute if items entity @s weapon.mainhand kafvalentine:extra_special_chocolate_cookie[count=1]",
@@ -125,8 +124,8 @@ describe("Valentine", () => {
     await prepare(ctx);
 
     await ctx.commands.assert("/item replace entity @s weapon.mainhand with kafvalentine:love 2");
-    const result = await ctx.scenario.run(useItemDefinition("use-love"), { timeoutMs: 10_000 });
-    expect(result.error ?? null).toBeNull();
+    await ctx.runtime.wait(100);
+    await ctx.player.useItem();
     await ctx.runtime.wait(150, { timeoutMs: 2_000 });
 
     await ctx.commands.assert("/execute if items entity @s weapon.mainhand kafvalentine:love[count=1]");
@@ -151,7 +150,7 @@ async function prepare(ctx: TeaKitTestContext) {
 async function setAndAssertBlock(
   ctx: TeaKitTestContext,
   pos: { x: number; y: number; z: number },
-  block: string,
+  block: `${string}:${string}`,
 ) {
   await ctx.world.setBlock(pos, block);
   await expect(() => ctx.world.block(pos)).toEventuallyEqual(expect.objectContaining({ id: block }), {
@@ -188,23 +187,8 @@ function commandOutput(result: unknown): string {
   return JSON.stringify(result);
 }
 
-function useInfuserDefinition(name: string): ScenarioDefinition {
-  return {
-    name: `valentine-${name.replaceAll(":", "-")}`,
-    steps: [
-      { action: "wait_ms", durationMs: 100 },
-      { action: "use_block_server", x: 0, y: 80, z: 2, direction: "north", hand: "main_hand" },
-      { action: "wait_ms", durationMs: 150 },
-    ],
-  } as ScenarioDefinition;
-}
-
-function useItemDefinition(name: string): ScenarioDefinition {
-  return {
-    name: `valentine-${name}`,
-    steps: [
-      { action: "wait_ms", durationMs: 100 },
-      { action: "use_item", hand: "main_hand", waitAfterMs: 150 },
-    ],
-  } as ScenarioDefinition;
+async function useInfuser(ctx: TeaKitTestContext) {
+  await ctx.runtime.wait(100);
+  await ctx.player.useBlock({ x: 0, y: 80, z: 2 }, { face: "north", hand: "main_hand" });
+  await ctx.runtime.wait(150);
 }
