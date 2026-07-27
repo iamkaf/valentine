@@ -130,6 +130,18 @@ describe("Valentine", () => {
 
     await ctx.commands.assert("/execute if items entity @s weapon.mainhand kafvalentine:love[count=1]");
   });
+
+  test("lets dispensers activate Love without dropping the item", async (ctx) => {
+    await prepare(ctx);
+
+    await ctx.commands.assert("/setblock 4 80 2 minecraft:dispenser[facing=east]");
+    await ctx.commands.assert("/item replace block 4 80 2 container.0 with kafvalentine:love 2");
+    await ctx.commands.assert("/setblock 4 81 2 minecraft:redstone_block");
+    await ctx.runtime.wait(300, { timeoutMs: 2_000 });
+
+    await ctx.commands.assert("/execute if items block 4 80 2 container.0 kafvalentine:love[count=1]");
+    await ctx.commands.assert("/execute unless entity @e[type=minecraft:item,distance=..16]");
+  });
 });
 
 async function prepare(ctx: TeaKitTestContext) {
