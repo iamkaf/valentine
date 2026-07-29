@@ -1,0 +1,17 @@
+{
+  "name": "Nether Wart Cookie",
+  "icon": "kafvalentine:nether_wart_cookie",
+  "category": "kafvalentine:cookies",
+  "associated_items": ["kafvalentine:nether_wart_cookie", "kafvalentine:special_nether_wart_cookie"],
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Kinda foul looking and smelling. May not be safe to eat."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "kafvalentine:nether_wart_cookie",
+      "text": "$(o)Not FDA approved.$()"
+    }
+  ]
+}

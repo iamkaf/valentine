@@ -1,0 +1,17 @@
+{
+  "name": "Peculiar Cookie",
+  "icon": "kafvalentine:peculiar_cookie",
+  "category": "kafvalentine:cookies",
+  "associated_items": ["kafvalentine:peculiar_cookie", "kafvalentine:special_peculiar_cookie"],
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Not nasty like the phantoms this is made of. Surprisingly satisfying to eat... if you don't care about fall damage.$(br2)Gives you Levitation."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "kafvalentine:peculiar_cookie",
+      "text": "$(o)You take my head to the clouds.$()"
+    }
+  ]
+}

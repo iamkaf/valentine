@@ -1,0 +1,17 @@
+{
+  "name": "Good Vision Cookie",
+  "icon": "kafvalentine:good_vision_cookie",
+  "category": "kafvalentine:cookies",
+  "associated_items": ["kafvalentine:good_vision_cookie", "kafvalentine:special_good_vision_cookie"],
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Carrots are good for your eyes. This cookie is made with carrots. Eat some.$(br2)Gives you Night Vision."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "kafvalentine:good_vision_cookie",
+      "text": "$(o)Carrots are good for your eyes.$()"
+    }
+  ]
+}

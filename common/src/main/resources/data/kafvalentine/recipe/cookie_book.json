@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "minecraft:book",
+    "kafvalentine:cotton_candy"
+  ],
+  "result": {
+    "components": {
+      "patchouli:book": "kafvalentine:cookies"
+    },
+    "count": 1,
+    "id": "patchouli:guide_book"
+  }
+}

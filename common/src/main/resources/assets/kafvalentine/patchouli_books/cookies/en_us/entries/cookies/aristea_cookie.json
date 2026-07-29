@@ -1,0 +1,17 @@
+{
+  "name": "Aristea Cookie",
+  "icon": "kafvalentine:aristea_cookie",
+  "category": "kafvalentine:cookies",
+  "associated_items": ["kafvalentine:aristea_cookie", "kafvalentine:special_aristea_cookie"],
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "The Aristea flower is a flower with magic properties. Some say if you find them you're lucky. I do believe that.$(br2)Gives you Luck and Dolphin's Grace.$(br2)Combine with the $(l:kafvalentine:cookies/prismatic_cookie)Prismatic Cookie$() for the best diving experience."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "kafvalentine:aristea_cookie",
+      "text": "$(o)Thank you for being you.$()"
+    }
+  ]
+}

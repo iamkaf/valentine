@@ -1,0 +1,17 @@
+{
+  "name": "Fire Cookie",
+  "icon": "kafvalentine:fire_cookie",
+  "category": "kafvalentine:cookies",
+  "associated_items": ["kafvalentine:fire_cookie", "kafvalentine:special_fire_cookie"],
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "A perfect snack to bring to the Nether.$(br2)Gives you Fire Resistance."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "kafvalentine:fire_cookie",
+      "text": "$(o)You are my fire.$()"
+    }
+  ]
+}

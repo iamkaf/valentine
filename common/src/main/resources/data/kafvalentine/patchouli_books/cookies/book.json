@@ -1,0 +1,9 @@
+{
+  "name": "Cookie Book",
+  "landing_text": "Welcome to Kaf's Valentine Special!$(br2)To begin, check out $(l:kafvalentine:basics/introduction)Introduction$().$(br2)Should you have problems or discover a bug, feel free to join our $(l:https://discord.gg/HV5WgTksaB)Discord$() or report them on $(l:https://github.com/iamkaf/valentine)GitHub$().$(br2)$(o)Unleashing love - one cookie at a time$()",
+  "subtitle": "Valentine Journal",
+  "model": "kafvalentine:cookie_book",
+  "creative_tab": "minecraft:tools_and_utilities",
+  "version": 1,
+  "use_resource_pack": true
+}

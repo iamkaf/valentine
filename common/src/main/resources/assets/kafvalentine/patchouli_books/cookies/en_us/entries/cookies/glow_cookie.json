@@ -1,0 +1,17 @@
+{
+  "name": "Glow Cookie",
+  "icon": "kafvalentine:glow_cookie",
+  "category": "kafvalentine:cookies",
+  "associated_items": ["kafvalentine:glow_cookie", "kafvalentine:special_glow_cookie"],
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "An exquisite cookie made with a rare material.$(br2)Will make you Glow."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "kafvalentine:glow_cookie",
+      "text": "$(o)You're easy to find if you're glowing.$()"
+    }
+  ]
+}

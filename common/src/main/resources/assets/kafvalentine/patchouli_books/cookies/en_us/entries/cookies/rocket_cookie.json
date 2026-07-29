@@ -1,0 +1,17 @@
+{
+  "name": "Rocket Cookie",
+  "icon": "kafvalentine:rocket_cookie",
+  "category": "kafvalentine:cookies",
+  "associated_items": ["kafvalentine:rocket_cookie", "kafvalentine:special_rocket_cookie"],
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "ZOOOOOOOOOOOOOOOOOM!$(br2)Bring the snacks, 'tis party time!$(br2)Pops fireworks."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "kafvalentine:rocket_cookie",
+      "text": "$(o)Do you want to watch the fireworks together?$()"
+    }
+  ]
+}
