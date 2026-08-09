@@ -1,5 +1,3 @@
-import org.gradle.api.artifacts.VersionCatalogsExtension
-
 plugins {
     id("dev.kikugie.stonecutter")
     id("fabric-loom") apply false
@@ -17,19 +15,6 @@ teakit {
 }
 
 stonecutter active "26.1.2".let { multiloaderStonecutter.active(it) }
-
-subprojects {
-    val loader = parent?.name ?: return@subprojects
-    if (loader !in setOf("fabric", "neoforge")) return@subprojects
-
-    val catalogName = "libsMc${name.replace(".", "").replace("-", "")}"
-    val catalog = rootProject.extensions.getByType<VersionCatalogsExtension>().named(catalogName)
-    val patchouli = catalog.findLibrary("patchouli-$loader").orElse(null) ?: return@subprojects
-
-    pluginManager.withPlugin("java") {
-        dependencies.add("runtimeOnly", patchouli)
-    }
-}
 
 stonecutter parameters {
     replacements.string(eval(current.version, ">=1.21.11")) {
