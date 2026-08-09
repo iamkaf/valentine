@@ -1,0 +1,17 @@
+{
+  "name": "Golden Cookie",
+  "icon": "kafvalentine:golden_cookie",
+  "category": "kafvalentine:cookies",
+  "associated_items": ["kafvalentine:golden_cookie", "kafvalentine:special_golden_cookie"],
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Everyone knows that gold makes delicious food even better. This cookie works just like a golden apple."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "kafvalentine:golden_cookie",
+      "text": "$(o)You shine brighter than this cookie.$()"
+    }
+  ]
+}

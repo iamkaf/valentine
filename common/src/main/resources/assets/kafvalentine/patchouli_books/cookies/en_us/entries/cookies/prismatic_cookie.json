@@ -1,0 +1,17 @@
+{
+  "name": "Prismatic Cookie",
+  "icon": "kafvalentine:prismatic_cookie",
+  "category": "kafvalentine:cookies",
+  "associated_items": ["kafvalentine:prismatic_cookie", "kafvalentine:special_prismatic_cookie"],
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "This cookie made of prismarine somehow looks like a guardian. I wonder how that happened...$(br2)Gives you Water Breathing.$(br2)Combine with the $(l:kafvalentine:cookies/aristea_cookie)Aristea Cookie$() for the best diving experience."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "kafvalentine:prismatic_cookie",
+      "text": "$(o)Glub glub?$()"
+    }
+  ]
+}

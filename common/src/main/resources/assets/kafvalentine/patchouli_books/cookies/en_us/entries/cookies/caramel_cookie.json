@@ -1,0 +1,17 @@
+{
+  "name": "Caramel Cookie",
+  "icon": "kafvalentine:caramel_cookie",
+  "category": "kafvalentine:cookies",
+  "associated_items": ["kafvalentine:caramel_cookie", "kafvalentine:special_caramel_cookie"],
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "A sweet and energetic treat. By some mysterious process it has been made into a cube.$(br2)Gives you Resistance."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "kafvalentine:caramel_cookie",
+      "text": "$(o)Sweet!$()"
+    }
+  ]
+}

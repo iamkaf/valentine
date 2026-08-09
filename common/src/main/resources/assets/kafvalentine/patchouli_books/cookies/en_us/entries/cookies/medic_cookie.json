@@ -1,0 +1,17 @@
+{
+  "name": "Medic Cookie",
+  "icon": "kafvalentine:medic_cookie",
+  "category": "kafvalentine:cookies",
+  "associated_items": ["kafvalentine:medic_cookie", "kafvalentine:special_medic_cookie"],
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "This has got to be the healthiest snack, as it heals you when you eat it. Eat a bunch of them!"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "kafvalentine:medic_cookie",
+      "text": "$(o)Will make you feel better.$()"
+    }
+  ]
+}

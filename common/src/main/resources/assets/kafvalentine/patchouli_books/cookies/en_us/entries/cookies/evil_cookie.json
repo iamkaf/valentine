@@ -1,0 +1,17 @@
+{
+  "name": "Evil Cookie",
+  "icon": "kafvalentine:evil_cookie",
+  "category": "kafvalentine:cookies",
+  "associated_items": ["kafvalentine:evil_cookie", "kafvalentine:special_evil_cookie"],
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Tricking a friend into eating this will surely lead to a good laugh...$(br2)...if they survive.$(br2)Gives you Wither and Darkness."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "kafvalentine:evil_cookie",
+      "text": "$(o)MISCHIEF.$()"
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "name": "Introduction",
+  "icon": "kafvalentine:cotton_candy",
+  "category": "kafvalentine:basics",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "To start the mod you'll need some cotton candy. You can get their seeds by breaking grass.$(br2)Once you have some cotton candy, go ahead and make a Lovey Dovey Infuser."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "kafvalentine:cotton_candy",
+      "title": "Cotton Candy"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "kafvalentine:cotton_candy_seeds",
+      "title": "Cotton Candy Seeds"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "kafvalentine:lovey_dovey_infuser"
+    }
+  ]
+}

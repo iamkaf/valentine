@@ -1,0 +1,17 @@
+{
+  "name": "Chorus Cookie",
+  "icon": "kafvalentine:chorus_cookie",
+  "category": "kafvalentine:cookies",
+  "associated_items": ["kafvalentine:chorus_cookie", "kafvalentine:special_chorus_cookie"],
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Did you know that chorus fruit is actually quite tasty?$(br2)$(o)May cause teleportation.$()"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "kafvalentine:chorus_cookie",
+      "text": "$(o)I'm never gonna dessert you.$()"
+    }
+  ]
+}

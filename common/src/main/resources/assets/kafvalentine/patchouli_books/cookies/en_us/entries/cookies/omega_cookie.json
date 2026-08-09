@@ -1,0 +1,27 @@
+{
+  "name": "Omega Cookie",
+  "icon": "kafvalentine:omega_cookie",
+  "category": "kafvalentine:cookies",
+  "associated_items": ["kafvalentine:omega_cookie", "kafvalentine:special_omega_cookie"],
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "The most powerful cookie. Amplified by the nether stars, your love radiates across an entire server, healing and protecting everyone.$(br2)Gives everyone Regeneration and Absorption."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "minecraft:nether_star",
+      "title": "A Powerful Ingredient"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "minecraft:enchanted_golden_apple",
+      "title": "A Powerful Ingredient"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "kafvalentine:omega_cookie",
+      "text": "$(o)You are what I hold dearest.$()"
+    }
+  ]
+}

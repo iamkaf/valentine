@@ -1,0 +1,17 @@
+{
+  "name": "Melon Cookie",
+  "icon": "kafvalentine:melon_cookie",
+  "category": "kafvalentine:cookies",
+  "associated_items": ["kafvalentine:melon_cookie", "kafvalentine:special_melon_cookie"],
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "A summer snack. As refreshing as it is cute.$(br2)Gives you Haste."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "kafvalentine:melon_cookie",
+      "text": "$(o)Refreshing!$()"
+    }
+  ]
+}

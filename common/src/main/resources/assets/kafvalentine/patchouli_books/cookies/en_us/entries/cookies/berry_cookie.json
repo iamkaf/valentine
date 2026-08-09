@@ -1,0 +1,18 @@
+{
+  "name": "Berry Cookie",
+  "icon": "kafvalentine:berry_cookie",
+  "category": "kafvalentine:cookies",
+  "associated_items": ["kafvalentine:berry_cookie", "kafvalentine:special_berry_cookie"],
+  "pages": [
+    {
+      "type": "patchouli:entity",
+      "entity": "minecraft:fox",
+      "text": "Eat this and you'll be jumping like a fox! Have you ever seen them pouncing at prey? It's quite the sight.$(br2)Gives you Jump Boost."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "kafvalentine:berry_cookie",
+      "text": "$(o)You're looking berry cute today.$()"
+    }
+  ]
+}

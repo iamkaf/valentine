@@ -29,5 +29,5 @@ run-client node:
   @if ! just list-nodes | grep -Fxq "{{node}}"; then echo "Unknown node: {{node}}"; exit 1; fi
   @version="{{node}}"; loader="${version##*-}"; version="${version%-*}"; ./gradlew --configure-on-demand ":$loader:$version:runClient" --console=plain
 
-test-check node timeout="480":
-  @./teakitw check --node "{{node}}" --timeout "{{timeout}}"
+teakit-check node:
+  @./gradlew teakitCheck -Pteakit.node="{{node}}" --console=plain

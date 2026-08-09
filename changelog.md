@@ -15,6 +15,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Petting another player now swings your hand.
 
+### Fixed
+
+- Restored the Cookie Book guide in Patchouli format.
+
 ## 5.1.0
 
 ### Changed
