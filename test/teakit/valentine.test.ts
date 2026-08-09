@@ -55,8 +55,12 @@ describe.configure({
     Capability.RegistryLookup,
     Capability.RuntimeTiming,
     Capability.ServerCommands,
+    Capability.ClientInput,
+    Capability.ClientScreen,
+    Capability.ClientScreens,
     Capability.WorldBlock,
     Capability.WorldFill,
+    Capability.WorldRecipes,
     Capability.WorldSetBlock,
   ],
 });
@@ -142,6 +146,78 @@ describe("Valentine", () => {
     await ctx.commands.assert("/execute if items block 4 80 2 container.0 kafvalentine:love[count=1]");
     await ctx.commands.assert("/execute unless entity @e[type=minecraft:item,distance=..16]");
   });
+
+  test(
+    "crafts the Cookie Book and opens its Patchouli UI",
+    {
+      target: {
+        minecraft: ">=26.1 <26.2",
+        loader: ["fabric", "neoforge"],
+      },
+    },
+    async (ctx) => {
+      await prepare(ctx);
+
+      const recipe = await ctx.recipes.assertCrafting(
+        2,
+        1,
+        ["minecraft:book", "kafvalentine:cotton_candy"],
+        "patchouli:guide_book",
+      );
+      expect(recipe.recipeId).toBe("kafvalentine:cookie_book");
+
+      await ctx.commands.assert("/item replace entity @s hotbar.0 with minecraft:book");
+      await ctx.commands.assert("/item replace entity @s hotbar.1 with kafvalentine:cotton_candy");
+
+      let screen = await ctx.client.openInventory();
+      await expect(screen).toHaveTitleLike(/crafting/i);
+
+      const inventorySlots = screen.menu().slots();
+      const bookSlot = inventorySlots.find((slot) => menuItemId(slot.item) === "minecraft:book");
+      const cottonCandySlot = inventorySlots.find((slot) => menuItemId(slot.item) === "kafvalentine:cotton_candy");
+      if (!bookSlot || !cottonCandySlot) {
+        throw new Error(`Expected crafting ingredients in the inventory: ${JSON.stringify(inventorySlots)}`);
+      }
+
+      screen = await screen.menu().slot(bookSlot.slot).click({ clickType: "PICKUP" });
+      screen = await screen.menu().slot(1).click({ clickType: "PICKUP" });
+      screen = await screen.menu().slot(cottonCandySlot.slot).click({ clickType: "PICKUP" });
+      await screen.menu().slot(2).click({ clickType: "PICKUP" });
+      await ctx.runtime.wait(150);
+      screen = await ctx.client.screen();
+      const craftedSlot = screen.menu().slots().find((slot) => menuItemId(slot.item) === "patchouli:guide_book");
+      if (!craftedSlot) {
+        throw new Error(`Expected the Cookie Book in the crafting result slot: ${JSON.stringify(screen.menu().slots())}`);
+      }
+
+      await screen.menu().slot(craftedSlot.slot).click({ clickType: "QUICK_MOVE" });
+      await ctx.runtime.wait(150);
+      await ctx.client.closeMenus();
+
+      const inventory = await ctx.player.inventory();
+      const bookStack = inventory.items.find((item) => menuItemId(item) === "patchouli:guide_book");
+      if (!bookStack) {
+        throw new Error(`Expected the crafted Cookie Book in the inventory: ${JSON.stringify(inventory)}`);
+      }
+      if (bookStack?.slot === undefined || bookStack.slot < 0 || bookStack.slot > 8) {
+        throw new Error(`Expected the crafted Cookie Book in the hotbar: ${JSON.stringify(inventory)}`);
+      }
+
+      await ctx.player.inventory().selectHotbar(bookStack.slot);
+      try {
+        await ctx.player.useItem({ hand: "main_hand" });
+
+        let book = await ctx.client.screen();
+        await expect(async () => {
+          book = await ctx.client.screen();
+          return book.screenClass?.startsWith("vazkii.patchouli.client.book.gui.GuiBook") ?? false;
+        }).toEventuallyEqual(true, { timeout: "10s" });
+        await expect(book).toHaveTitleLike(/cookie book/i);
+      } finally {
+        await ctx.client.closeMenus();
+      }
+    },
+  );
 });
 
 async function prepare(ctx: TeaKitTestContext) {
@@ -197,6 +273,19 @@ function commandOutput(result: unknown): string {
   }
 
   return JSON.stringify(result);
+}
+
+function menuItemId(item: unknown): string | undefined {
+  if (!item || typeof item !== "object") {
+    return undefined;
+  }
+
+  const stack = item as { id?: unknown; itemId?: unknown };
+  if (typeof stack.id === "string") {
+    return stack.id;
+  }
+
+  return typeof stack.itemId === "string" ? stack.itemId : undefined;
 }
 
 async function useInfuser(ctx: TeaKitTestContext) {
