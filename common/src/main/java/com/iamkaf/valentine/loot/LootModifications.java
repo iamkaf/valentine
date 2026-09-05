@@ -11,8 +11,12 @@ import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
 import net.minecraft.world.level.storage.loot.predicates.LootItemRandomChanceCondition;
+//? if >=26.3 {
+/*import net.minecraft.world.level.storage.loot.providers.number.ints.ContextIntProviders;
+*///?} else {
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
+//?}
 
 import java.util.List;
 
@@ -36,9 +40,15 @@ public class LootModifications {
 
     private static void modifyGrassDrops(java.util.function.Consumer<LootPool.Builder> addPool) {
         LootPool.Builder pool = LootPool.lootPool()
+                //? if >=26.3
+                /*.setRolls(ContextIntProviders.exactly(1))*/
+                //? if <26.3
                 .setRolls(ConstantValue.exactly(1))
                 .when(LootItemRandomChanceCondition.randomChance(0.02f))
                 .add(LootItem.lootTableItem(Valentine.Items.COTTON_CANDY_SEEDS.get()))
+                //? if >=26.3
+                /*.apply(SetItemCountFunction.setCount(ContextIntProviders.between(1, 1)));*/
+                //? if <26.3
                 .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0f, 1.0f)));
         addPool.accept(pool);
     }
@@ -67,9 +77,15 @@ public class LootModifications {
         );
         for (var cookie : COOKIES) {
             LootPool.Builder pool = LootPool.lootPool()
+                    //? if >=26.3
+                    /*.setRolls(ContextIntProviders.exactly(1))*/
+                    //? if <26.3
                     .setRolls(ConstantValue.exactly(1))
                     .when(LootItemRandomChanceCondition.randomChance(0.15f))
                     .add(LootItem.lootTableItem(cookie))
+                    //? if >=26.3
+                    /*.apply(SetItemCountFunction.setCount(ContextIntProviders.between(1, 4)));*/
+                    //? if <26.3
                     .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0f, 4.0f)));
             addPool.accept(pool);
         }

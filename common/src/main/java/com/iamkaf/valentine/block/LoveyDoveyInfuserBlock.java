@@ -45,6 +45,11 @@ public class LoveyDoveyInfuserBlock extends Block {
         if (stack.getItem() instanceof CookieItem cookie) {
             Item upgrade = cookie.upgrade();
             if (upgrade != null) {
+                //? if >=26.3 {
+                if (level.isClientSide()) {
+                    return InteractionResult.SUCCESS;
+                }
+                //?}
                 stack.shrink(1);
                 ItemStack upgradeStack = new ItemStack(upgrade);
                 boolean added = player.addItem(upgradeStack);
