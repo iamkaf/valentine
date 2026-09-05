@@ -16,7 +16,7 @@ import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
-//? if =26.2 {
+//? if >=26.2 {
 /*import net.minecraft.world.entity.EntityTypes;
 *///?} else {
 import net.minecraft.world.entity.EntityType;
@@ -134,6 +134,9 @@ public class OnCookieEaten {
                 }
 
                 Vec3 vec3 = livingEntity.position();
+                //? if >=26.3
+                /*if (livingEntity.randomTeleport(d, e, f, true, net.minecraft.tags.BlockTags.CONSUMABLE_DOES_NOT_TELEPORT_TO)) {*/
+                //? if <26.3
                 if (livingEntity.randomTeleport(d, e, f, true)) {
                     world.gameEvent(GameEvent.TELEPORT, vec3, GameEvent.Context.of(livingEntity));
                     SoundSource soundSource;
@@ -309,7 +312,7 @@ public class OnCookieEaten {
                     0.8d
             );
             var bat = new Bat(
-                    //? if =26.2 {
+                    //? if >=26.2 {
                     /*EntityTypes.BAT
                     *///?} else {
                     EntityType.BAT
