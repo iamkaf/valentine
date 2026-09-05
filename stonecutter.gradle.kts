@@ -3,7 +3,7 @@ plugins {
     id("fabric-loom") apply false
     id("net.fabricmc.fabric-loom") apply false
     id("com.iamkaf.multiloader.root")
-    id("com.iamkaf.teakit") version "0.14.0"
+    id("com.iamkaf.teakit") version "0.16.0"
 }
 
 teakit {
