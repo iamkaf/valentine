@@ -7,7 +7,7 @@ plugins {
 }
 
 teakit {
-    runnerVersion.set("0.14.0")
+    runnerVersion.set("0.16.0")
     testDirectories.add("test/teakit")
     timeoutSeconds.set(720)
     failOnRuntimeIncomplete.set(true)
