@@ -1,6 +1,7 @@
 package com.iamkaf.valentine.block;
 
 import com.iamkaf.valentine.Valentine;
+//? if <26.3
 import com.mojang.serialization.MapCodec;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
@@ -13,16 +14,19 @@ import org.jetbrains.annotations.NotNull;
 
 public class CottonCandyCropBlock extends CropBlock {
     public static final int MAX_AGE = 5;
+    //? if <26.3
     public static final MapCodec<CropBlock> CODEC = simpleCodec(CottonCandyCropBlock::new);
 
     public CottonCandyCropBlock(Properties settings) {
         super(settings);
     }
 
+    //? if <26.3 {
     @Override
     public @NotNull MapCodec<? extends CropBlock> codec() {
         return CODEC;
     }
+    //?}
 
     @Override
     protected @NotNull ItemLike getBaseSeedId() {
