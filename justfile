@@ -31,3 +31,6 @@ run-client node:
 
 teakit-check node:
   @./gradlew teakitCheck -Pteakit.node="{{node}}" --console=plain
+
+datagen:
+  @./gradlew --configure-on-demand :fabric:26.3:runDatagen --console=plain

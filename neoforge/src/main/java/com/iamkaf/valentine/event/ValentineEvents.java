@@ -1,4 +1,6 @@
-package com.iamkaf.valentine.event;
+// Brewing uses the shared recipe data on 26.3 and newer.
+//? if <26.3 {
+/*package com.iamkaf.valentine.event;
 
 import com.iamkaf.valentine.Valentine;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -20,3 +22,5 @@ public class ValentineEvents {
         );
     }
 }
+*/
+//?}

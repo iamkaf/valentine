@@ -5,6 +5,10 @@ plugins {
     id("com.iamkaf.multiloader.fabric")
 }
 
+extensions.configure<com.iamkaf.multiloader.fabric.MultiloaderFabricExtension>("multiloaderFabric") {
+    commonDatagen.set(project.name == "26.3")
+}
+
 val catalog = mcCatalog()
 val patchouli = catalog.findLibrary("patchouli-fabric")
 
