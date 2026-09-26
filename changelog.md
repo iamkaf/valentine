@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
-- Patting another player now swings your hand on Minecraft 26.3.
+- Patting another player now swings your hand.
 
 ## 5.3.0
 
