@@ -65,6 +65,11 @@ public final class ValentineDatagen implements DataGeneratorEntrypoint {
             neoForgeConditions.add(neoForgeCondition);
             conditional.add("neoforge:conditions", neoForgeConditions);
 
+            var forgeCondition = new JsonObject();
+            forgeCondition.addProperty("type", "forge:mod_loaded");
+            forgeCondition.addProperty("modid", requiredMod);
+            conditional.add("forge:condition", forgeCondition);
+
             // Preserve the recipe's existing key order, two-space indentation, and final newline.
             // DataProvider.saveStable sorts keys, so write the serialized bytes through the cache.
             byte[] bytes = (JSON.toJson(conditional) + "\n").getBytes(StandardCharsets.UTF_8);

@@ -25,5 +25,9 @@
       "type": "neoforge:mod_loaded",
       "modid": "patchouli"
     }
-  ]
+  ],
+  "forge:condition": {
+    "type": "forge:mod_loaded",
+    "modid": "patchouli"
+  }
 }

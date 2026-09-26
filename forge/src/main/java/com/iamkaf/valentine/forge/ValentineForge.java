@@ -20,6 +20,7 @@ public final class ValentineForge {
         if (FMLLoader.getDist().isClient()) {
             ValentineForgeClient.init();
         }
+        //? if <26.3
         ValentineForgeEvents.init();
     }
 }
