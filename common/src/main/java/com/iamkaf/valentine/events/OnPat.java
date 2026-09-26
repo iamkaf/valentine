@@ -30,6 +30,10 @@ public class OnPat {
             return InteractionResult.PASS;
         }
 
+        if (!(entity instanceof Player)) {
+            return InteractionResult.PASS;
+        }
+
         if (player instanceof ServerPlayer serverPlayer && entity instanceof ServerPlayer other) {
             ServerLevel serverLevel = (ServerLevel) serverPlayer.level();
             patVFX(other);
@@ -51,10 +55,9 @@ public class OnPat {
                     1f,
                     serverLevel.getRandom().nextLong()
             ));
-            return InteractionResult.SUCCESS;
         }
 
-        return InteractionResult.PASS;
+        return InteractionResult.SUCCESS;
     }
 
     public static void patVFX(ServerPlayer player) {
