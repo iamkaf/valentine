@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - Patting another player now swings your hand.
+- Minecraft 1.21.11 through 26.2: Restored the Cookie Book guide in Patchouli format.
 
 ## 5.3.0
 
