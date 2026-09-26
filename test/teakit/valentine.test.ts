@@ -104,6 +104,7 @@ describe("Valentine", () => {
       await ctx.commands.assert(`/item replace entity @s weapon.mainhand with ${baseCookie} 2`);
       await ctx.commands.assert(`/execute if items entity @s weapon.mainhand ${baseCookie}[count=2]`);
 
+      await ctx.player.inventory().waitForItem(baseCookie, { selected: true, count: 2, timeout: "5s" });
       await useInfuser(ctx);
       await ctx.runtime.wait(150, { timeoutMs: 2_000 });
 
@@ -221,18 +222,19 @@ describe("Valentine", () => {
 });
 
 async function prepare(ctx: TeaKitTestContext) {
-  await ctx.commands.run("/gamemode survival");
+  await ctx.commands.run("/gamemode creative");
   await ctx.commands.run("/difficulty peaceful");
   await ctx.commands.run("/effect clear @s");
   await ctx.commands.run("/clear @s");
   await ctx.commands.run("/kill @e[type=minecraft:item,distance=..64]");
   await ctx.commands.run("/kill @e[type=minecraft:firework_rocket,distance=..64]");
   await ctx.commands.run("/kill @e[type=minecraft:bat,distance=..64]");
-  await ctx.commands.run("/tp @s 0.5 80 0.5 0 10");
   await ctx.world.clear(ARENA.min, ARENA.max);
   await ctx.world.fill(ARENA.floorMin, ARENA.floorMax, "minecraft:stone");
   await ctx.commands.assert("/execute if block 0 79 0 minecraft:stone");
   await ctx.commands.assert("/execute if block 0 80 0 minecraft:air");
+  await ctx.player.teleport({ x: 0.5, y: 80, z: 0.5 });
+  await ctx.commands.run("/gamemode survival");
 }
 
 async function setAndAssertBlock(
