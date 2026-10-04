@@ -5,6 +5,20 @@ All notable changes to Kaf's Valentine Special will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 5.3.2
+
+### Fixed
+
+- Minecraft 1.21.11 Fabric: Aristea, potted Aristea, and cotton candy crops no longer render as solid blocks.
+
+  Before:
+
+  ![Aristea, potted Aristea, and cotton candy crops rendering as solid blocks](https://i.kaf.sh/i/4d5aac47-a47f-4e83-8fcb-bb4ec2774abb.png)
+
+  After:
+
+  ![Aristea, potted Aristea, and cotton candy crops rendering normally](https://i.kaf.sh/i/214094cd-588f-4126-9d4e-5bf701d4df02.png)
+
 ## 5.3.1
 
 ### Fixed
