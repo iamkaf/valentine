@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "minecraft:chorus_fruit"
+    },
+    "B": {
+      "item": "kafvalentine:cotton_candy"
+    },
+    "C": {
+      "item": "minecraft:cookie"
+    }
+  },
+  "pattern": [
+    "ABA",
+    "BCB",
+    "ABA"
+  ],
+  "result": {
+    "item": "kafvalentine:chorus_cookie",
+    "count": 2
+  }
+}

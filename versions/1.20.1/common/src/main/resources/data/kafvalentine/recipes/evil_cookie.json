@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "minecraft:wither_skeleton_skull"
+    },
+    "B": {
+      "item": "kafvalentine:cotton_candy"
+    },
+    "C": {
+      "item": "minecraft:cookie"
+    },
+    "D": {
+      "item": "minecraft:soul_sand"
+    }
+  },
+  "pattern": [
+    "ABD",
+    "BCB",
+    "DBA"
+  ],
+  "result": {
+    "item": "kafvalentine:evil_cookie",
+    "count": 2
+  }
+}

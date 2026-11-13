@@ -8,11 +8,13 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
+//? if >=1.21.5
 import net.minecraft.world.item.component.TooltipDisplay;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
@@ -20,23 +22,50 @@ public class CookieItem extends Item {
     private final String id;
     private final ChatFormatting tooltipColor;
     private Supplier<? extends Item> specialCookie = () -> null;
+    //? if <1.21.2 {
+    /*// Use cooldowns are an item component from 1.21.2; earlier, the cookie starts its own after it is eaten.
+    private final int cooldownTicks;
 
+    public CookieItem(Properties properties, String id, ChatFormatting tooltipColor, int cooldownTicks) {
+        super(properties);
+        this.id = id;
+        this.tooltipColor = tooltipColor;
+        this.cooldownTicks = cooldownTicks;
+    }
+    *///?} else {
     public CookieItem(Properties properties, String id, ChatFormatting tooltipColor) {
         super(properties);
         this.id = id;
         this.tooltipColor = tooltipColor;
     }
+    //?}
 
+    //? if >=1.21.5 {
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, TooltipDisplay tooltipDisplay,
             Consumer<Component> tooltipAdder, TooltipFlag flag) {
-        tooltipAdder.accept(Component.translatable("item.kafvalentine." + id + ".tooltip").withStyle(tooltipColor));
+        tooltipAdder.accept(tooltipLine());
+    }
+    //?} else {
+    /*@Override
+    public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
+        tooltip.add(tooltipLine());
+    }
+    *///?}
+
+    private Component tooltipLine() {
+        return Component.translatable("item.kafvalentine." + id + ".tooltip").withStyle(tooltipColor);
     }
 
     @Override
     public @NotNull ItemStack finishUsingItem(ItemStack stack, Level level, LivingEntity livingEntity) {
         if (livingEntity instanceof Player player) {
             OnCookieEaten.execute(id, stack, player, level);
+            //? if <1.21.2 {
+            /*if (cooldownTicks > 0) {
+                player.getCooldowns().addCooldown(this, cooldownTicks);
+            }
+            *///?}
         }
 
         return super.finishUsingItem(stack, level, livingEntity);

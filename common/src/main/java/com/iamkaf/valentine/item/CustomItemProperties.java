@@ -1,5 +1,6 @@
 package com.iamkaf.valentine.item;
 
+//? if >=1.21.4 {
 import com.iamkaf.valentine.Valentine;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.client.multiplayer.ClientLevel;
@@ -9,6 +10,7 @@ import net.minecraft.world.entity.ItemOwner;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.Nullable;
+//?}
 
 public class CustomItemProperties {
     public static void init() {
@@ -16,6 +18,8 @@ public class CustomItemProperties {
 //        register(Valentine.Items.COLORFUL_COTTON_CANDY.get(), Valentine.resource("color"), CottonCandyColor.MAP_CODEC);
     }
 
+    // Item model properties are data driven from 1.21.4.
+    //? if >=1.21.4 {
     public static void register(Item item, Identifier name,
             MapCodec<? extends RangeSelectItemModelProperty> property) {
     }
@@ -38,4 +42,5 @@ public class CustomItemProperties {
             return MAP_CODEC;
         }
     }
+    //?}
 }
