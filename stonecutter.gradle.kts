@@ -22,7 +22,6 @@ stonecutter parameters {
         replace(".location()", ".identifier()")
         replace("net.minecraft.world.entity.animal.Fox;", "net.minecraft.world.entity.animal.fox.Fox;")
         replace("import net.minecraft.Util;", "import net.minecraft.util.Util;")
-        replace("CompostingChanceRegistry", "CompostableRegistry")
     }
     replacements.regex(eval(current.version, ">=1.21.10")) {
         replace("\\.noCollission\\(" to ".noCollision(", "\\.noCollision\\(" to ".noCollission(")

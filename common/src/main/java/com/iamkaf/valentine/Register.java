@@ -14,6 +14,14 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.alchemy.Potion;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
+//? if >=26.3 {
+/*import com.iamkaf.amber.api.event.v1.events.common.ItemEvents;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.world.item.component.Compostable;
+import net.minecraft.world.level.storage.loot.providers.number.ints.ContextIntProviders;
+*///?} else {
+import net.minecraft.world.level.block.ComposterBlock;
+//?}
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -79,8 +87,23 @@ public final class Register {
         COMPOSTABLES.put(item, chance);
     }
 
-    public static Map<Supplier<? extends ItemLike>, Float> compostables() {
-        return COMPOSTABLES;
+    /** Makes the compostables work in the composter. Call it once the items are registered. */
+    public static void registerCompostables() {
+        //? if >=26.3 {
+        /*ItemEvents.MODIFY_DEFAULT_COMPONENTS.register(context -> COMPOSTABLES.forEach((item, chance) -> {
+            var layers = switch (Math.round(chance * 100)) {
+                case 30 -> ContextIntProviders.COMPOSTABLE_LOW;
+                case 50 -> ContextIntProviders.COMPOSTABLE_LOW_MEDIUM;
+                case 65 -> ContextIntProviders.COMPOSTABLE_MEDIUM;
+                case 85 -> ContextIntProviders.COMPOSTABLE_MEDIUM_HIGH;
+                case 100 -> ContextIntProviders.COMPOSTABLE_ALWAYS_ADD_ONE;
+                default -> throw new IllegalArgumentException("Unsupported compost chance: " + chance);
+            };
+            context.modify(item.get().asItem(), builder -> builder.set(DataComponents.COMPOSTABLE, new Compostable(layers)));
+        }));
+        *///?} else {
+        COMPOSTABLES.forEach((item, chance) -> ComposterBlock.COMPOSTABLES.put(item.get().asItem(), chance.floatValue()));
+        //?}
     }
 
     public static Supplier<MobEffect> mobEffect(String id, Supplier<MobEffect> effect) {

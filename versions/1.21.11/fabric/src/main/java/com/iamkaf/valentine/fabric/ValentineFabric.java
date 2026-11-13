@@ -8,7 +8,6 @@ import com.iamkaf.valentine.worldgen.WorldGen;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
 import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
-import net.fabricmc.fabric.api.registry.CompostingChanceRegistry;
 import net.fabricmc.fabric.api.registry.FabricBrewingRecipeRegistryBuilder;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -21,7 +20,7 @@ public final class ValentineFabric implements ModInitializer {
         Love.registerDispenseBehavior();
         Registry.register(BuiltInRegistries.BLOCK_TYPE, Valentine.resource("cotton_candy_crop"), CottonCandyCropBlock.CODEC);
         registerPotionRecipes();
-        registerCompostables();
+        Register.registerCompostables();
         registerWorldgen();
     }
 
@@ -33,10 +32,6 @@ public final class ValentineFabric implements ModInitializer {
                     BuiltInRegistries.POTION.wrapAsHolder(Valentine.Potions.SMITTEN_POTION.get())
             );
         });
-    }
-
-    private void registerCompostables() {
-        Register.compostables().forEach((item, chance) -> CompostingChanceRegistry.INSTANCE.add(item.get(), chance));
     }
 
     private void registerWorldgen() {

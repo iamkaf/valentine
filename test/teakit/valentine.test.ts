@@ -134,6 +134,20 @@ describe("Valentine", () => {
     await expectHeld(ctx, "kafvalentine:love", 1);
   });
 
+  test("composts Aristea", async (ctx) => {
+    await prepare(ctx);
+
+    await ctx.commands.assert("/setblock -4 80 2 minecraft:composter");
+    await ctx.commands.assert("/setblock -4 81 2 minecraft:hopper[facing=down]");
+    await ctx.commands.assert("/item replace block -4 81 2 container.0 with kafvalentine:aristea 64");
+
+    // Each Aristea fills a layer 30% of the time, so wait for the first layer.
+    await expect(async () => (await ctx.commands.run("/execute unless block -4 80 2 minecraft:composter[level=0]")).result).toEventuallyEqual(1, {
+      timeout: 15_000,
+      interval: 200,
+    });
+  });
+
   test("lets dispensers activate Love without dropping the item", async (ctx) => {
     await prepare(ctx);
 

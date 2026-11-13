@@ -1,5 +1,6 @@
 package com.iamkaf.valentine.forge;
 
+import com.iamkaf.valentine.Register;
 import com.iamkaf.valentine.Valentine;
 import com.iamkaf.valentine.item.custom.Love;
 import net.minecraft.core.registries.Registries;
@@ -7,6 +8,8 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.loading.FMLLoader;
 import net.minecraftforge.registries.RegisterEvent;
+//? if <26.3
+import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 //? if <1.21.6
 /*import net.minecraftforge.eventbus.api.IEventBus;*/
 
@@ -19,8 +22,12 @@ public final class ValentineForge {
         if (FMLLoader.getDist().isClient()) {
             ValentineForgeClient.init();
         }
-        //? if <26.3
+        //? if >=26.3 {
+        /*Register.registerCompostables();
+        *///?} else {
+        FMLCommonSetupEvent.getBus(context.getModBusGroup()).addListener(event -> event.enqueueWork(Register::registerCompostables));
         ValentineForgeEvents.init();
+        //?}
     }
     //?} else {
     /*public ValentineForge() {
@@ -30,6 +37,7 @@ public final class ValentineForge {
         if (FMLLoader.getDist().isClient()) {
             ValentineForgeClient.init();
         }
+        modBus.addListener((FMLCommonSetupEvent event) -> event.enqueueWork(Register::registerCompostables));
         ValentineForgeEvents.init(modBus);
     }
     *///?}
