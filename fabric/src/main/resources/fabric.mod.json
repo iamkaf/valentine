@@ -23,9 +23,6 @@
             "com.iamkaf.valentine.fabric.client.ValentineFabricClient"
         ]
     },
-    "mixins": [
-        "${mod_id}.mixins.json"
-    ],
     "depends": {
         "fabricloader": ">=${fabric_loader_version}",
         "fabric-api": "*",
