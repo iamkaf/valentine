@@ -13,12 +13,15 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
+//? if >=1.21.5
 import net.minecraft.world.item.component.TooltipDisplay;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
+import java.util.List;
 import java.util.function.Consumer;
 
 @SuppressWarnings("deprecation") // I'll deal with the tooltip deprecation when it's time.
@@ -61,10 +64,22 @@ public class CottonCandyItem extends Item {
         return super.useOn(context);
     }
 
+    //? if >=1.21.5 {
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, TooltipDisplay tooltipDisplay,
             Consumer<Component> tooltipAdder, TooltipFlag flag) {
         super.appendHoverText(stack, context, tooltipDisplay, tooltipAdder, flag);
+        tooltip(tooltipAdder);
+    }
+    //?} else {
+    /*@Override
+    public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
+        super.appendHoverText(stack, level, tooltip, flag);
+        tooltip(tooltip::add);
+    }
+    *///?}
+
+    private static void tooltip(Consumer<Component> tooltipAdder) {
         new SmartTooltip()
                 .add(Component.translatable("text.kafvalentine.hold_shift").withStyle(ChatFormatting.AQUA))
                 .shift(Component.translatable("item.kafvalentine.cotton_candy.tooltip").withStyle(ChatFormatting.AQUA))

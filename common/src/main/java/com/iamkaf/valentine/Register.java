@@ -3,6 +3,7 @@ package com.iamkaf.valentine;
 import com.iamkaf.amber.api.registry.v1.DeferredRegister;
 import com.iamkaf.amber.api.registry.v1.RegistrySupplier;
 import com.iamkaf.amber.api.registry.v1.creativetabs.CreativeModeTabRegistry;
+//? if >=1.20.5
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
@@ -22,8 +23,10 @@ import java.util.function.UnaryOperator;
 public final class Register {
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(Valentine.MOD_ID, Registries.BLOCK);
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(Valentine.MOD_ID, Registries.ITEM);
+    //? if >=1.20.5 {
     public static final DeferredRegister<DataComponentType<?>> DATA_COMPONENT_TYPES =
             DeferredRegister.create(Valentine.MOD_ID, Registries.DATA_COMPONENT_TYPE);
+    //?}
     public static final DeferredRegister<MobEffect> MOB_EFFECTS =
             DeferredRegister.create(Valentine.MOD_ID, Registries.MOB_EFFECT);
     public static final DeferredRegister<Potion> POTIONS = DeferredRegister.create(Valentine.MOD_ID, Registries.POTION);
@@ -37,7 +40,11 @@ public final class Register {
         if (!id.contains("crop")) {
             item(id, itemKey -> new net.minecraft.world.item.BlockItem(
                     block.get(),
+                    //? if >=1.21.2 {
                     new Item.Properties().setId(itemKey).useBlockDescriptionPrefix()
+                    //?} else {
+                    /*new Item.Properties()
+                    *///?}
             ));
         }
         return block;
@@ -59,12 +66,14 @@ public final class Register {
         );
     }
 
+    //? if >=1.20.5 {
     public static <T> Supplier<DataComponentType<T>> dataComponentType(
             String name,
             UnaryOperator<DataComponentType.Builder<T>> builderUnaryOperator
     ) {
         return DATA_COMPONENT_TYPES.register(name, () -> builderUnaryOperator.apply(DataComponentType.builder()).build());
     }
+    //?}
 
     public static <T extends ItemLike> void compostable(Supplier<T> item, float chance) {
         COMPOSTABLES.put(item, chance);
@@ -85,6 +94,7 @@ public final class Register {
     public static void init() {
         BLOCKS.register();
         ITEMS.register();
+        //? if >=1.20.5
         DATA_COMPONENT_TYPES.register();
         MOB_EFFECTS.register();
         POTIONS.register();

@@ -1,7 +1,7 @@
 {
   "required": true,
   "package": "com.iamkaf.valentine.neoforge.mixin",
-  "compatibilityLevel": "JAVA_21",
+  "compatibilityLevel": "${mixin_compat_neoforge}",
   "minVersion": "0.8",
   "client": [
   ],

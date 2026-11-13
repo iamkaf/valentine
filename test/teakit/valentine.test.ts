@@ -70,13 +70,14 @@ describe("Valentine", () => {
     await expect(registry.missing(CORE_REGISTRY_IDS)).resolves.toEqual([]);
 
     await commands.run("/clear @s");
+    // `/clear` with a count of 0 only counts matches, and fails when nothing matches the tag.
     await commands.assert("/item replace entity @s weapon.mainhand with kafvalentine:apple_cookie");
-    await commands.assert("/execute if items entity @s weapon.mainhand #kafvalentine:kaf_cookie");
-    await commands.assert("/execute if items entity @s weapon.mainhand #c:cookies");
+    await commands.assert("/clear @s #kafvalentine:kaf_cookie 0");
+    await commands.assert("/clear @s #c:cookies 0");
 
     await commands.assert("/item replace entity @s weapon.mainhand with kafvalentine:aristea");
-    await commands.assert("/execute if items entity @s weapon.mainhand #c:aristeas");
-    await commands.assert("/execute if items entity @s weapon.mainhand #c:flowers");
+    await commands.assert("/clear @s #c:aristeas 0");
+    await commands.assert("/clear @s #c:flowers 0");
 
     await commands.assert("/effect give @s kafvalentine:smitten 3 0 true");
     await commandOutputContains(commands, "/effect clear @s kafvalentine:smitten", ["Removed effect"]);
@@ -102,13 +103,12 @@ describe("Valentine", () => {
     for (const [baseCookie, upgradedCookie] of INFUSER_UPGRADES) {
       await ctx.commands.run("/clear @s");
       await ctx.commands.assert(`/item replace entity @s weapon.mainhand with ${baseCookie} 2`);
-      await ctx.commands.assert(`/execute if items entity @s weapon.mainhand ${baseCookie}[count=2]`);
+      await expectHeld(ctx, baseCookie, 2);
 
-      await ctx.player.inventory().waitForItem(baseCookie, { selected: true, count: 2, timeout: "5s" });
       await useInfuser(ctx);
       await ctx.runtime.wait(150, { timeoutMs: 2_000 });
 
-      await ctx.commands.assert(`/execute if items entity @s weapon.mainhand ${baseCookie}[count=1]`);
+      await expectHeld(ctx, baseCookie, 1);
       await expect(ctx.player.inventory()).toContainItem(upgradedCookie);
     }
   });
@@ -120,9 +120,7 @@ describe("Valentine", () => {
     await ctx.commands.assert("/item replace entity @s weapon.mainhand with kafvalentine:extra_special_chocolate_cookie 1");
     await useInfuser(ctx);
 
-    await ctx.commands.assert(
-      "/execute if items entity @s weapon.mainhand kafvalentine:extra_special_chocolate_cookie[count=1]",
-    );
+    await expectHeld(ctx, "kafvalentine:extra_special_chocolate_cookie", 1);
   });
 
   test("uses Love as a consumable interaction item", async (ctx) => {
@@ -133,7 +131,7 @@ describe("Valentine", () => {
     await ctx.player.useItem();
     await ctx.runtime.wait(150, { timeoutMs: 2_000 });
 
-    await ctx.commands.assert("/execute if items entity @s weapon.mainhand kafvalentine:love[count=1]");
+    await expectHeld(ctx, "kafvalentine:love", 1);
   });
 
   test("lets dispensers activate Love without dropping the item", async (ctx) => {
@@ -144,17 +142,17 @@ describe("Valentine", () => {
     await ctx.commands.assert("/setblock 4 81 2 minecraft:redstone_block");
     await ctx.runtime.wait(300, { timeoutMs: 2_000 });
 
-    await ctx.commands.assert("/execute if items block 4 80 2 container.0 kafvalentine:love[count=1]");
+    const dispenser = await ctx.world.container({ x: 4, y: 80, z: 2 }).inspect();
+    const loaded = dispenser.items.find((item) => item.slot === 0);
+    expect(menuItemId(loaded)).toBe("kafvalentine:love");
+    expect(loaded?.count).toBe(1);
     await ctx.commands.assert("/execute unless entity @e[type=minecraft:item,distance=..16]");
   });
 
   test(
     "crafts the Cookie Book and opens its Patchouli UI",
     {
-      target: {
-        minecraft: ">=26.1 <26.2",
-        loader: ["fabric", "neoforge"],
-      },
+      target: { mods: "patchouli" },
     },
     async (ctx) => {
       await prepare(ctx);
@@ -288,6 +286,14 @@ function menuItemId(item: unknown): string | undefined {
   }
 
   return typeof stack.itemId === "string" ? stack.itemId : undefined;
+}
+
+/** Waits for the held stack to be exactly `count` of `item`. */
+async function expectHeld(ctx: TeaKitTestContext, item: `${string}:${string}`, count: number) {
+  await expect(async () => {
+    const held = (await ctx.player.inventory()).selectedItem;
+    return held && menuItemId(held) === item ? held.count : undefined;
+  }).toEventuallyEqual(count, { timeout: "3s" });
 }
 
 async function useInfuser(ctx: TeaKitTestContext) {

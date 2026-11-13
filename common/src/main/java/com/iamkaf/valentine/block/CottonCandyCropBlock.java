@@ -14,14 +14,14 @@ import org.jetbrains.annotations.NotNull;
 
 public class CottonCandyCropBlock extends CropBlock {
     public static final int MAX_AGE = 5;
-    //? if <26.3
+    //? if >=1.20.3 <26.3
     public static final MapCodec<CropBlock> CODEC = simpleCodec(CottonCandyCropBlock::new);
 
     public CottonCandyCropBlock(Properties settings) {
         super(settings);
     }
 
-    //? if <26.3 {
+    //? if >=1.20.3 <26.3 {
     @Override
     public @NotNull MapCodec<? extends CropBlock> codec() {
         return CODEC;

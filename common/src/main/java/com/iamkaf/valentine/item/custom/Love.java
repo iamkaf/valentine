@@ -3,7 +3,11 @@ package com.iamkaf.valentine.item.custom;
 import com.iamkaf.valentine.Valentine;
 import net.minecraft.core.Holder;
 import net.minecraft.core.Position;
+//? if >=1.20.2 {
 import net.minecraft.core.dispenser.BlockSource;
+//?} else {
+/*import net.minecraft.core.BlockSource;
+*///?}
 import net.minecraft.core.dispenser.DefaultDispenseItemBehavior;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.protocol.game.ClientboundSoundPacket;
@@ -12,6 +16,8 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+//? if <1.21.2
+/*import net.minecraft.world.InteractionResultHolder;*/
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -31,7 +37,11 @@ public class Love extends Item {
             @Override
             protected ItemStack execute(BlockSource source, ItemStack stack) {
                 Position position = DispenserBlock.getDispensePosition(source);
+                //? if >=1.20.2 {
                 source.level().sendParticles(
+                //?} else {
+                /*source.getLevel().sendParticles(
+                *///?}
                         ParticleTypes.HEART,
                         position.x(),
                         position.y(),
@@ -48,12 +58,28 @@ public class Love extends Item {
         });
     }
 
+    //? if >=1.21.2 {
     @Override
     public @NotNull InteractionResult use(Level level, Player player,
             InteractionHand usedHand) {
         if (player.level().isClientSide()) {
             return super.use(level, player, usedHand);
         }
+        consume(level, player, usedHand);
+        return InteractionResult.CONSUME;
+    }
+    //?} else {
+    /*@Override
+    public @NotNull InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand usedHand) {
+        if (player.level().isClientSide()) {
+            return super.use(level, player, usedHand);
+        }
+        consume(level, player, usedHand);
+        return InteractionResultHolder.consume(player.getItemInHand(usedHand));
+    }
+    *///?}
+
+    private static void consume(Level level, Player player, InteractionHand usedHand) {
         ServerPlayer serverPlayer = (ServerPlayer) player;
         patVFX(serverPlayer);
         ItemStack stack = serverPlayer.getItemInHand(usedHand);
@@ -68,6 +94,5 @@ public class Love extends Item {
                 1f,
                 level.getRandom().nextLong()
         ));
-        return InteractionResult.CONSUME;
     }
 }
