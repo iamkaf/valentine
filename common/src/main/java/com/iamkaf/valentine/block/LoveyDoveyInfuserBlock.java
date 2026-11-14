@@ -39,15 +39,37 @@ public class LoveyDoveyInfuserBlock extends Block {
         }
     }
 
+    //? if >=1.21.2 {
     @Override
     protected @NotNull InteractionResult useItemOn(ItemStack stack, BlockState state, Level level,
             BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
+        if (infuse(stack, level, pos, player)) {
+            return InteractionResult.SUCCESS;
+        }
+        return super.useItemOn(stack, state, level, pos, player, hand, hitResult);
+    }
+    //?} else {
+    /*@Override
+    @SuppressWarnings("deprecation")
+    public @NotNull InteractionResult use(BlockState state, Level level, BlockPos pos, Player player,
+            InteractionHand hand, BlockHitResult hitResult) {
+        if (infuse(player.getItemInHand(hand), level, pos, player)) {
+            return InteractionResult.SUCCESS;
+        }
+        return super.use(state, level, pos, player, hand, hitResult);
+    }
+    *///?}
+
+    /**
+     * Swaps one cookie in the stack for its special version. Returns false when the stack has no upgrade.
+     */
+    private static boolean infuse(ItemStack stack, Level level, BlockPos pos, Player player) {
         if (stack.getItem() instanceof CookieItem cookie) {
             Item upgrade = cookie.upgrade();
             if (upgrade != null) {
                 //? if >=26.3 {
                 if (level.isClientSide()) {
-                    return InteractionResult.SUCCESS;
+                    return true;
                 }
                 //?}
                 stack.shrink(1);
@@ -62,10 +84,9 @@ public class LoveyDoveyInfuserBlock extends Block {
                     ));
                 }
                 feedback(level, pos.above());
-                return InteractionResult.SUCCESS;
+                return true;
             }
         }
-
-        return super.useItemOn(stack, state, level, pos, player, hand, hitResult);
+        return false;
     }
 }

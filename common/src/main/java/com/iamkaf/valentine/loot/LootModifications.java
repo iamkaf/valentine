@@ -2,12 +2,10 @@ package com.iamkaf.valentine.loot;
 
 import com.iamkaf.amber.api.event.v1.events.common.LootEvents;
 import com.iamkaf.valentine.Valentine;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.storage.loot.LootPool;
-import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
 import net.minecraft.world.level.storage.loot.predicates.LootItemRandomChanceCondition;
@@ -21,14 +19,17 @@ import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 import java.util.List;
 
 public class LootModifications {
-    private static final ResourceKey<LootTable> GRASS = Blocks.SHORT_GRASS.getLootTable().orElseThrow();
-    private static final ResourceKey<LootTable> TALL_GRASS = Blocks.TALL_GRASS.getLootTable().orElseThrow();
+    //? if >=1.21.2 {
+    private static final Identifier GRASS = Blocks.SHORT_GRASS.getLootTable().orElseThrow().identifier();
+    private static final Identifier TALL_GRASS = Blocks.TALL_GRASS.getLootTable().orElseThrow().identifier();
+    //?} else {
+    /*private static final Identifier GRASS = Blocks.SHORT_GRASS.getLootTable();
+    private static final Identifier TALL_GRASS = Blocks.TALL_GRASS.getLootTable();
+    *///?}
 
     static {
         LootEvents.MODIFY.register((key, addPool) -> {
-            Identifier grass = GRASS.identifier();
-            Identifier tallGrass = TALL_GRASS.identifier();
-            if (grass.equals(key) || tallGrass.equals(key)) {
+            if (GRASS.equals(key) || TALL_GRASS.equals(key)) {
                 modifyGrassDrops(addPool);
             }
             if (isVillageHouse(key)) {

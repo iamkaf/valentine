@@ -5,6 +5,7 @@ import com.mojang.logging.LogUtils;
 import it.unimi.dsi.fastutil.ints.IntList;
 import net.minecraft.ChatFormatting;
 import net.minecraft.util.Util;
+//? if >=1.20.5
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.Component;
@@ -29,8 +30,14 @@ import net.minecraft.world.entity.projectile.FireworkRocketEntity;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+//? if >=1.20.5 {
 import net.minecraft.world.item.component.FireworkExplosion;
 import net.minecraft.world.item.component.Fireworks;
+//?} else {
+/*import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.ListTag;
+import net.minecraft.world.item.FireworkRocketItem;
+*///?}
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.Vec3;
@@ -125,8 +132,13 @@ public class OnCookieEaten {
                 double d = livingEntity.getX() + (livingEntity.getRandom().nextDouble() - 0.5) * 16.0;
                 double e =
                         Mth.clamp(livingEntity.getY() + (double) (livingEntity.getRandom().nextInt(16) - 8),
+                                //? if >=1.21.2 {
                                 (double) world.getMinY(),
                                 (double) (world.getMaxY() + ((ServerLevel) world).getLogicalHeight() - 1)
+                                //?} else {
+                                /*(double) world.getMinBuildHeight(),
+                                (double) (world.getMaxBuildHeight() - 1 + ((ServerLevel) world).getLogicalHeight() - 1)
+                                *///?}
                         );
                 double f = livingEntity.getZ() + (livingEntity.getRandom().nextDouble() - 0.5) * 16.0;
                 if (livingEntity.isPassenger()) {
@@ -154,7 +166,9 @@ public class OnCookieEaten {
                             livingEntity.getY(),
                             livingEntity.getZ(),
                             soundEvent,
-                            soundSource
+                            soundSource,
+                            1f,
+                            1f
                     );
                     livingEntity.resetFallDistance();
                     break;
@@ -180,7 +194,12 @@ public class OnCookieEaten {
     private static void omegaCookie(Player user, Level world, boolean isSpecial) {
         if (world instanceof ServerLevel serverWorld) {
             // clear weather
+            //? if >=1.20.3 {
             serverWorld.resetWeatherCycle();
+            //?} else {
+            /*// resetWeatherCycle is private here; this sets the same rain and thunder state.
+            serverWorld.setWeatherParameters(0, 0, false, false);
+            *///?}
 
             // send message to server
             serverWorld.getServer().sendSystemMessage(getMessage(user));
@@ -259,6 +278,7 @@ public class OnCookieEaten {
             DyeColor dyeColor = Util.getRandom(DyeColor.values(), random);
 
             ItemStack itemStack = new ItemStack(Items.FIREWORK_ROCKET);
+            //? if >=1.20.5 {
             itemStack.set(DataComponents.FIREWORKS,
                     new Fireworks((byte) (isSpecial ? 2 : 0), List.of(new FireworkExplosion(
                             isSpecial ? FireworkExplosion.Shape.LARGE_BALL :
@@ -269,6 +289,17 @@ public class OnCookieEaten {
                             false
                     )))
             );
+            //?} else {
+            /*CompoundTag explosion = new CompoundTag();
+            explosion.putByte(FireworkRocketItem.TAG_EXPLOSION_TYPE, (byte) (isSpecial ?
+                    FireworkRocketItem.Shape.LARGE_BALL : FireworkRocketItem.Shape.SMALL_BALL).getId());
+            explosion.putIntArray(FireworkRocketItem.TAG_EXPLOSION_COLORS, new int[]{dyeColor.getFireworkColor()});
+            ListTag explosions = new ListTag();
+            explosions.add(explosion);
+            CompoundTag fireworks = itemStack.getOrCreateTagElement(FireworkRocketItem.TAG_FIREWORKS);
+            fireworks.putByte(FireworkRocketItem.TAG_FLIGHT, (byte) (isSpecial ? 2 : 0));
+            fireworks.put(FireworkRocketItem.TAG_EXPLOSIONS, explosions);
+            *///?}
 
             FireworkRocketEntity fireworkRocketEntity = new FireworkRocketEntity(world,
                     user,

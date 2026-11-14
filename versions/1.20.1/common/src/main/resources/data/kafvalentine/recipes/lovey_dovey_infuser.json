@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "O": {
+      "item": "kafvalentine:cotton_candy"
+    },
+    "X": {
+      "item": "minecraft:iron_ingot"
+    }
+  },
+  "pattern": [
+    "OOO",
+    "XXX",
+    "X X"
+  ],
+  "result": {
+    "item": "kafvalentine:lovey_dovey_infuser"
+  }
+}

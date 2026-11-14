@@ -11,9 +11,11 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Rarity;
+//? if >=1.21.2 {
 import net.minecraft.world.item.component.Consumable;
 import net.minecraft.world.item.component.Consumables;
 import net.minecraft.world.item.consume_effects.ApplyStatusEffectsConsumeEffect;
+//?}
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,7 +45,11 @@ public class CookieBuilder {
         return this;
     }
 
+    //? if >=1.20.5 {
     public CookieBuilder addEffect(Holder<MobEffect> effect, int duration, int amplifier, float probability) {
+    //?} else {
+    /*public CookieBuilder addEffect(MobEffect effect, int duration, int amplifier, float probability) {
+    *///?}
         this.effects.add(new MobEffectInstance(effect, duration, amplifier));
         this.effectProbabilities.add(probability);
         return this;
@@ -69,6 +75,7 @@ public class CookieBuilder {
         return this;
     }
 
+    //? if >=1.21.2 {
     public CookieItem build() {
         Item.Properties properties =
                 new Item.Properties().food(makeFoodComponent(), makeConsumableComponent()).stacksTo(16).rarity(rarity);
@@ -97,4 +104,25 @@ public class CookieBuilder {
 
         return foodBuilder.build();
     }
+    //?} else {
+    /*public CookieItem build() {
+        Item.Properties properties = new Item.Properties().food(makeFoodComponent()).stacksTo(16).rarity(rarity);
+        if (fireproof) {
+            properties = properties.fireResistant();
+        }
+        return new CookieItem(properties, id, tooltipColor, Math.round(cooldown * 20));
+    }
+
+    private FoodProperties makeFoodComponent() {
+        // fast() eats in 0.8 seconds, as the consumable component does on newer lines.
+        FoodProperties.Builder foodBuilder = new FoodProperties.Builder().nutrition(nutrition)
+                .saturationModifier(saturationModifier)
+                .alwaysEdible()
+                .fast();
+        for (int i = 0; i < effects.size(); i++) {
+            foodBuilder.effect(effects.get(i), effectProbabilities.get(i));
+        }
+        return foodBuilder.build();
+    }
+    *///?}
 }

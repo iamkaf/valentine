@@ -17,6 +17,7 @@ import com.iamkaf.valentine.loot.LootModifications;
 import com.mojang.logging.LogUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
+//? if >=1.20.5
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
@@ -31,6 +32,8 @@ import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.BlockItem;
+//? if <1.21.2
+/*import net.minecraft.world.item.ItemNameBlockItem;*/
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Rarity;
@@ -57,6 +60,7 @@ public final class Valentine {
 
         Items.init();
         Blocks.init();
+        //? if >=1.20.5
         DataComponents.init();
         Effects.init();
         Potions.init();
@@ -72,7 +76,15 @@ public final class Valentine {
      * Creates resource location in the mod namespace with the given path.
      */
     public static Identifier resource(String path) {
-        return Identifier.fromNamespaceAndPath(MOD_ID, path);
+        return id(MOD_ID, path);
+    }
+
+    private static Identifier id(String namespace, String path) {
+        //? if >=1.21 {
+        return Identifier.fromNamespaceAndPath(namespace, path);
+        //?} else {
+        /*return new Identifier(namespace, path);
+        *///?}
     }
 
     /**
@@ -84,6 +96,28 @@ public final class Valentine {
 
     public static ResourceKey<Block> blockKey(String path) {
         return ResourceKey.create(Registries.BLOCK, resource(path));
+    }
+
+    /**
+     * Item properties for the item registered as {@code path}. Items carry their key in their properties from 1.21.2.
+     */
+    public static Item.Properties itemProperties(String path) {
+        //? if >=1.21.2 {
+        return new Item.Properties().setId(itemKey(path));
+        //?} else {
+        /*return new Item.Properties();
+        *///?}
+    }
+
+    /**
+     * Gives block properties the key of the block registered as {@code path}, which blocks need from 1.21.2.
+     */
+    public static BlockBehaviour.Properties withId(BlockBehaviour.Properties properties, String path) {
+        //? if >=1.21.2 {
+        return properties.setId(blockKey(path));
+        //?} else {
+        /*return properties;
+        *///?}
     }
 
     public static class CreativeModeTabs {
@@ -162,21 +196,25 @@ public final class Valentine {
 
         public static final Supplier<Item> COTTON_CANDY = Register.item(
                 "cotton_candy",
-                () -> new CottonCandyItem(new Item.Properties().food(new FoodProperties.Builder().nutrition(4)
+                () -> new CottonCandyItem(itemProperties("cotton_candy").food(new FoodProperties.Builder().nutrition(4)
                         .saturationModifier(0.3f)
-                        .build()).setId(itemKey("cotton_candy")))
+                        .build()))
         );
 
         public static final Supplier<Item> CANDIED_COTTON_CANDY_CANDY = Register.item(
                 "candied_cotton_candy_candy",
-                () -> new Item(new Item.Properties().food(new FoodProperties.Builder().nutrition(6)
+                () -> new Item(itemProperties("candied_cotton_candy_candy").food(new FoodProperties.Builder().nutrition(6)
                         .saturationModifier(0.7f)
-                        .build()).setId(itemKey("candied_cotton_candy_candy")))
+                        .build()))
         );
 
         public static final Supplier<Item> COTTON_CANDY_SEEDS = Register.item(
                 "cotton_candy_seeds",
-                () -> new BlockItem(Blocks.COTTON_CANDY_CROP.get(), new Item.Properties().setId(itemKey("cotton_candy_seeds")).useItemDescriptionPrefix())
+                //? if >=1.21.2 {
+                () -> new BlockItem(Blocks.COTTON_CANDY_CROP.get(), itemProperties("cotton_candy_seeds").useItemDescriptionPrefix())
+                //?} else {
+                /*() -> new ItemNameBlockItem(Blocks.COTTON_CANDY_CROP.get(), itemProperties("cotton_candy_seeds"))
+                *///?}
         );
 
         public static final Supplier<CookieItem> SPECIAL_CHOCOLATE_COOKIE = Register.item(
@@ -548,7 +586,7 @@ public final class Valentine {
         );
 
         public static Supplier<Item> LOVE =
-                Register.item("love", () -> new Love(new Item.Properties().setId(itemKey("love"))));
+                Register.item("love", () -> new Love(itemProperties("love")));
 
         private static void init() {
 
@@ -585,49 +623,48 @@ public final class Valentine {
     public static class Blocks {
         public static final Supplier<Block> LOVEY_DOVEY_INFUSER = Register.block(
                 "lovey_dovey_infuser",
-                () -> new LoveyDoveyInfuserBlock(BlockBehaviour.Properties.ofFullCopy(net.minecraft.world.level.block.Blocks.IRON_BLOCK)
-                        .setId(blockKey("lovey_dovey_infuser")))
+                () -> new LoveyDoveyInfuserBlock(withId(BlockBehaviour.Properties.ofFullCopy(net.minecraft.world.level.block.Blocks.IRON_BLOCK), "lovey_dovey_infuser"))
         );
 
         public static final Supplier<Block> COTTON_CANDY_CROP = Register.block(
                 "cotton_candy_crop",
-                () -> new CottonCandyCropBlock(BlockBehaviour.Properties.ofFullCopy(net.minecraft.world.level.block.Blocks.WHEAT)
-                        .setId(blockKey("cotton_candy_crop")))
+                () -> new CottonCandyCropBlock(withId(BlockBehaviour.Properties.ofFullCopy(net.minecraft.world.level.block.Blocks.WHEAT), "cotton_candy_crop"))
         );
 
         public static final Supplier<Block> ARISTEA = Register.block(
                 "aristea", () -> new AristeaBlock(
                         MobEffects.SPEED,
                         10,
-                        BlockBehaviour.Properties.ofFullCopy(net.minecraft.world.level.block.Blocks.ALLIUM)
+                        withId(BlockBehaviour.Properties.ofFullCopy(net.minecraft.world.level.block.Blocks.ALLIUM)
                                 .noOcclusion()
-                                .noCollision()
-                                .setId(blockKey("aristea"))
+                                .noCollision(), "aristea")
                 )
         );
 
         public static final Supplier<Block> POTTED_ARISTEA = Register.block(
                 "potted_aristea", () -> new FlowerPotBlock(
                         ARISTEA.get(),
-                        BlockBehaviour.Properties.ofFullCopy(net.minecraft.world.level.block.Blocks.POTTED_ALLIUM)
-                                .noOcclusion()
-                                .setId(blockKey("potted_aristea"))
+                        withId(BlockBehaviour.Properties.ofFullCopy(net.minecraft.world.level.block.Blocks.POTTED_ALLIUM)
+                                .noOcclusion(), "potted_aristea")
                 )
         );
 
         public static final Supplier<Block> COTTON_CANDY_BLOCK = Register.block(
                 "cotton_candy_block",
-                () -> new Block(BlockBehaviour.Properties.ofFullCopy(
+                () -> new Block(withId(BlockBehaviour.Properties.ofFullCopy(
                         //? if >=26.2 {
                         /*net.minecraft.world.level.block.Blocks.WOOL.white()
                         *///?} else {
                         net.minecraft.world.level.block.Blocks.WHITE_WOOL
                         //?}
                 )
-                        .strength(0.2f)
-                        .setId(blockKey("cotton_candy_block"))) {
+                        .strength(0.2f), "cotton_candy_block")) {
                     @Override
+                    //? if >=1.21.5 {
                     public void fallOn(Level level, BlockState state, BlockPos pos, Entity entity, double fallDistance) {
+                    //?} else {
+                    /*public void fallOn(Level level, BlockState state, BlockPos pos, Entity entity, float fallDistance) {
+                    *///?}
                         // this block is very soft, so it should not deal as much fall damage
                         entity.causeFallDamage(fallDistance, 0.2F, level.damageSources().fall());
                     }
@@ -638,6 +675,7 @@ public final class Valentine {
         }
     }
 
+    //? if >=1.20.5 {
     public static class DataComponents {
         public static final Supplier<DataComponentType<ItemColorDataComponent>> COLOR =
                 Register.dataComponentType("color", builder -> builder.persistent(ItemColorDataComponent.CODEC));
@@ -646,14 +684,22 @@ public final class Valentine {
 
         }
     }
+    //?}
 
     public static class Effects {
         public static final Supplier<MobEffect> SMITTEN_EFFECT = Register.mobEffect(
                 "smitten", () -> new SmittenEffect(MobEffectCategory.BENEFICIAL, 0xf75477).addAttributeModifier(
                         Attributes.MOVEMENT_SPEED,
+                        //? if >=1.21 {
                         resource("smitten"),
                         0.15f,
                         AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL
+                        //?} else {
+                        /*// Modifiers are keyed by UUID before 1.21.
+                        "a3f7c2d4-5b1e-4f8a-9c6d-2e7b8f1a4c90",
+                        0.15f,
+                        AttributeModifier.Operation.MULTIPLY_TOTAL
+                        *///?}
                 )
         );
 
@@ -664,7 +710,11 @@ public final class Valentine {
     public static class Potions {
         public static Supplier<Potion> SMITTEN_POTION = Register.potion(
                 "smitten_potion",
+                //? if >=1.20.5 {
                 () -> new Potion("smitten_potion", new MobEffectInstance(net.minecraft.core.Holder.direct(Effects.SMITTEN_EFFECT.get()), 1200, 0))
+                //?} else {
+                /*() -> new Potion("smitten_potion", new MobEffectInstance(Effects.SMITTEN_EFFECT.get(), 1200, 0))
+                *///?}
         );
 
         static void init() {
@@ -677,7 +727,7 @@ public final class Valentine {
         }
 
         private static TagKey<Item> createItemTag(String namespace, String path) {
-            return TagKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(namespace, path));
+            return TagKey.create(Registries.ITEM, id(namespace, path));
         }
 
         private static TagKey<Block> createBlockTag(String name) {
@@ -685,7 +735,7 @@ public final class Valentine {
         }
 
         private static TagKey<Block> createBlockTag(String namespace, String path) {
-            return TagKey.create(Registries.BLOCK, Identifier.fromNamespaceAndPath(namespace, path));
+            return TagKey.create(Registries.BLOCK, id(namespace, path));
         }
 
         // legacy tags, should be removed later (or added to datagen)

@@ -15,15 +15,21 @@ import net.minecraft.world.level.block.FlowerBlock;
 import net.minecraft.world.level.block.state.BlockState;
 
 public class AristeaBlock extends FlowerBlock implements BonemealableBlock {
+    //? if >=1.20.5 {
     public AristeaBlock(Holder<MobEffect> suspiciousStewEffect, int effectDuration, Properties settings) {
+    //?} else {
+    /*public AristeaBlock(MobEffect suspiciousStewEffect, int effectDuration, Properties settings) {
+    *///?}
         super(suspiciousStewEffect, effectDuration, settings);
     }
 
     @Override
     //? if >=26.3
     /*public boolean isValidBonemealTarget(LevelReader world, BlockPos pos, BlockState state, BonemealSource source) {*/
-    //? if <26.3
+    //? if >=1.20.2 <26.3
     public boolean isValidBonemealTarget(LevelReader world, BlockPos pos, BlockState state) {
+    //? if <1.20.2
+    /*public boolean isValidBonemealTarget(LevelReader world, BlockPos pos, BlockState state, boolean isClient) {*/
         return true;
     }
 
