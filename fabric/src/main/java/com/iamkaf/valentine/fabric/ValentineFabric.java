@@ -8,8 +8,10 @@ import com.iamkaf.valentine.worldgen.WorldGen;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
 import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
-//? if >=1.20.5 <26.3
+//? if >=1.21.2 <26.3
 import net.fabricmc.fabric.api.registry.FabricPotionBrewingBuilder;
+//? if >=1.20.5 <1.21.2
+/*import net.fabricmc.fabric.api.registry.FabricBrewingRecipeRegistryBuilder;*/
 //? if <1.20.5
 /*import net.fabricmc.fabric.api.registry.FabricBrewingRecipeRegistry;*/
 import net.minecraft.core.Registry;
@@ -31,7 +33,7 @@ public final class ValentineFabric implements ModInitializer {
 
     //? if <26.3 {
     private void registerPotionRecipes() {
-        //? if >=1.20.5 {
+        //? if >=1.21.2 {
         FabricPotionBrewingBuilder.BUILD.register(builder -> {
             builder.registerPotionRecipe(
                     Potions.AWKWARD,
@@ -39,7 +41,15 @@ public final class ValentineFabric implements ModInitializer {
                     BuiltInRegistries.POTION.wrapAsHolder(Valentine.Potions.SMITTEN_POTION.get())
             );
         });
-        //?} else {
+        //?} else if >=1.20.5 {
+        /*FabricBrewingRecipeRegistryBuilder.BUILD.register(builder -> {
+            builder.registerPotionRecipe(
+                    Potions.AWKWARD,
+                    net.minecraft.world.item.crafting.Ingredient.of(Valentine.Blocks.ARISTEA.get().asItem()),
+                    BuiltInRegistries.POTION.wrapAsHolder(Valentine.Potions.SMITTEN_POTION.get())
+            );
+        });
+        *///?} else {
         /*FabricBrewingRecipeRegistry.registerPotionRecipe(
                 Potions.AWKWARD,
                 net.minecraft.world.item.crafting.Ingredient.of(Valentine.Blocks.ARISTEA.get().asItem()),

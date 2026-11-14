@@ -46,7 +46,12 @@ public class CookieItem extends Item {
             Consumer<Component> tooltipAdder, TooltipFlag flag) {
         tooltipAdder.accept(tooltipLine());
     }
-    //?} else {
+    //?} else if >=1.20.5 {
+    /*@Override
+    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag flag) {
+        tooltip.add(tooltipLine());
+    }
+    *///?} else {
     /*@Override
     public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
         tooltip.add(tooltipLine());
