@@ -1,5 +1,6 @@
 import org.gradle.api.artifacts.VersionCatalog
 import org.gradle.api.artifacts.VersionCatalogsExtension
+import com.iamkaf.multiloader.support.MultiloaderProjectContext
 
 plugins {
     id("com.iamkaf.multiloader.fabric")
@@ -20,6 +21,12 @@ fun mcCatalog(): VersionCatalog {
 
 dependencies {
     if (patchouli.isPresent) {
-        runtimeOnly(patchouli.get())
+        if (MultiloaderProjectContext.of(project).useUnobfuscatedMinecraft()) {
+            runtimeOnly(patchouli.get())
+        } else {
+            // Loom has to remap the Modrinth jar, and remapping drops the Fiber jar nested inside it.
+            "modRuntimeOnly"(patchouli.get())
+            "modRuntimeOnly"("me.zeroeightsix:fiber:0.23.0-2")
+        }
     }
 }
