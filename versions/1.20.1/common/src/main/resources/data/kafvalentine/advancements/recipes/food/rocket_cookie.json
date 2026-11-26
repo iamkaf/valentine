@@ -39,7 +39,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:rocket_cookie"
+        "recipe": "kafvalentine:rocket_cookie"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -54,7 +54,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:rocket_cookie"
+      "kafvalentine:rocket_cookie"
     ]
   }
 }

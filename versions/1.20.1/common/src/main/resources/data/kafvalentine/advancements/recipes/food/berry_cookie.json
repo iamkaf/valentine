@@ -39,7 +39,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:berry_cookie"
+        "recipe": "kafvalentine:berry_cookie"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -54,7 +54,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:berry_cookie"
+      "kafvalentine:berry_cookie"
     ]
   }
 }

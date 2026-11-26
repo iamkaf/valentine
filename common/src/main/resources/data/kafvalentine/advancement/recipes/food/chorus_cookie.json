@@ -33,7 +33,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:chorus_cookie"
+        "recipe": "kafvalentine:chorus_cookie"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -48,7 +48,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:chorus_cookie"
+      "kafvalentine:chorus_cookie"
     ]
   }
 }

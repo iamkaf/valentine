@@ -39,7 +39,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:apple_cookie"
+        "recipe": "kafvalentine:apple_cookie"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -54,7 +54,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:apple_cookie"
+      "kafvalentine:apple_cookie"
     ]
   }
 }

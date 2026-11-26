@@ -39,7 +39,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:prismatic_cookie"
+        "recipe": "kafvalentine:prismatic_cookie"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -54,7 +54,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:prismatic_cookie"
+      "kafvalentine:prismatic_cookie"
     ]
   }
 }

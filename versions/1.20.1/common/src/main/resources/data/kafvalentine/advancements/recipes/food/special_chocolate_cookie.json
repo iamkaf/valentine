@@ -27,7 +27,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:special_chocolate_cookie"
+        "recipe": "kafvalentine:special_chocolate_cookie"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -41,7 +41,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:special_chocolate_cookie"
+      "kafvalentine:special_chocolate_cookie"
     ]
   }
 }

@@ -33,7 +33,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:evil_cookie"
+        "recipe": "kafvalentine:evil_cookie"
       },
       "trigger": "minecraft:recipe_unlocked"
     },
@@ -59,7 +59,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:evil_cookie"
+      "kafvalentine:evil_cookie"
     ]
   }
 }

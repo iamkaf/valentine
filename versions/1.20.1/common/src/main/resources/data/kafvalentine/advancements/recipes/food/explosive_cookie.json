@@ -27,7 +27,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:explosive_cookie"
+        "recipe": "kafvalentine:explosive_cookie"
       },
       "trigger": "minecraft:recipe_unlocked"
     },
@@ -54,7 +54,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:explosive_cookie"
+      "kafvalentine:explosive_cookie"
     ]
   }
 }

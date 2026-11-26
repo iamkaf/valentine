@@ -11,6 +11,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Ported to Minecraft 1.21.1.
 
+### Fixed
+
+- Picking up an ingredient now unlocks its Valentine recipes in the recipe book.
+
 ## 5.4.0
 
 ### Changed
