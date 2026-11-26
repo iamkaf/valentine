@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - Picking up an ingredient now unlocks its Valentine recipes in the recipe book.
+- Fabric 1.20.1: Aristea and cotton candy crops no longer render as black squares.
 
 ## 5.4.0
 
