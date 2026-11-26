@@ -71,7 +71,13 @@ public class CottonCandyItem extends Item {
         super.appendHoverText(stack, context, tooltipDisplay, tooltipAdder, flag);
         tooltip(tooltipAdder);
     }
-    //?} else {
+    //?} else if >=1.20.5 {
+    /*@Override
+    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag flag) {
+        super.appendHoverText(stack, context, tooltip, flag);
+        tooltip(tooltip::add);
+    }
+    *///?} else {
     /*@Override
     public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
         super.appendHoverText(stack, level, tooltip, flag);

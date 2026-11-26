@@ -39,7 +39,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:good_vision_cookie"
+        "recipe": "kafvalentine:good_vision_cookie"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -54,7 +54,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:good_vision_cookie"
+      "kafvalentine:good_vision_cookie"
     ]
   }
 }

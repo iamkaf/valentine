@@ -43,7 +43,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:omega_cookie"
+        "recipe": "kafvalentine:omega_cookie"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -59,7 +59,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:omega_cookie"
+      "kafvalentine:omega_cookie"
     ]
   }
 }

@@ -1,0 +1,7 @@
+modId = "kafvalentine"
+projectKey = "valentine"
+
+# Superflat has no biome decoration, so worldgen tests need real terrain.
+[defaults.systemProperties]
+"teakit.worldType" = "normal"
+"teakit.worldId" = "valentine_natural"

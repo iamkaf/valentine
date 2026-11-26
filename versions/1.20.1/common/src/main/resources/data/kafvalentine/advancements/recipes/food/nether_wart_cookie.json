@@ -39,7 +39,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:nether_wart_cookie"
+        "recipe": "kafvalentine:nether_wart_cookie"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -54,7 +54,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:nether_wart_cookie"
+      "kafvalentine:nether_wart_cookie"
     ]
   }
 }

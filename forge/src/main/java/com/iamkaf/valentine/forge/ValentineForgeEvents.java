@@ -8,6 +8,8 @@ import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.item.alchemy.PotionBrewing;
 import net.minecraftforge.event.brewing.BrewingRecipeRegisterEvent;
+//? if <1.21.6
+/*import net.minecraftforge.common.MinecraftForge;*/
 //?} else {
 /*import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -29,7 +31,11 @@ public final class ValentineForgeEvents {
 
     //? if >=1.20.5 {
     public static void init() {
+        //? if >=1.21.6 {
         BrewingRecipeRegisterEvent.BUS.addListener(ValentineForgeEvents::onBrewingRecipeRegister);
+        //?} else {
+        /*MinecraftForge.EVENT_BUS.addListener(ValentineForgeEvents::onBrewingRecipeRegister);
+        *///?}
     }
 
     private static void onBrewingRecipeRegister(BrewingRecipeRegisterEvent event) {

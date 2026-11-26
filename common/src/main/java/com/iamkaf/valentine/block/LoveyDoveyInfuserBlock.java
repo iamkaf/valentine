@@ -48,7 +48,16 @@ public class LoveyDoveyInfuserBlock extends Block {
         }
         return super.useItemOn(stack, state, level, pos, player, hand, hitResult);
     }
-    //?} else {
+    //?} else if >=1.20.5 {
+    /*@Override
+    protected net.minecraft.world.@NotNull ItemInteractionResult useItemOn(ItemStack stack, BlockState state,
+            Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
+        if (infuse(stack, level, pos, player)) {
+            return net.minecraft.world.ItemInteractionResult.SUCCESS;
+        }
+        return super.useItemOn(stack, state, level, pos, player, hand, hitResult);
+    }
+    *///?} else {
     /*@Override
     @SuppressWarnings("deprecation")
     public @NotNull InteractionResult use(BlockState state, Level level, BlockPos pos, Player player,

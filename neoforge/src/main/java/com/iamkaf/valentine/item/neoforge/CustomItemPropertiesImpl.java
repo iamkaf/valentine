@@ -1,3 +1,5 @@
+// Item model properties are data driven from 1.21.4.
+//? if >=1.21.4 {
 package com.iamkaf.valentine.item.neoforge;
 
 import com.mojang.serialization.MapCodec;
@@ -11,3 +13,4 @@ public class CustomItemPropertiesImpl {
         // no-op
     }
 }
+//?}

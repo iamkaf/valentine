@@ -22,7 +22,10 @@ public class LootModifications {
     //? if >=1.21.2 {
     private static final Identifier GRASS = Blocks.SHORT_GRASS.getLootTable().orElseThrow().identifier();
     private static final Identifier TALL_GRASS = Blocks.TALL_GRASS.getLootTable().orElseThrow().identifier();
-    //?} else {
+    //?} else if >=1.20.5 {
+    /*private static final Identifier GRASS = Blocks.SHORT_GRASS.getLootTable().identifier();
+    private static final Identifier TALL_GRASS = Blocks.TALL_GRASS.getLootTable().identifier();
+    *///?} else {
     /*private static final Identifier GRASS = Blocks.SHORT_GRASS.getLootTable();
     private static final Identifier TALL_GRASS = Blocks.TALL_GRASS.getLootTable();
     *///?}

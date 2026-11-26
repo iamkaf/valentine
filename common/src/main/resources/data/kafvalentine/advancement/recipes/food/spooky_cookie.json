@@ -33,7 +33,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:spooky_cookie"
+        "recipe": "kafvalentine:spooky_cookie"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -48,7 +48,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:spooky_cookie"
+      "kafvalentine:spooky_cookie"
     ]
   }
 }

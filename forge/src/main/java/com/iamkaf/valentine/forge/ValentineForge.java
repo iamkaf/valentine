@@ -29,7 +29,18 @@ public final class ValentineForge {
         ValentineForgeEvents.init();
         //?}
     }
-    //?} else {
+    //?} else if >=1.20.5 {
+    /*public ValentineForge() {
+        IEventBus modBus = FMLJavaModLoadingContext.get().getModEventBus();
+        Valentine.init();
+        modBus.addListener(ValentineForge::onRegister);
+        if (FMLLoader.getDist().isClient()) {
+            ValentineForgeClient.init();
+        }
+        modBus.addListener((FMLCommonSetupEvent event) -> event.enqueueWork(Register::registerCompostables));
+        ValentineForgeEvents.init();
+    }
+    *///?} else {
     /*public ValentineForge() {
         IEventBus modBus = FMLJavaModLoadingContext.get().getModEventBus();
         Valentine.init();

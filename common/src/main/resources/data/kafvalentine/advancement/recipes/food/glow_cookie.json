@@ -33,7 +33,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:glow_cookie"
+        "recipe": "kafvalentine:glow_cookie"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -48,7 +48,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:glow_cookie"
+      "kafvalentine:glow_cookie"
     ]
   }
 }

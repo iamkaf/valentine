@@ -22,7 +22,20 @@ public class SmittenEffect extends MobEffect {
     public boolean shouldApplyEffectTickThisTick(int duration, int amplifier) {
         return true;
     }
-    //?} else {
+    //?} else if >=1.20.5 {
+    /*@Override
+    public boolean applyEffectTick(LivingEntity livingEntity, int amplifier) {
+        if (livingEntity.level() instanceof ServerLevel serverLevel) {
+            hearts(serverLevel, livingEntity);
+        }
+        return super.applyEffectTick(livingEntity, amplifier);
+    }
+
+    @Override
+    public boolean shouldApplyEffectTickThisTick(int duration, int amplifier) {
+        return true;
+    }
+    *///?} else {
     /*@Override
     public void applyEffectTick(LivingEntity livingEntity, int amplifier) {
         if (livingEntity.level() instanceof ServerLevel serverLevel) {

@@ -39,7 +39,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:medic_cookie"
+        "recipe": "kafvalentine:medic_cookie"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -54,7 +54,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:medic_cookie"
+      "kafvalentine:medic_cookie"
     ]
   }
 }
