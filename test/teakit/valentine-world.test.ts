@@ -244,6 +244,27 @@ describe("Valentine world", () => {
     expect(JSON.stringify(speed.output)).toContain("0.115");
   });
 
+  test("unlocks recipes when the player picks up their ingredients", async (ctx) => {
+    await prepare(ctx);
+    await ctx.commands.run("/recipe take @s *");
+    await ctx.commands.run("/advancement revoke @s everything");
+
+    for (const [item, recipes] of [
+      ["kafvalentine:cotton_candy", ["apple_cookie", "special_chocolate_cookie"]],
+      ["kafvalentine:aristea", ["purple_dye"]],
+    ] as const) {
+      await ctx.commands.run("/clear @s");
+      await ctx.commands.assert(`/item replace entity @s hotbar.0 with ${item} 1`);
+      for (const recipe of recipes) {
+        // /recipe take only succeeds for a recipe the player has.
+        await expect(async () => (await ctx.commands.run(`/recipe take @s kafvalentine:${recipe}`)).success).toEventuallyEqual(true, {
+          timeout: "5s",
+          interval: 250,
+        });
+      }
+    }
+  });
+
   test("patting another player gives them Love", async (ctx) => {
     await prepare(ctx);
     await ctx.commands.run("/gamemode survival");
