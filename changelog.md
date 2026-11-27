@@ -5,6 +5,12 @@ All notable changes to Kaf's Valentine Special will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 5.5.1
+
+### Fixed
+
+- NeoForge 1.21.1: Kaf's Valentine Special works with NeoForge 21.1.62 and newer again. 5.5.0 required NeoForge 21.1.268, which launchers don't offer yet.
+
 ## 5.5.0
 
 ### Changed
